@@ -278,18 +278,19 @@
   if (!root || root.dataset.ready === 'true') return;
   root.dataset.ready = 'true';
 
-  const stickySentinel = document.createElement('div');
-stickySentinel.style.cssText =
-  'position:absolute;width:1px;height:1px;top:90px;left:0;pointer-events:none;';
+ let lastScrolled = null;
 
-root.before(stickySentinel);
+const updateSticky = () => {
+  const scrolled = window.scrollY > 90;
 
-const stickyObserver = new IntersectionObserver(
-  ([entry]) => {
-    root.classList.toggle('is-scrolled', !entry.isIntersecting);
-  },
-  { threshold: 0 }
-);
+  if (scrolled === lastScrolled) return;
+
+  lastScrolled = scrolled;
+  root.classList.toggle('is-scrolled', scrolled);
+};
+
+window.addEventListener('scroll', updateSticky, { passive: true });
+updateSticky();
 
 stickyObserver.observe(stickySentinel);
 
