@@ -135,7 +135,14 @@
       "settings": {
         "logo": "shopify://shop_images/Untitled_design_2.png",
         "logo_width": 170,
-        "menu": "main-menu"
+        "menu": "main-menu",
+        "shipping_text": "Free Shipping Across the U.S.",
+        "warranty_text": "2-Year Warranty",
+        "nsf_text": "NSF Certified Components",
+        "phone": "(888) 407-2424",
+        "mega_heading": "Premium water, from the first drop to the last.",
+        "mega_image": "shopify://shop_images/Gemini_Generated_Image_rm3v0lrm3v0lrm3v.png",
+        "mega_link": ""
       }
     }
   },
