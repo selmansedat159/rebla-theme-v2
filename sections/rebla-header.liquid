@@ -278,7 +278,14 @@
   if (!root || root.dataset.ready === 'true') return;
   root.dataset.ready = 'true';
 
-  const syncScroll = () => root.classList.toggle('is-scrolled', window.scrollY > 150);
+  let scrollFrame = null;
+  const syncScroll = () => {
+    if (scrollFrame) return;
+    scrollFrame = requestAnimationFrame(() => {
+      root.classList.toggle('is-scrolled', window.scrollY > 90);
+      scrollFrame = null;
+    });
+  };
   syncScroll();
   window.addEventListener('scroll', syncScroll, { passive: true });
 
@@ -449,143 +456,47 @@
 </style>
 
 
+
+
+
+
 <style>
-/* FINAL STICKY HEADER */
-.rebla-v5{position:relative!important;overflow:visible!important}
-
-/* Desktop */
+/* Clean sticky behavior: desktop uses .rebla-v5__sticky already present in this file */
 @media (min-width:750px){
-  .rebla-v5__desktop{
-    display:block;
-    position:relative;
-    z-index:120;
-    transition:none;
-  }
-
-  .rebla-v5.is-scrolled .rebla-v5__desktop{
-    position:fixed!important;
-    top:12px!important;
-    left:24px!important;
-    right:24px!important;
-    width:auto!important;
-    z-index:9999!important;
-    background:rgba(255,255,255,.96)!important;
-    border:1px solid rgba(10,27,51,.08);
-    border-radius:16px;
-    box-shadow:0 16px 42px rgba(10,27,51,.16);
-    overflow:hidden;
-    backdrop-filter:blur(18px);
-    -webkit-backdrop-filter:blur(18px);
-    animation:reblaDesktopStickyIn .38s cubic-bezier(.22,1,.36,1) both;
-  }
-
-  .rebla-v5.is-scrolled .rebla-v5__desktop-top{display:none!important}
-  .rebla-v5.is-scrolled .rebla-v5__desktop-main{min-height:68px!important}
-  .rebla-v5.is-scrolled .rebla-v5__desktop .rebla-v5__logo img{max-height:48px!important}
-  .rebla-v5.is-scrolled .rebla-v5__sticky{display:none!important}
-
-  @keyframes reblaDesktopStickyIn{
-    from{opacity:0;transform:translateY(-18px) scale(.985)}
-    to{opacity:1;transform:translateY(0) scale(1)}
+  .rebla-v5__sticky{
+    transition:
+      opacity .32s ease,
+      visibility .32s ease,
+      transform .42s cubic-bezier(.22,1,.36,1);
   }
 }
 
-/* Mobile */
+/* Mobile: animate the same header into floating state */
 @media (max-width:749px){
   .rebla-v5__mobile{
-    position:relative;
-    z-index:120;
-    transition:none;
+    transition:
+      top .38s cubic-bezier(.22,1,.36,1),
+      left .38s cubic-bezier(.22,1,.36,1),
+      right .38s cubic-bezier(.22,1,.36,1),
+      border-radius .38s ease,
+      box-shadow .38s ease,
+      transform .38s cubic-bezier(.22,1,.36,1);
   }
 
   .rebla-v5.is-scrolled .rebla-v5__mobile{
-    position:fixed!important;
-    top:8px!important;
-    left:10px!important;
-    right:10px!important;
-    width:auto!important;
-    z-index:9999!important;
-    background:rgba(255,255,255,.97)!important;
-    border:1px solid rgba(10,27,51,.08);
-    border-radius:15px;
-    box-shadow:0 14px 34px rgba(10,27,51,.17);
-    overflow:hidden;
-    backdrop-filter:blur(16px);
-    -webkit-backdrop-filter:blur(16px);
-    animation:reblaMobileStickyIn .42s cubic-bezier(.22,1,.36,1) both;
+    animation:reblaMobileFloat .42s cubic-bezier(.22,1,.36,1) both;
   }
 
-  .rebla-v5.is-scrolled .rebla-v5__mobile-top{display:none!important}
-  .rebla-v5.is-scrolled .rebla-v5__mobile-main{min-height:62px!important}
-  .rebla-v5.is-scrolled .rebla-v5__mobile .rebla-v5__logo img{max-height:46px!important}
+  .rebla-v5.is-scrolled .rebla-v5__mobile-top{
+    display:none!important;
+  }
 
-  @keyframes reblaMobileStickyIn{
-    from{opacity:0;transform:translateY(-16px) scale(.97)}
+  @keyframes reblaMobileFloat{
+    from{opacity:.72;transform:translateY(-14px) scale(.975)}
     to{opacity:1;transform:translateY(0) scale(1)}
   }
 }
 </style>
-
-
-<script>
-(() => {
-  const SECTION_ID = 'rebla-v5-{{ section.id }}';
-  const NS = '__reblaSticky_{{ section.id | replace: "-", "_" }}';
-
-  function destroy() {
-    const old = window[NS];
-    if (!old) return;
-    window.removeEventListener('scroll', old.onScroll);
-    window.removeEventListener('resize', old.onScroll);
-    if (old.raf) cancelAnimationFrame(old.raf);
-    delete window[NS];
-  }
-
-  function init() {
-    destroy();
-
-    const root = document.getElementById(SECTION_ID);
-    if (!root) return;
-
-    const state = { raf: null };
-
-    const update = () => {
-      state.raf = null;
-      const y = window.scrollY || document.documentElement.scrollTop || 0;
-      root.classList.toggle('is-scrolled', y > 90);
-    };
-
-    state.onScroll = () => {
-      if (state.raf) return;
-      state.raf = requestAnimationFrame(update);
-    };
-
-    window.addEventListener('scroll', state.onScroll, { passive: true });
-    window.addEventListener('resize', state.onScroll, { passive: true });
-    window[NS] = state;
-
-    update();
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init, { once: true });
-  } else {
-    init();
-  }
-
-  document.addEventListener('shopify:section:load', (event) => {
-    if (event.target && event.target.querySelector('#' + SECTION_ID)) init();
-  });
-
-  document.addEventListener('shopify:section:select', (event) => {
-    if (event.target && event.target.querySelector('#' + SECTION_ID)) init();
-  });
-
-  document.addEventListener('shopify:section:unload', (event) => {
-    if (event.target && event.target.querySelector('#' + SECTION_ID)) destroy();
-  });
-})();
-</script>
 
 {% schema %}
 {
