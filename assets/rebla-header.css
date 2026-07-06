@@ -1,0 +1,153 @@
+/* REBLA Premium Header v1.0
+   Visual layer only: keeps Radiant's native menu, search, account, cart,
+   sticky behavior, mobile drawer, and Theme Editor controls intact.
+*/
+
+:root {
+  --rebla-blue: #0f5fdb;
+  --rebla-blue-hover: #0b4ec0;
+  --rebla-ink: #17191d;
+  --rebla-line: rgba(23, 25, 29, 0.08);
+  --rebla-header-blur: 18px;
+  --rebla-header-max: 1600px;
+}
+
+/* Desktop header shell */
+@media screen and (min-width: 750px) {
+  #header-component .header__row--top .header__columns {
+    width: min(calc(100% - 64px), var(--rebla-header-max));
+    max-width: var(--rebla-header-max);
+    margin-inline: auto;
+    padding-inline: 0;
+  }
+
+  #header-component .header__row--top {
+    min-height: 74px;
+  }
+
+  #header-component .header__columns {
+    column-gap: clamp(24px, 2.8vw, 52px);
+  }
+
+  #header-component .header__column--left,
+  #header-component .header__column--center,
+  #header-component .header__column--right {
+    gap: clamp(24px, 2.4vw, 44px);
+  }
+
+  /* Navigation */
+  #header-component .menu-list__link {
+    position: relative;
+    padding-block: 12px;
+    font-size: 0.92rem;
+    line-height: 1.2;
+    letter-spacing: 0.01em;
+    text-decoration: none;
+    transition: color 180ms ease, opacity 180ms ease;
+  }
+
+  #header-component .menu-list__link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 4px;
+    height: 1.5px;
+    border-radius: 999px;
+    background: var(--rebla-blue);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 220ms cubic-bezier(.2,.8,.2,1);
+  }
+
+  #header-component .menu-list__link:hover,
+  #header-component .menu-list__link[aria-expanded="true"] {
+    color: var(--rebla-blue);
+  }
+
+  #header-component .menu-list__link:hover::after,
+  #header-component .menu-list__link[aria-expanded="true"]::after {
+    transform: scaleX(1);
+  }
+
+  /* Right-side actions */
+  #header-component .header__column--right {
+    gap: 20px;
+  }
+
+  #header-component .header-actions__action,
+  #header-component .search-action {
+    transition: transform 180ms ease, opacity 180ms ease, color 180ms ease;
+  }
+
+  #header-component .header-actions__action:hover,
+  #header-component .search-action:hover {
+    color: var(--rebla-blue);
+    transform: translateY(-1px);
+  }
+}
+
+/* Clean divider and premium surface */
+#header-component .header__row--top {
+  border-bottom-color: var(--rebla-line);
+}
+
+#header-component .header__underlay-closed {
+  box-shadow: 0 1px 0 var(--rebla-line);
+}
+
+/* Sticky glass state */
+.header-section:has(> #header-component[sticky]) {
+  transition: box-shadow 240ms ease;
+}
+
+#header-component[data-sticky-state="active"] .header__underlay-closed {
+  background: rgba(255, 255, 255, 0.86) !important;
+  -webkit-backdrop-filter: blur(var(--rebla-header-blur)) saturate(150%);
+  backdrop-filter: blur(var(--rebla-header-blur)) saturate(150%);
+  box-shadow:
+    0 1px 0 var(--rebla-line),
+    0 12px 36px rgba(18, 28, 45, 0.06);
+}
+
+#header-component[data-sticky-state="active"] .header__row--top {
+  min-height: 64px;
+}
+
+#header-component[data-sticky-state="active"] .header__columns,
+#header-component[data-sticky-state="active"] .header-logo img,
+#header-component[data-sticky-state="active"] .header-logo svg {
+  transition: min-height 260ms ease, transform 260ms ease;
+}
+
+/* Open menu: keep background crisp */
+#header-component:has(.menu-list__link[aria-expanded="true"]) .header__underlay-open,
+#header-component:has(.mega-menu__list:hover) .header__underlay-open {
+  background-color: rgba(255, 255, 255, 0.98);
+}
+
+/* Mobile: preserve Radiant structure, only refine spacing/surface */
+@media screen and (max-width: 749px) {
+  #header-component .header__row--top {
+    min-height: 62px;
+  }
+
+  #header-component .header__columns {
+    padding-inline: 10px;
+  }
+
+  #header-component[data-sticky-state="active"] .header__underlay-closed {
+    background: rgba(255, 255, 255, 0.92) !important;
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    backdrop-filter: blur(14px) saturate(140%);
+  }
+}
+
+/* Respect reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  #header-component *,
+  #header-component *::before,
+  #header-component *::after {
+    transition-duration: 0.01ms !important;
+  }
+}
