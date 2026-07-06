@@ -196,7 +196,7 @@
       </nav>
 
       <div class="rebla-v5__actions">
-        <a class="rebla-v5__action" href="{{ routes.search_url }}" aria-label="Search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M16.5 16.5L21 21"/></svg></a>
+        <button type="button" class="rebla-v5__action"  aria-label="Search" data-rebla-search-trigger aria-expanded="false"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M16.5 16.5L21 21"/></svg></button>
         <a class="rebla-v5__action" href="{{ routes.account_url }}" aria-label="Account"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-5 4-7 8-7s7 2 8 7"/></svg></a>
         <a class="rebla-v5__action" href="{{ routes.cart_url }}" aria-label="Cart"><svg viewBox="0 0 24 24"><path d="M3 4h2l2 12h11l2-8H6"/><circle cx="9" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg>{% if cart.item_count > 0 %}<span class="rebla-v5__badge">{{ cart.item_count }}</span>{% endif %}</a>
       </div>
@@ -210,7 +210,7 @@
       </a>
       <nav aria-label="Sticky navigation"><ul class="rebla-v5__menu">{% for link in nav_menu.links %}<li><a class="rebla-v5__link" href="{{ link.url }}">{{ link.title }}</a></li>{% endfor %}</ul></nav>
       <div class="rebla-v5__actions">
-        <a class="rebla-v5__action" href="{{ routes.search_url }}" aria-label="Search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M16.5 16.5L21 21"/></svg></a>
+        <button type="button" class="rebla-v5__action"  aria-label="Search" data-rebla-search-trigger aria-expanded="false"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M16.5 16.5L21 21"/></svg></button>
         <a class="rebla-v5__action" href="{{ routes.account_url }}" aria-label="Account"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-5 4-7 8-7s7 2 8 7"/></svg></a>
         <a class="rebla-v5__action" href="{{ routes.cart_url }}" aria-label="Cart"><svg viewBox="0 0 24 24"><path d="M3 4h2l2 12h11l2-8H6"/><circle cx="9" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg>{% if cart.item_count > 0 %}<span class="rebla-v5__badge">{{ cart.item_count }}</span>{% endif %}</a>
       </div>
@@ -227,7 +227,7 @@
       <button class="rebla-v5__hamburger" type="button" aria-label="Open menu"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
       <a class="rebla-v5__mobile-brand" href="{{ routes.root_url }}">{% if section.settings.logo != blank %}{{ section.settings.logo | image_url: width: 360 | image_tag: class: 'rebla-v5__logo', loading: 'eager', alt: shop.name }}{% else %}<span class="rebla-v5__name">{{ shop.name }}</span>{% endif %}</a>
       <div class="rebla-v5__mobile-actions">
-        <a class="rebla-v5__action" href="{{ routes.search_url }}" aria-label="Search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M16.5 16.5L21 21"/></svg></a>
+        <button type="button" class="rebla-v5__action"  aria-label="Search" data-rebla-search-trigger aria-expanded="false"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M16.5 16.5L21 21"/></svg></button>
         <a class="rebla-v5__action" href="{{ routes.account_url }}" aria-label="Account"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-5 4-7 8-7s7 2 8 7"/></svg></a>
         <a class="rebla-v5__action" href="{{ routes.cart_url }}" aria-label="Cart"><svg viewBox="0 0 24 24"><path d="M3 4h2l2 12h11l2-8H6"/><circle cx="9" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg>{% if cart.item_count > 0 %}<span class="rebla-v5__badge">{{ cart.item_count }}</span>{% endif %}</a>
       </div>
@@ -272,6 +272,56 @@
   closeBtn?.addEventListener('click', () => setDrawer(false));
   backdrop?.addEventListener('click', () => setDrawer(false));
   document.addEventListener('keydown', e => { if (e.key === 'Escape') setDrawer(false); });
+})();
+</script>
+
+
+<style>
+  .rebla-search-overlay-v6[hidden]{display:none!important}
+  .rebla-search-overlay-v6{position:fixed;inset:0;z-index:9999;background:rgba(10,24,51,.18);backdrop-filter:blur(4px);padding:92px 20px 20px}
+  .rebla-search-overlay-v6__box{max-width:720px;margin:0 auto;background:#fff;border:1px solid rgba(10,24,51,.10);border-radius:18px;box-shadow:0 24px 70px rgba(10,24,51,.18);padding:14px}
+  .rebla-search-overlay-v6 form{display:flex;align-items:center;gap:10px}
+  .rebla-search-overlay-v6 input{width:100%;height:52px;border:0;outline:0;font:inherit;font-size:16px;color:#0a1833;background:transparent;padding:0 10px}
+  .rebla-search-overlay-v6 button{border:0;background:transparent;cursor:pointer;color:#0a1833}
+  .rebla-search-overlay-v6__submit{height:44px;padding:0 18px!important;border-radius:12px!important;background:#1e6bff!important;color:#fff!important;font-weight:700}
+  .rebla-search-overlay-v6__close{font-size:26px;line-height:1;padding:8px!important}
+  .rebla-v5__utility-nsf{display:flex;align-items:center;gap:9px}
+  .rebla-v5__nsf-badge{display:inline-grid;place-items:center;width:28px;height:28px;border:1.5px solid currentColor;border-radius:50%;font-size:9px;font-weight:800}
+  @media(max-width:749px){.rebla-search-overlay-v6{padding-top:76px}.rebla-v5__utility-nsf{display:none}}
+</style>
+
+<div id="reblaSearchOverlayV6" class="rebla-search-overlay-v6" hidden>
+  <div class="rebla-search-overlay-v6__box" role="dialog" aria-modal="true" aria-label="Search">
+    <form action="{{ routes.search_url }}" method="get" role="search">
+      <input id="reblaSearchInputV6" type="search" name="q" placeholder="Search products, filters and parts…" autocomplete="off">
+      <button class="rebla-search-overlay-v6__submit" type="submit">Search</button>
+      <button class="rebla-search-overlay-v6__close" type="button" aria-label="Close search">×</button>
+    </form>
+  </div>
+</div>
+
+<script>
+(function(){
+  const overlay = document.getElementById('reblaSearchOverlayV6');
+  if (!overlay) return;
+  const input = document.getElementById('reblaSearchInputV6');
+  const close = () => {
+    overlay.hidden = true;
+    document.querySelectorAll('[data-rebla-search-trigger]').forEach(el => el.setAttribute('aria-expanded','false'));
+  };
+  document.addEventListener('click', function(e){
+    const trigger = e.target.closest('[data-rebla-search-trigger]');
+    if (trigger) {
+      e.preventDefault();
+      e.stopPropagation();
+      overlay.hidden = false;
+      trigger.setAttribute('aria-expanded','true');
+      setTimeout(() => input && input.focus(), 30);
+      return;
+    }
+    if (e.target === overlay || e.target.closest('.rebla-search-overlay-v6__close')) close();
+  });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
 })();
 </script>
 
@@ -343,4 +393,5 @@
     }
   ]
 }
-{% endschema %}
+{% endschema %}<div class="rebla-v5__utility-item rebla-v5__utility-nsf"><span class="rebla-v5__nsf-badge">NSF</span><strong>NSF Certified Components</strong></div>
+      
