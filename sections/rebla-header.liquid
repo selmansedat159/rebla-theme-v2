@@ -278,18 +278,20 @@
   if (!root || root.dataset.ready === 'true') return;
   root.dataset.ready = 'true';
 
-  const desktopHeader = root.querySelector('.rebla-v5__desktop');
+  const stickySentinel = document.createElement('div');
+stickySentinel.style.cssText =
+  'position:absolute;width:1px;height:1px;top:90px;left:0;pointer-events:none;';
 
-if (desktopHeader) {
-  const stickyObserver = new IntersectionObserver(
-    ([entry]) => {
-      root.classList.toggle('is-scrolled', !entry.isIntersecting);
-    },
-    { threshold: 0 }
-  );
+root.before(stickySentinel);
 
-  stickyObserver.observe(desktopHeader);
-}
+const stickyObserver = new IntersectionObserver(
+  ([entry]) => {
+    root.classList.toggle('is-scrolled', !entry.isIntersecting);
+  },
+  { threshold: 0 }
+);
+
+stickyObserver.observe(stickySentinel);
 
   const drawer = root.querySelector('.rebla-v5__drawer');
   const openBtn = root.querySelector('.rebla-v5__hamburger');
