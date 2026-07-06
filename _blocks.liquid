@@ -1,69 +1,26 @@
 
 
-{% liquid
-  if section.settings.background_color != blank
-    render 'contrast-override', background_color: section.settings.background_color, section_id: section.id
-  endif
+{% comment %}
+  Shopify automatically wraps AI generated blocks in a wrapper section called _blocks.liquid.
+  By shipping a sections/_blocks.liquid in the theme, we override the default wrapper with a customized one.
+  More info: https://shopify.dev/docs/storefronts/themes/architecture/blocks/ai-generated-theme-blocks
+{% endcomment %}
+
+{% capture children %}
+  {% content_for 'blocks' %}
+{% endcapture %}
+
+{% render 'section',
+  section: section,
+  children: children,
+  section_id: section.id,
+  background_color: section.settings.background_color
 %}
-
-<div
-  class="section-background{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}"
-></div>
-<div
-  class="section section--{{ section.settings.section_width }}{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}"
->
-  <div
-    class="border-style"
-    style="{% render 'border-override', settings: section.settings %}"
-  >
-    {% render 'background-media',
-      background_media: section.settings.background_media,
-      background_video: section.settings.video,
-      background_video_position: section.settings.video_position,
-      background_image: section.settings.background_image,
-      background_image_position: section.settings.background_image_position
-    %}
-
-    <div
-      class="
-        spacing-style
-        layout-panel-flex
-        layout-panel-flex--{{ section.settings.content_direction }}
-        section-content-wrapper
-        {% if section.settings.vertical_on_mobile %} mobile-column{% endif %}
-      "
-      style="
-        {% render 'layout-panel-style', settings: section.settings %}
-        {%  render 'spacing-style', settings: section.settings %}
-      "
-      data-testid="section-content"
-    >
-      {% content_for 'blocks' %}
-
-      {%- if shop.password_message != blank -%}
-        <div class="password-content">
-          {{ shop.password_message }}
-        </div>
-      {%- endif -%}
-    </div>
-  </div>
-</div>
-
-{% stylesheet %}
-  .section-password {
-    flex-grow: 1;
-    display: flex;
-  }
-
-  .password-content {
-    text-align: center;
-  }
-{% endstylesheet %}
 
 {% schema %}
 {
   "name": "t:names.section",
-  "class": "section-wrapper section-password",
+  "class": "section-wrapper",
   "blocks": [
     {
       "type": "@theme"
@@ -75,9 +32,6 @@
       "type": "_divider"
     }
   ],
-  "disabled_on": {
-    "groups": ["header"]
-  },
   "settings": [
     {
       "type": "header",
@@ -236,6 +190,49 @@
       "default": "page-width"
     },
     {
+      "type": "select",
+      "id": "section_height",
+      "label": "t:settings.height",
+      "options": [
+        {
+          "value": "",
+          "label": "t:options.auto"
+        },
+        {
+          "value": "small",
+          "label": "t:options.small"
+        },
+        {
+          "value": "medium",
+          "label": "t:options.medium"
+        },
+        {
+          "value": "large",
+          "label": "t:options.large"
+        },
+        {
+          "value": "full-screen",
+          "label": "t:options.full_screen"
+        },
+        {
+          "value": "custom",
+          "label": "t:options.custom"
+        }
+      ],
+      "default": ""
+    },
+    {
+      "type": "range",
+      "id": "section_height_custom",
+      "label": "t:settings.custom_height",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 50,
+      "unit": "%",
+      "visible_if": "{{ section.settings.section_height == 'custom' }}"
+    },
+    {
       "type": "header",
       "content": "t:content.appearance"
     },
@@ -313,6 +310,112 @@
       "visible_if": "{{ section.settings.background_media == 'image' }}"
     },
     {
+      "type": "checkbox",
+      "id": "toggle_overlay",
+      "label": "t:settings.background_overlay"
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "t:settings.overlay_color",
+      "alpha": true,
+      "default": "#00000026",
+      "visible_if": "{{ section.settings.toggle_overlay }}"
+    },
+    {
+      "type": "select",
+      "id": "overlay_style",
+      "label": "t:settings.overlay_style",
+      "options": [
+        {
+          "value": "solid",
+          "label": "t:options.solid"
+        },
+        {
+          "value": "gradient",
+          "label": "t:options.gradient"
+        }
+      ],
+      "default": "solid",
+      "visible_if": "{{ section.settings.toggle_overlay }}"
+    },
+    {
+      "type": "select",
+      "id": "gradient_direction",
+      "label": "t:settings.gradient_direction",
+      "options": [
+        {
+          "value": "to top",
+          "label": "t:options.up"
+        },
+        {
+          "value": "to bottom",
+          "label": "t:options.down"
+        }
+      ],
+      "default": "to top",
+      "visible_if": "{{ section.settings.toggle_overlay and section.settings.overlay_style == 'gradient' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:content.borders"
+    },
+    {
+      "type": "select",
+      "id": "border",
+      "label": "t:settings.style",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:options.none"
+        },
+        {
+          "value": "solid",
+          "label": "t:options.solid"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "t:settings.thickness",
+      "default": 1,
+      "visible_if": "{{ section.settings.border != 'none' }}"
+    },
+    {
+      "type": "range",
+      "id": "border_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "t:settings.opacity",
+      "default": 100,
+      "visible_if": "{{ section.settings.border != 'none' }}"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "t:settings.color",
+      "placeholder": "t:settings.default",
+      "visible_if": "{{ section.settings.border != 'none' }}"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "t:settings.border_radius",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
       "type": "header",
       "content": "t:content.padding"
     },
@@ -335,6 +438,12 @@
       "step": 1,
       "unit": "px",
       "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:names.custom_section",
+      "category": "t:categories.layout"
     }
   ]
 }
