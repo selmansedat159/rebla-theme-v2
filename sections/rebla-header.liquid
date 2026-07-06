@@ -394,6 +394,49 @@
 }
 </style>
 
+
+<style>
+@media (min-width: 750px) {
+  .rebla-v5__trust,
+  .rebla-v5__trustbar,
+  .rebla-v5__topbar {
+    overflow: hidden !important;
+  }
+
+  .rebla-v5__trust .rebla-v5__inner,
+  .rebla-v5__trustbar .rebla-v5__inner,
+  .rebla-v5__topbar .rebla-v5__inner,
+  .rebla-v5__trust-inner {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    max-width: 820px !important;
+    margin: 0 auto !important;
+    gap: 0 !important;
+  }
+
+  .rebla-v5__trust .rebla-v5__benefit,
+  .rebla-v5__trustbar .rebla-v5__benefit,
+  .rebla-v5__topbar .rebla-v5__benefit,
+  .rebla-v5__trust-inner .rebla-v5__benefit {
+    display: flex !important;
+    flex: 1 1 25% !important;
+    width: 25% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 18px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    white-space: nowrap !important;
+    box-sizing: border-box !important;
+  }
+}
+</style>
+
 {% schema %}
 {
   "name": "Rebla Header V5",
