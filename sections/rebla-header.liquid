@@ -278,16 +278,19 @@
   if (!root || root.dataset.ready === 'true') return;
   root.dataset.ready = 'true';
 
-  let scrollFrame = null;
   const syncScroll = () => {
-    if (scrollFrame) return;
-    scrollFrame = requestAnimationFrame(() => {
-      root.classList.toggle('is-scrolled', window.scrollY > 90);
-      scrollFrame = null;
-    });
-  };
-  syncScroll();
-  window.addEventListener('scroll', syncScroll, { passive: true });
+  const scrollTop =
+    window.pageYOffset ||
+    document.documentElement.scrollTop ||
+    document.body.scrollTop ||
+    0;
+
+  root.classList.toggle('is-scrolled', scrollTop > 90);
+};
+
+window.addEventListener('scroll', syncScroll, { passive: true });
+document.addEventListener('scroll', syncScroll, { passive: true });
+syncScroll();
 
   const drawer = root.querySelector('.rebla-v5__drawer');
   const openBtn = root.querySelector('.rebla-v5__hamburger');
