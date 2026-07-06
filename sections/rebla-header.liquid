@@ -70,7 +70,7 @@
   .rebla-v5__feature strong{display:block;font-size:12px;margin-bottom:3px}
   .rebla-v5__feature small{display:block;font-size:10px;opacity:.66;line-height:1.35}
   .rebla-v5__sticky{position:fixed;top:14px;left:50%;width:min(calc(100% - 32px),1180px);z-index:100;opacity:0;visibility:hidden;pointer-events:none;transform:translate(-50%,-18px);transition:.2s ease}
-  .rebla-v5.is-scrolled .rebla-v5__sticky{opacity:1;visibility:visible;pointer-events:auto;transform:translate(-50%,0)}
+  .rebla-v5.is-desktop-scrolled .rebla-v5__sticky{opacity:1;visibility:visible;pointer-events:auto;transform:translate(-50%,0)}
 
   .rebla-v5__sticky-inner{min-height:68px;padding:0 24px;display:grid;grid-template-columns:150px 1fr auto;align-items:center;gap:28px;background:rgba(255,255,255,.84);border:1px solid rgba(255,255,255,.7);border-radius:16px;box-shadow:0 16px 42px rgba(10,27,51,.15);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
   .rebla-v5__sticky .rebla-v5__logo{max-width:112px;max-height:44px}
@@ -131,9 +131,19 @@
     border:1.5px solid currentColor;border-radius:50%;
     font-size:8px;font-weight:800;flex:0 0 auto
   }
+
+  .rebla-v5__desktop-sentinel{
+    display:block;
+    width:1px;
+    height:1px;
+    margin-bottom:-1px;
+    pointer-events:none;
+  }
+
 </style>
 
 <div class="rebla-v5" id="ReblaV5-{{ section.id }}">
+  <span class="rebla-v5__desktop-sentinel" aria-hidden="true"></span>
   <header class="rebla-v5__desktop">
     <div class="rebla-v5__bar">
       <div class="rebla-v5__bar-inner">
@@ -308,6 +318,21 @@
 
 
 
+  const desktopSentinel = root.querySelector('.rebla-v5__desktop-sentinel');
+
+  if (desktopSentinel && 'IntersectionObserver' in window) {
+    if (root._reblaDesktopObserver) root._reblaDesktopObserver.disconnect();
+
+    root._reblaDesktopObserver = new IntersectionObserver(
+      ([entry]) => {
+        root.classList.toggle('is-desktop-scrolled', !entry.isIntersecting);
+      },
+      { root: null, threshold: 0 }
+    );
+
+    root._reblaDesktopObserver.observe(desktopSentinel);
+  }
+
   const drawer = root.querySelector('.rebla-v5__drawer');
   const openBtn = root.querySelector('.rebla-v5__hamburger');
   const closeBtn = root.querySelector('.rebla-v5__close');
@@ -447,32 +472,6 @@
 </style>
 
 
-
-
-<style>
-/* Desktop sticky — explicit final override */
-@media (min-width:750px){
-  .rebla-v5__sticky{
-    display:block!important;
-    position:fixed!important;
-    top:14px!important;
-    left:50%!important;
-    width:min(calc(100% - 32px),1180px)!important;
-    z-index:99999!important;
-    opacity:0!important;
-    visibility:hidden!important;
-    pointer-events:none!important;
-    transform:translate(-50%,-18px)!important;
-  }
-
-  .rebla-v5.is-scrolled > .rebla-v5__sticky{
-    opacity:1!important;
-    visibility:visible!important;
-    pointer-events:auto!important;
-    transform:translate(-50%,0)!important;
-  }
-}
-</style>
 
 {% schema %}
 {
