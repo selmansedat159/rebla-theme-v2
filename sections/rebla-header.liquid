@@ -114,6 +114,13 @@
     .rebla-v5__mobile-actions{display:flex;align-items:center;gap:1px}
     .rebla-v5__mobile-actions .rebla-v5__action{width:34px}
   }
+
+  .rebla-v5__nsf-top{display:flex;align-items:center;justify-content:center;gap:10px}
+  .rebla-v5__nsf-circle{
+    display:inline-grid;place-items:center;width:25px;height:25px;
+    border:1.5px solid currentColor;border-radius:50%;
+    font-size:8px;font-weight:800;flex:0 0 auto
+  }
 </style>
 
 <div class="rebla-v5" id="ReblaV5-{{ section.id }}">
@@ -221,6 +228,10 @@
     <div class="rebla-v5__mobile-top">
       <div class="rebla-v5__mobile-benefit"><svg viewBox="0 0 24 24"><path d="M3 6h11v10H3zM14 9h4l3 3v4h-7z"/></svg><span>Free Shipping</span></div>
       <div class="rebla-v5__mobile-benefit"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3 8-7 10-4-2-7-5-7-10V6z"/></svg><span>2-Year Warranty</span></div>
+        <div class="rebla-v5__trust-item rebla-v5__nsf-top">
+          <span class="rebla-v5__nsf-circle">NSF</span>
+          <strong>NSF Certified Components</strong>
+        </div>
       <a class="rebla-v5__mobile-benefit" href="tel:{{ section.settings.phone | remove: ' ' }}"><svg viewBox="0 0 24 24"><path d="M6 3l4 4-2 3c1.5 3 3 4.5 6 6l3-2 4 4-2 3c-8 0-16-8-16-16z"/></svg><span>{{ section.settings.phone }}</span></a>
     </div>
     <div class="rebla-v5__mobile-main">
@@ -280,7 +291,7 @@
   .rebla-search-overlay-v6[hidden]{display:none!important}
   .rebla-search-overlay-v6{
     position:fixed;
-    top:176px;
+    top:154px;
     right:28px;
     z-index:9999;
     width:min(390px,calc(100vw - 32px));
@@ -307,7 +318,7 @@
     font-size:22px;line-height:1;padding:6px!important
   }
   @media(max-width:749px){
-    .rebla-search-overlay-v6{top:132px;right:16px}
+    .rebla-search-overlay-v6{top:118px;right:16px}
   }
 </style>
 
