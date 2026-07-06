@@ -136,6 +136,10 @@
             <svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3 8-7 10-4-2-7-5-7-10V6z"/><path d="M9 12l2 2 4-5"/></svg>
             <span>{{ section.settings.warranty_text }}</span>
           </div>
+          <div class="rebla-v5__benefit">
+            <span class="rebla-v5__nsf-circle">NSF</span>
+            <span>{{ section.settings.nsf_text }}</span>
+          </div>
           <a class="rebla-v5__benefit" href="tel:{{ section.settings.phone | remove: ' ' | remove: '(' | remove: ')' | remove: '-' }}">
             <svg viewBox="0 0 24 24"><path d="M6 3l4 4-2 3c1.5 3 3 4.5 6 6l3-2 4 4-2 3c-8 0-16-8-16-16z"/></svg>
             <span>{{ section.settings.phone }}</span>
@@ -360,7 +364,7 @@
 
 {% schema %}
 {
-  "name": "Rebla Header V5",
+  "name": "Rebla Header V9",
   "tag": "section",
   "class": "rebla-header-v4-section",
   "settings": [
@@ -399,6 +403,12 @@
     },
     {
       "type": "text",
+      "id": "nsf_text",
+      "label": "NSF text",
+      "default": "NSF Certified Components"
+    },
+    {
+      "type": "text",
       "id": "phone",
       "label": "Phone",
       "default": "(888) 407-2424"
@@ -406,18 +416,18 @@
     {
       "type": "text",
       "id": "mega_heading",
-      "label": "Mega menu promo heading",
+      "label": "Shop System card heading",
       "default": "Premium water, from the first drop to the last."
     },
     {
       "type": "image_picker",
       "id": "mega_image",
-      "label": "Mega menu promo image"
+      "label": "Shop System card image"
     },
     {
       "type": "url",
       "id": "mega_link",
-      "label": "Mega menu promo link"
+      "label": "Shop System card link"
     }
   ],
   "presets": [
