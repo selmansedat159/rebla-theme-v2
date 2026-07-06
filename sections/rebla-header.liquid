@@ -136,7 +136,7 @@
             <svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3 8-7 10-4-2-7-5-7-10V6z"/><path d="M9 12l2 2 4-5"/></svg>
             <span>{{ section.settings.warranty_text }}</span>
           </div>
-          <div class="rebla-v5__benefit">
+          <div class="rebla-v5__benefit rebla-v5__benefit--nsf">
             <span class="rebla-v5__nsf-circle">NSF</span>
             <span>{{ section.settings.nsf_text }}</span>
           </div>
@@ -362,9 +362,41 @@
 })();
 </script>
 
+
+<style>
+@media (min-width: 750px) {
+  .rebla-v5__trust-inner {
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    align-items: center !important;
+    width: min(calc(100% - 48px), 760px) !important;
+    margin: 0 auto !important;
+  }
+  .rebla-v5__trust-inner > * {
+    min-width: 0 !important;
+    white-space: nowrap !important;
+    justify-content: center !important;
+    margin: 0 !important;
+  }
+}
+.rebla-v5__nsf-circle {
+  width: 27px;
+  height: 27px;
+  border: 1.5px solid currentColor;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  font-size: 9px;
+  font-weight: 800;
+  line-height: 1;
+}
+</style>
+
 {% schema %}
 {
-  "name": "Rebla Header V9",
+  "name": "Rebla Header V5",
   "tag": "section",
   "class": "rebla-header-v4-section",
   "settings": [
