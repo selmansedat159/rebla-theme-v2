@@ -448,6 +448,32 @@
 
 
 
+
+<style>
+/* Desktop sticky — explicit final override */
+@media (min-width:750px){
+  .rebla-v5__sticky{
+    display:block!important;
+    position:fixed!important;
+    top:14px!important;
+    left:50%!important;
+    width:min(calc(100% - 32px),1180px)!important;
+    z-index:99999!important;
+    opacity:0!important;
+    visibility:hidden!important;
+    pointer-events:none!important;
+    transform:translate(-50%,-18px)!important;
+  }
+
+  .rebla-v5.is-scrolled > .rebla-v5__sticky{
+    opacity:1!important;
+    visibility:visible!important;
+    pointer-events:auto!important;
+    transform:translate(-50%,0)!important;
+  }
+}
+</style>
+
 {% schema %}
 {
   "name": "Rebla Header V5",
