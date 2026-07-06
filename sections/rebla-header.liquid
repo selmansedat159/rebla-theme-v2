@@ -278,19 +278,18 @@
   if (!root || root.dataset.ready === 'true') return;
   root.dataset.ready = 'true';
 
-  const syncScroll = () => {
-  const scrollTop =
-    window.pageYOffset ||
-    document.documentElement.scrollTop ||
-    document.body.scrollTop ||
-    0;
+  const desktopHeader = root.querySelector('.rebla-v5__desktop');
 
-  root.classList.toggle('is-scrolled', scrollTop > 90);
-};
+if (desktopHeader) {
+  const stickyObserver = new IntersectionObserver(
+    ([entry]) => {
+      root.classList.toggle('is-scrolled', !entry.isIntersecting);
+    },
+    { threshold: 0 }
+  );
 
-window.addEventListener('scroll', syncScroll, { passive: true });
-document.addEventListener('scroll', syncScroll, { passive: true });
-syncScroll();
+  stickyObserver.observe(desktopHeader);
+}
 
   const drawer = root.querySelector('.rebla-v5__drawer');
   const openBtn = root.querySelector('.rebla-v5__hamburger');
