@@ -1,0 +1,268 @@
+{% comment %}
+  REBLA Custom Header v1.0
+  Standalone Shopify section.
+{% endcomment %}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    position: relative;
+    z-index: 50;
+  }
+
+  .rebla-header {
+    --rh-blue: #0f5fdb;
+    --rh-ink: #101828;
+    --rh-line: rgba(16, 24, 40, .09);
+    background: rgba(255,255,255,.97);
+    border-bottom: 1px solid var(--rh-line);
+  }
+
+  .rebla-header__inner {
+    width: min(calc(100% - 72px), 1440px);
+    min-height: 82px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(210px,1fr) auto minmax(210px,1fr);
+    align-items: center;
+    gap: 32px;
+  }
+
+  .rebla-header__brand { justify-self: start; display:flex; align-items:center; }
+  .rebla-header__logo { display:block; width:auto; max-width:{{ section.settings.logo_width }}px; height:auto; }
+  .rebla-header__name { color:var(--rh-ink); font-size:22px; font-weight:700; text-decoration:none; }
+
+  .rebla-header__nav { justify-self:center; }
+  .rebla-header__menu {
+    list-style:none;
+    margin:0;
+    padding:0;
+    display:flex;
+    align-items:center;
+    gap:clamp(28px,2.8vw,48px);
+  }
+
+  .rebla-header__link {
+    position:relative;
+    display:inline-flex;
+    align-items:center;
+    min-height:44px;
+    color:var(--rh-ink);
+    font-size:14px;
+    font-weight:500;
+    line-height:1;
+    text-decoration:none;
+    white-space:nowrap;
+  }
+
+  .rebla-header__link::after {
+    content:"";
+    position:absolute;
+    left:50%;
+    bottom:5px;
+    width:100%;
+    height:1.5px;
+    background:var(--rh-blue);
+    transform:translateX(-50%) scaleX(0);
+    transition:transform .24s cubic-bezier(.22,1,.36,1);
+  }
+
+  .rebla-header__link:hover,
+  .rebla-header__link[aria-current="page"] { color:var(--rh-blue); }
+
+  .rebla-header__link:hover::after,
+  .rebla-header__link[aria-current="page"]::after {
+    transform:translateX(-50%) scaleX(1);
+  }
+
+  .rebla-header__actions {
+    justify-self:end;
+    display:flex;
+    align-items:center;
+    gap:4px;
+  }
+
+  .rebla-header__icon {
+    position:relative;
+    width:42px;
+    height:42px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    border:0;
+    border-radius:999px;
+    background:transparent;
+    color:var(--rh-ink);
+    text-decoration:none;
+    cursor:pointer;
+    transition:background .18s ease,color .18s ease,transform .2s ease;
+  }
+
+  .rebla-header__icon:hover {
+    background:rgba(15,95,219,.07);
+    color:var(--rh-blue);
+    transform:translateY(-1px);
+  }
+
+  .rebla-header__icon svg { width:20px; height:20px; stroke:currentColor; fill:none; stroke-width:1.7; }
+  .rebla-header__count {
+    position:absolute;
+    top:2px;
+    right:0;
+    min-width:18px;
+    height:18px;
+    padding:0 5px;
+    border-radius:999px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:var(--rh-ink);
+    color:#fff;
+    font-size:10px;
+    line-height:1;
+  }
+
+  .rebla-header__mobile-toggle { display:none; }
+
+  .rebla-mobile-menu {
+    display:none;
+    border-top:1px solid var(--rh-line);
+    padding:10px 20px 22px;
+    background:#fff;
+  }
+
+  .rebla-mobile-menu[open] { display:block; }
+  .rebla-mobile-menu__list { list-style:none; margin:0; padding:0; }
+  .rebla-mobile-menu__link {
+    display:block;
+    padding:15px 2px;
+    border-bottom:1px solid var(--rh-line);
+    color:var(--rh-ink);
+    font-size:16px;
+    font-weight:500;
+    text-decoration:none;
+  }
+
+  @media (max-width: 749px) {
+    .rebla-header__inner {
+      width:100%;
+      min-height:66px;
+      padding:0 14px;
+      grid-template-columns:1fr auto 1fr;
+      gap:8px;
+    }
+    .rebla-header__nav { display:none; }
+    .rebla-header__mobile-toggle { display:inline-flex; justify-self:start; }
+    .rebla-header__brand { justify-self:center; }
+    .rebla-header__logo { max-width:min({{ section.settings.logo_width }}px, 122px); }
+    .rebla-header__actions { justify-self:end; gap:0; }
+    .rebla-header__account { display:none; }
+    .rebla-header__icon { width:40px; height:40px; }
+  }
+</style>
+
+<header class="rebla-header" data-rebla-header>
+  <div class="rebla-header__inner">
+    <button class="rebla-header__icon rebla-header__mobile-toggle" type="button" aria-label="Open menu" aria-expanded="false" data-rebla-menu-toggle>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+
+    <div class="rebla-header__brand">
+      <a href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }}">
+        {% if section.settings.logo != blank %}
+          {{ section.settings.logo | image_url: width: 600 | image_tag: class: 'rebla-header__logo', loading: 'eager', widths: '120,180,240,360,600', alt: shop.name }}
+        {% else %}
+          <span class="rebla-header__name">{{ shop.name }}</span>
+        {% endif %}
+      </a>
+    </div>
+
+    <nav class="rebla-header__nav" aria-label="Main navigation">
+      <ul class="rebla-header__menu">
+        {% for link in section.settings.menu.links %}
+          <li>
+            <a class="rebla-header__link" href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>{{ link.title }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </nav>
+
+    <div class="rebla-header__actions">
+      <a class="rebla-header__icon" href="{{ routes.search_url }}" aria-label="Search">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg>
+      </a>
+
+      {% if shop.customer_accounts_enabled %}
+        <a class="rebla-header__icon rebla-header__account" href="{{ routes.account_url }}" aria-label="Account">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5.5 20c.7-4 3-6 6.5-6s5.8 2 6.5 6"/></svg>
+        </a>
+      {% endif %}
+
+      <a class="rebla-header__icon" href="{{ routes.cart_url }}" aria-label="Cart">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+        {% if cart.item_count > 0 %}
+          <span class="rebla-header__count">{{ cart.item_count }}</span>
+        {% endif %}
+      </a>
+    </div>
+  </div>
+
+  <div class="rebla-mobile-menu" data-rebla-mobile-menu>
+    <ul class="rebla-mobile-menu__list">
+      {% for link in section.settings.menu.links %}
+        <li><a class="rebla-mobile-menu__link" href="{{ link.url }}">{{ link.title }}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+</header>
+
+<script>
+  (() => {
+    const section = document.getElementById('shopify-section-{{ section.id }}');
+    if (!section) return;
+    const toggle = section.querySelector('[data-rebla-menu-toggle]');
+    const menu = section.querySelector('[data-rebla-mobile-menu]');
+    if (!toggle || !menu) return;
+
+    toggle.addEventListener('click', () => {
+      const open = menu.hasAttribute('open');
+      menu.toggleAttribute('open', !open);
+      toggle.setAttribute('aria-expanded', String(!open));
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Rebla Header",
+  "tag": "section",
+  "class": "rebla-header-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "min": 100,
+      "max": 260,
+      "step": 5,
+      "unit": "px",
+      "label": "Logo width",
+      "default": 170
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "main-menu"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Rebla Header"
+    }
+  ]
+}
+{% endschema %}
