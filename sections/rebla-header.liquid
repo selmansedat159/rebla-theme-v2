@@ -498,6 +498,35 @@
 }
 </style>
 
+
+<script>
+/* REBLA STICKY — isolated scroll controller */
+(() => {
+  const rootId = 'ReblaV5-{{ section.id }}';
+  const threshold = 90;
+
+  const applyStickyState = () => {
+    const root = document.getElementById(rootId);
+    if (!root) return;
+    const y = window.scrollY || document.documentElement.scrollTop || 0;
+    root.classList.toggle('is-scrolled', y > threshold);
+  };
+
+  const bindSticky = () => {
+    applyStickyState();
+    window.removeEventListener('scroll', applyStickyState);
+    window.addEventListener('scroll', applyStickyState, { passive: true });
+  };
+
+  bindSticky();
+  requestAnimationFrame(bindSticky);
+  setTimeout(bindSticky, 300);
+
+  document.addEventListener('shopify:section:load', bindSticky);
+  document.addEventListener('shopify:section:select', bindSticky);
+})();
+</script>
+
 {% schema %}
 {
   "name": "Rebla Header V5",
