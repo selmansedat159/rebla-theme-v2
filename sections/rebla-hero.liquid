@@ -315,18 +315,6 @@
         {{ section.settings.mobile_padding_bottom }}px;
     }
 
-    #ReblaHero-{{ section.id }} .rh-mobile-copy::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: -28px;
-      height: 56px;
-      z-index: -1;
-      pointer-events: none;
-      background: linear-gradient(to bottom, var(--rh-mobile-bg) 0%, var(--rh-mobile-bg) 34%, rgba(247, 248, 250, .92) 48%, rgba(247, 248, 250, .58) 68%, rgba(247, 248, 250, 0) 100%);
-    }
-
     #ReblaHero-{{ section.id }} .rh-mobile-copy--left {
       text-align: left;
     }
@@ -365,8 +353,24 @@
       z-index: 2;
       width: 100%;
       height: {{ section.settings.mobile_image_height }}px;
-      margin-top: -115px;
+      margin-top: -52px;
       overflow: hidden;
+    }
+
+    #ReblaHero-{{ section.id }} .rh-mobile-media::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 82px;
+      z-index: 2;
+      pointer-events: none;
+      background: linear-gradient(
+        to bottom,
+        var(--rh-mobile-bg) 0%,
+        rgba(247, 248, 250, .72) 28%,
+        rgba(247, 248, 250, .24) 62%,
+        rgba(247, 248, 250, 0) 100%
+      );
     }
 
     #ReblaHero-{{ section.id }} .rh-image-mobile,
