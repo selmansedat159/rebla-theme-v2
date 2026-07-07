@@ -144,11 +144,55 @@
         "mega_image": "shopify://shop_images/Gemini_Generated_Image_rm3v0lrm3v0lrm3v.png",
         "mega_link": ""
       }
+    },
+    "rebla_hero_9D7iLP": {
+      "type": "rebla-hero",
+      "name": "Rebla Hero",
+      "settings": {
+        "heading": "Engineered clarity for every drop.",
+        "description": "<p>Premium reverse osmosis system engineered for cleaner, safer, better-tasting water.</p>",
+        "button_label": "Shop System",
+        "button_link": "",
+        "show_arrow": true,
+        "desktop_image_position": "center center",
+        "mobile_image_position": "center center",
+        "desktop_height": 560,
+        "content_width": 1440,
+        "desktop_side_padding": 48,
+        "copy_width": 540,
+        "desktop_copy_position": "left",
+        "desktop_heading_size": 72,
+        "heading_line_height": 98,
+        "description_width": 470,
+        "desktop_text_size": 18,
+        "description_spacing": 24,
+        "button_spacing": 28,
+        "desktop_fade": 90,
+        "mobile_padding_top": 48,
+        "mobile_side_padding": 24,
+        "mobile_padding_bottom": 30,
+        "mobile_heading_size": 44,
+        "mobile_heading_line_height": 102,
+        "mobile_description_width": 360,
+        "mobile_text_size": 16,
+        "mobile_description_spacing": 16,
+        "mobile_button_spacing": 22,
+        "mobile_image_height": 420,
+        "mobile_text_alignment": "left",
+        "heading_color": "#0A1B33",
+        "text_color": "#0A1B33",
+        "mobile_background": "#F7F8FA",
+        "button_background": "#1261D6",
+        "button_hover_background": "#0B50B9",
+        "button_text_color": "#FFFFFF",
+        "button_radius": 7
+      }
     }
   },
   "order": [
     "header_announcements_KzyBTE",
     "header_section",
-    "rebla_header_qRmdXX"
+    "rebla_header_qRmdXX",
+    "rebla_hero_9D7iLP"
   ]
 }
