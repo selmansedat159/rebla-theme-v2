@@ -1,32 +1,54 @@
-<div class="page-width page-margin">
-  <div class="grid">
-    <div class="grid__item">
-      <!-- Sayfa Başlığı (Hakkımızda vb.) -->
-      <h1 class="main-page-title page-title h0">
-        {{ page.title | escape }}
-      </h1>
-      
-      <!-- Shopify Panelinde Yazdığın İçerik Metni -->
-      <div class="rte">
-        {{ page.content }}
-      </div>
-    </div>
+<div class="rebla-page-container">
+  <!-- Sayfa Başlığı (About Us) -->
+  <h1 class="rebla-page-title">
+    {{ page.title | escape }}
+  </h1>
+  
+  <!-- Sayfa İçeriği -->
+  <div class="rebla-page-content">
+    {{ page.content }}
   </div>
 </div>
 
 <style>
-  .page-margin {
-    margin-top: 50px;
-    margin-bottom: 50px;
-    padding: 0 20px;
+  /* Temanın grid çakışmalarından tamamen bağımsız, özel Rebla kutusu */
+  .rebla-page-container {
+    max-width: 1200px !important;
+    margin: 140px auto 60px auto !important; /* Üst boşluk 140px yapılarak havada uçan menünün arkasında kalması engellendi */
+    padding: 0 40px !important;
+    display: block !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
   }
-  .main-page-title {
-    margin-bottom: 30px;
-    font-family: var(--font-heading--family);
+
+  .rebla-page-title {
+    font-size: 3.5rem !important;
+    font-weight: 600 !important;
+    margin-bottom: 24px !important;
+    text-align: left !important;
+    display: block !important;
+    width: 100% !important;
+    letter-spacing: -0.02em !important;
   }
-  .rte {
-    font-family: var(--font-body--family);
-    line-height: 1.6;
+
+  .rebla-page-content {
+    font-size: 1.6px !important; /* Veya temanın default yazı boyutuna göre ayarlanabilir */
+    line-height: 1.7 !important;
+    text-align: left !important;
+    display: block !important;
+    width: 100% !important;
+    color: #1e293b !important;
+  }
+
+  /* Mobil cihazlar için ferahlık ayarı */
+  @media screen and (max-width: 749px) {
+    .rebla-page-container {
+      margin-top: 120px !important;
+      padding: 0 20px !important;
+    }
+    .rebla-page-title {
+      font-size: 2.5rem !important;
+    }
   }
 </style>
 
