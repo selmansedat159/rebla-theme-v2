@@ -1,5 +1,5 @@
 {% comment %}
-  REBLA HEADER V5 - CORE STICKY REFIRED
+  REBLA HEADER V5
   Premium desktop + sticky + mobile header
 {% endcomment %}
 
@@ -8,30 +8,16 @@
 %}
 
 <style>
-  #shopify-section-{{ section.id }}{position:relative;z-index:99999}
+  #shopify-section-{{ section.id }}{position:relative;z-index:80}
 {% if request.page_type == 'index' %}
-  #shopify-section-{{ section.id }}{position:absolute;top:0;left:0;right:0;pointer-events:none}
-  #shopify-section-{{ section.id }} .rebla-v5__desktop { pointer-events: auto !important; }
-{% else %}
-  #shopify-section-{{ section.id }} {
-    position: relative !important;
-    top: auto !important;
-    left: auto !important;
-    right: auto !important;
-    pointer-events: auto !important;
-  }
-  #shopify-section-{{ section.id }} .rebla-v5__desktop {
-    position: relative !important;
-    pointer-events: auto !important;
-    padding: 26px max(24px, calc((100% - 1440px) / 2)) 20px !important;
-  }
+#shopify-section-{{ section.id }}{position:absolute;top:0;left:0;right:0;pointer-events:none}
 {% endif %}
   .rebla-v5{--ink:#0a1b33;--blue:#1e6bff;--line:rgba(10,27,51,.10);--soft:#f7f8fa;color:var(--ink);font-family:inherit}
-  .rebla-v5 * { box-sizing: border-box; }
+  .rebla-v5 *{box-sizing:border-box}
   .rebla-v5 a{color:inherit;text-decoration:none}
   .rebla-v5 button{font:inherit;color:inherit}
   .rebla-v5 svg{display:block;width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
-  .rebla-v5__desktop{background:transparent;border:0;padding:26px 56px 0}
+  .rebla-v5__desktop{background:transparent;border:0;padding:26px 56px 0;pointer-events:none}
   .rebla-v5__bar{border-bottom:1px solid var(--line)}
   .rebla-v5__bar-inner,.rebla-v5__main-inner{width:min(calc(100% - 48px),1440px);margin:auto}
   .rebla-v5__bar-inner{min-height:46px;display:flex;justify-content:center;align-items:center}
@@ -90,85 +76,6 @@
   .rebla-v5__feature svg{width:27px;height:27px;color:var(--ink)}
   .rebla-v5__feature strong{display:block;font-size:12px;margin-bottom:3px}
   .rebla-v5__feature small{display:block;font-size:10px;opacity:.66;line-height:1.35}
-  
-  /* ULTRASONIK STICKY FORCE CSS */
-  .rebla-v5__sticky-shell {
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    width: 100% !important;
-    z-index: 999999 !important;
-    pointer-events: none !important;
-  }
-  .rebla-v5__sticky{
-    position:absolute !important;
-    top:0 !important;
-    left:0 !important;
-    right:0 !important;
-    width:100% !important;
-    opacity:0 !important;
-    visibility:hidden !important;
-    pointer-events:none !important;
-    transform:translateY(-100%) !important;
-    transition:transform .28s cubic-bezier(.22,1,.36,1), opacity .18s ease, visibility .28s !important;
-  }
-  
-  /* Global Sınıf Tetiklendiğinde Çalışacak Ezici Kural */
-  html.rebla-sticky-active .rebla-v5__sticky-shell { pointer-events: auto !important; }
-  html.rebla-sticky-active .rebla-v5__sticky {
-    opacity: 1 !important;
-    visibility: visible !important;
-    pointer-events: auto !important;
-    transform: translateY(0) !important;
-  }
-
-  .rebla-v5__sticky-inner{
-    width:100% !important;
-    max-width:100% !important;
-    height:58px !important;
-    min-height:58px !important;
-    padding:0 32px !important;
-    display:flex !important;
-    justify-content:space-between !important;
-    align-items:center !important;
-    background:#fff !important;
-    border:0 !important;
-    border-bottom:1px solid rgba(10,27,51,.10) !important;
-    border-radius:0 !important;
-    box-shadow:0 4px 16px rgba(10,27,51,.06) !important;
-  }
-  .rebla-v5__sticky .rebla-v5__brand{flex:0 0 auto !important; pointer-events: auto !important;}
-  .rebla-v5__sticky .rebla-v5__logo{max-width:110px !important;max-height:36px !important; display:block !important;}
-  .rebla-v5__sticky nav{flex:1 1 auto !important;display:flex !important;justify-content:center !important}
-  .rebla-v5__sticky .rebla-v5__menu{gap:32px !important; display:flex !important; align-items:center !important; list-style:none !important;}
-  .rebla-v5__sticky .rebla-v5__link{min-height:58px !important;font-size:14px !important;border:0 !important; display:flex !important; align-items:center !important; pointer-events: auto !important;}
-  .rebla-v5__sticky .rebla-v5__actions{flex:0 0 auto !important;margin-right:0 !important;gap:16px !important; display:flex !important; align-items:center !important}
-  .rebla-v5__sticky .rebla-v5__call{min-height:36px !important;padding:0 14px !important;font-size:11px !important;border-radius:20px !important; display:inline-flex !important; align-items:center !important; pointer-events: auto !important;}
-
-  .rebla-v5__mobile,.rebla-v5__drawer{display:none}
-  .rebla-v5__drawer.is-open{display:block;position:fixed;inset:0;z-index:120}
-  .rebla-v5__backdrop{position:absolute;inset:0;background:rgba(10,27,51,.38)}
-  .rebla-v5__panel{position:relative;width:min(88vw,390px);height:100%;padding:22px;background:#fff;overflow:auto}
-  .rebla-v5__drawer-head{display:flex;justify-space-between;align-items:center;margin-bottom:22px}
-  .rebla-v5__close{border:0;background:none;font-size:32px;cursor:pointer}
-  .rebla-v5__drawer-list,.rebla-v5__drawer-sub{list-style:none;margin:0;padding:0}
-  .rebla-v5__drawer-list>li{border-bottom:1px solid var(--line)}
-  .rebla-v5__drawer-list>li>a{display:block;padding:17px 2px;font-weight:750}
-  .rebla-v5__drawer-sub{padding:0 0 12px 14px}
-  .rebla-v5__drawer-sub a{display:block;padding:8px 2px;font-size:13px;opacity:.78}
-
-  @media(max-width:1100px){
-    .rebla-v5__main-inner{grid-template-columns:170px 1fr auto;gap:20px}
-    .rebla-v5__menu{gap:22px}
-    .rebla-v5__link{font-size:13px}
-    .rebla-v5__mega-inner{grid-template-columns:190px 1fr}
-    .rebla-v5__trust{display:none}
-    .rebla-v5__mega-inner{grid-template-columns:210px 1fr}
-    .rebla-v5__featurebar-inner{grid-template-columns:repeat(2,1fr)}
-    .rebla-v5__feature:nth-child(3){border-left:0;border-top:1px solid var(--line)}
-    .rebla-v5__feature:nth-child(4){border-top:1px solid var(--line)}
-  }
 
   @media(max-width:749px){
     #shopify-section-{{ section.id }}{position:relative;pointer-events:auto}
@@ -193,6 +100,7 @@
       overflow:hidden;background:rgba(255,255,255,.90);
       backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)
     }
+
   }
 
   .rebla-v5__nsf-top{display:flex;align-items:center;justify-content:center;gap:10px}
@@ -209,14 +117,47 @@
     margin-bottom:-1px;
     pointer-events:none;
   }
-  @media(max-width:749px){
-    #shopify-section-{{ section.id }} .rebla-v5__sticky-shell{display:none!important}
+@media(max-width:749px){
+
+
+/* SIMPLE STICKY — tek sistem */
+@media(min-width:990px){
+  #shopify-section-{{ section.id }} .rebla-v5__desktop.rebla-simple-sticky{
+    position:fixed!important;
+    top:0!important;
+    left:0!important;
+    right:0!important;
+    width:100%!important;
+    z-index:99999!important;
+    padding:0!important;
+    margin:0!important;
+    background:transparent!important;
+    pointer-events:auto!important;
   }
+
+  #shopify-section-{{ section.id }} .rebla-v5__desktop.rebla-simple-sticky .rebla-v5__main{
+    margin:0!important;
+    border-radius:0!important;
+    border-left:0!important;
+    border-right:0!important;
+    border-top:0!important;
+    width:100%!important;
+    box-shadow:0 4px 18px rgba(10,27,51,.10)!important;
+  }
+
+  #shopify-section-{{ section.id }} .rebla-v5__desktop.rebla-simple-sticky .rebla-v5__main-inner{
+    width:100%!important;
+    border-radius:0!important;
+  }
+}
+
 </style>
 
 <div class="rebla-v5" id="ReblaV5-{{ section.id }}">
   <span class="rebla-v5__desktop-sentinel" aria-hidden="true"></span>
   <header class="rebla-v5__desktop">
+
+
     <div class="rebla-v5__main-inner">
       <a class="rebla-v5__brand" href="{{ routes.root_url }}">
         {% if section.settings.logo != blank %}
@@ -257,6 +198,7 @@
                         </div>
                       {% endfor %}
                     </div>
+
                   </div>
 
                   <div class="rebla-v5__featurebar">
@@ -302,44 +244,10 @@
       </div>
     </div>
   </header>
-
-<div class="rebla-v5__sticky-shell">
-  <div class="rebla-v5__sticky">
-    <div class="rebla-v5__sticky-inner">
-      <a class="rebla-v5__brand" href="{{ routes.root_url }}">
-        {% if section.settings.sticky_logo != blank %}{{ section.settings.sticky_logo | image_url: width: 240 | image_tag: class: 'rebla-v5__logo', loading: 'eager', alt: shop.name }}{% elsif section.settings.logo != blank %}{{ section.settings.logo | image_url: width: 360 | image_tag: class: 'rebla-v5__logo', loading: 'eager', alt: shop.name }}{% else %}<span class="rebla-v5__name">{{ shop.name }}</span>{% endif %}
-      </a>
-      <nav aria-label="Sticky navigation"><ul class="rebla-v5__menu">{% for link in nav_menu.links %}<li><a class="rebla-v5__link" href="{{ link.url }}">{{ link.title }}</a></li>{% endfor %}</ul></nav>
-      <div class="rebla-v5__actions">
-        <a class="rebla-v5__call" href="tel:{{ section.settings.phone | remove: ' ' | remove: '(' | remove: ')' | remove: '-' }}">{{ section.settings.cta_text }}</a>
-        <button type="button" class="rebla-v5__action"  aria-label="Search" data-rebla-search-trigger aria-expanded="false"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M16.5 16.5L21 21"/></svg></button>
-        <a class="rebla-v5__action" href="{{ routes.account_url }}" aria-label="Account"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-5 4-7 8-7s7 2 8 7"/></svg></a>
-        <a class="rebla-v5__action" href="{{ routes.cart_url }}" aria-label="Cart"><svg viewBox="0 0 24 24"><path d="M3 4h2l2 12h11l2-8H6"/><circle cx="9" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg>{% if cart.item_count > 0 %}<span class="rebla-v5__badge">{{ cart.item_count }}</span>{% endif %}</a>
-        <span class="rebla-v5__flag" aria-label="United States">
-          <svg viewBox="0 0 48 48" role="img" aria-hidden="true">
-            <defs><clipPath id="reblaUsFlag2"><circle cx="24" cy="24" r="23"/></clipPath></defs>
-            <g clip-path="url(#reblaUsFlag2)">
-              <rect width="48" height="48" fill="#fff"/>
-              <g fill="#D52B1E">
-                <rect y="0" width="48" height="4"/><rect y="8" width="48" height="4"/>
-                <rect y="16" width="48" height="4"/><rect y="24" width="48" height="4"/>
-                <rect y="32" width="48" height="4"/><rect y="40" width="48" height="4"/>
-              </g>
-              <rect width="21" height="24" fill="#173B72"/>
-              <g fill="#fff">
-                <circle cx="4" cy="4" r="1"/><circle cx="10" cy="4" r="1"/><circle cx="16" cy="4" r="1"/>
-                <circle cx="7" cy="9" r="1"/><circle cx="13" cy="9" r="1"/><circle cx="19" cy="9" r="1"/>
-                <circle cx="4" cy="14" r="1"/><circle cx="10" cy="14" r="1"/><circle cx="16" cy="14" r="1"/>
-                <circle cx="7" cy="19" r="1"/><circle cx="13" cy="19" r="1"/><circle cx="19" cy="19" r="1"/>
-              </g>
-            </g>
-          </svg>
-        </span>
-      </div>
-    </div>
-  </div>
+</div>
 
   <header class="rebla-v5__mobile">
+
     <div class="rebla-v5__mobile-main">
       <button class="rebla-v5__hamburger" type="button" aria-label="Open menu"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
       <a class="rebla-v5__mobile-brand" href="{{ routes.root_url }}">{% if section.settings.logo != blank %}{{ section.settings.logo | image_url: width: 360 | image_tag: class: 'rebla-v5__logo', loading: 'eager', alt: shop.name }}{% else %}<span class="rebla-v5__name">{{ shop.name }}</span>{% endif %}</a>
@@ -436,15 +344,21 @@
 })();
 </script>
 
+
+
+
+
+
+
+
+
+
 <style>
+
 @media (min-width:750px){
-  .rebla-v5__sticky{
-    transition:
-      opacity .22s ease,
-      visibility .22s ease,
-      transform .32s cubic-bezier(.22,1,.36,1) !important;
-  }
 }
+
+/* Mobile: animate the same header into floating state */
 @media (max-width:749px){
   .rebla-v5__mobile{
     transition:
@@ -455,12 +369,15 @@
       box-shadow .38s ease,
       transform .38s cubic-bezier(.22,1,.36,1);
   }
+
   .rebla-v5.is-scrolled .rebla-v5__mobile{
     animation:reblaMobileFloat .42s cubic-bezier(.22,1,.36,1) both;
   }
+
   .rebla-v5.is-scrolled .rebla-v5__mobile-top{
     display:none!important;
   }
+
   @keyframes reblaMobileFloat{
     from{opacity:.72;transform:translateY(-14px) scale(.975)}
     to{opacity:1;transform:translateY(0) scale(1)}
@@ -468,33 +385,34 @@
 }
 </style>
 
+
+
+
+
+
+
+
+
 <script>
 (() => {
-  let lastScrollTop = 0;
-  const rootHtml = document.documentElement;
+  const section = document.getElementById('shopify-section-{{ section.id }}');
+  if (!section) return;
 
-  const handleScroll = () => {
-    if (window.innerWidth < 750) {
-      rootHtml.classList.remove('rebla-sticky-active');
+  const header = section.querySelector('.rebla-v5__desktop');
+  if (!header) return;
+
+  const updateSticky = () => {
+    if (window.innerWidth < 990) {
+      header.classList.remove('rebla-simple-sticky');
       return;
     }
 
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    
-    // 120px'den fazla kaydırıldıysa VE aşağı doğru iniliyorsa sticky'yi aktif et
-    if (scrollTop > 120 && scrollTop > lastScrollTop) {
-      rootHtml.classList.add('rebla-sticky-active');
-    } else {
-      // Yukarı kaydırılıyorsa veya en tepedeysek pasif et
-      rootHtml.classList.remove('rebla-sticky-active');
-    }
-    
-    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+    header.classList.toggle('rebla-simple-sticky', window.scrollY > 120);
   };
 
-  window.addEventListener('scroll', handleScroll, { passive: true });
-  window.addEventListener('resize', handleScroll);
-  handleScroll();
+  updateSticky();
+  window.addEventListener('scroll', updateSticky, { passive: true });
+  window.addEventListener('resize', updateSticky);
 })();
 </script>
 
@@ -508,11 +426,6 @@
       "type": "image_picker",
       "id": "logo",
       "label": "Logo"
-    },
-    {
-      "type": "image_picker",
-      "id": "sticky_logo",
-      "label": "Sticky header logo"
     },
     {
       "type": "range",
@@ -585,3 +498,5 @@
 }
 {% endschema %}
 </div>
+
+
