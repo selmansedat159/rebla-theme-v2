@@ -22,7 +22,7 @@
   .rebla-v5__benefit{min-width:0;padding:0 30px;display:flex;justify-content:center;align-items:center;gap:10px;font-size:12px;font-weight:650;white-space:nowrap}
   .rebla-v5__benefit+.rebla-v5__benefit{border-left:1px solid var(--line)}
   .rebla-v5__benefit svg{width:19px;height:19px}
-  .rebla-v5__main-inner{min-height:100px;display:grid;grid-template-columns:260px minmax(0,1fr) auto;align-items:center;gap:28px}
+  .rebla-v5__main-inner{min-height:100px;display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;column-gap:34px;padding-right:36px}
   .rebla-v5__brand{justify-self:start;display:flex;align-items:center}
   .rebla-v5__logo{display:block;width:auto;height:auto;max-width:{{ section.settings.logo_width }}px;max-height:72px}
   .rebla-v5__name{font-size:28px;font-weight:800;letter-spacing:-.03em}
@@ -80,7 +80,7 @@
   .rebla-v5__sticky{position:fixed;top:14px;left:50%;width:min(calc(100% - 32px),1180px);z-index:100;opacity:0;visibility:hidden;pointer-events:none;transform:translate(-50%,-18px);transition:.2s ease}
   .rebla-v5.is-desktop-scrolled .rebla-v5__sticky{opacity:1;visibility:visible;pointer-events:auto;transform:translate(-50%,0)}
 
-  .rebla-v5__sticky-inner{min-height:68px;padding:0 24px;display:grid;grid-template-columns:150px 1fr auto;align-items:center;gap:28px;background:rgba(255,255,255,.84);border:1px solid rgba(255,255,255,.7);border-radius:16px;box-shadow:0 16px 42px rgba(10,27,51,.15);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+  .rebla-v5__sticky-inner{min-height:68px;padding:0 36px 0 24px;display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;column-gap:34px;background:rgba(255,255,255,.84);border:1px solid rgba(255,255,255,.7);border-radius:16px;box-shadow:0 16px 42px rgba(10,27,51,.15);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
   .rebla-v5__sticky .rebla-v5__logo{max-width:112px;max-height:44px}
   .rebla-v5__sticky .rebla-v5__menu{justify-content:center;gap:30px}
   .rebla-v5__sticky .rebla-v5__link{min-height:68px;font-size:12px;border:0}
