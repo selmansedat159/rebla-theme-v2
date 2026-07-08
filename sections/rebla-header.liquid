@@ -198,6 +198,47 @@
 .rebla-v5__desktop.is-sticky .rebla-v5__main-logo{display:none}
 .rebla-v5__desktop.is-sticky .rebla-v5__sticky-logo{display:block}
 
+
+/* TRUE SLIM STICKY — separate bar, independent from floating header */
+.rebla-v5__slim-sticky{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  z-index:10000;
+  height:58px;
+  background:#fff;
+  border-bottom:1px solid rgba(10,27,51,.10);
+  box-shadow:0 4px 18px rgba(10,27,51,.08);
+  transform:translateY(-110%);
+  opacity:0;
+  visibility:hidden;
+  transition:transform .24s ease,opacity .18s ease,visibility .24s;
+}
+.rebla-v5__slim-sticky.is-visible{
+  transform:translateY(0);
+  opacity:1;
+  visibility:visible;
+}
+.rebla-v5__slim-inner{
+  width:100%;
+  height:58px;
+  padding:0 38px;
+  display:grid;
+  grid-template-columns:150px minmax(0,1fr) auto;
+  align-items:center;
+  gap:20px;
+}
+.rebla-v5__slim-sticky .rebla-v5__brand{height:42px;display:flex;align-items:center}
+.rebla-v5__slim-sticky .rebla-v5__logo{width:auto!important;max-width:112px!important;max-height:34px!important}
+.rebla-v5__slim-sticky .rebla-v5__menu{gap:28px!important}
+.rebla-v5__slim-sticky .rebla-v5__link{font-size:13px!important;line-height:58px!important}
+.rebla-v5__slim-sticky .rebla-v5__actions{gap:13px!important}
+.rebla-v5__slim-sticky .rebla-v5__call{min-height:36px!important;padding:0 18px!important;font-size:12px!important}
+.rebla-v5__slim-sticky .rebla-v5__mega{top:58px!important}
+.rebla-v5__slim-sticky .rebla-v5__flag{width:25px!important;height:25px!important}
+@media(max-width:989px){.rebla-v5__slim-sticky{display:none!important}}
+
 </style>
 
 <div class="rebla-v5" id="ReblaV5-{{ section.id }}">
@@ -355,70 +396,38 @@
 
 <script>
 (() => {
-  const root = document.getElementById('ReblaV5-{{ section.id }}');
-  if (!root) return;
+  const section = document.getElementById('shopify-section-{{ section.id }}');
+  if (!section || window.innerWidth < 990) return;
 
-  if (root._reblaStickyHandler) {
-    window.removeEventListener('scroll', root._reblaStickyHandler);
-  }
+  const original = section.querySelector('.rebla-v5__desktop');
+  const main = original && original.querySelector('.rebla-v5__main-inner');
+  if (!main) return;
 
-  let stickyActive = root.classList.contains('is-scrolled');
-  let stickyFrame = null;
+  const sticky = document.createElement('header');
+  sticky.className = 'rebla-v5__slim-sticky';
+  sticky.setAttribute('aria-label', 'Sticky navigation');
 
-  const updateSticky = () => {
-    if (stickyFrame) return;
+  const inner = main.cloneNode(true);
+  inner.classList.remove('rebla-v5__main-inner');
+  inner.classList.add('rebla-v5__slim-inner');
 
-    stickyFrame = requestAnimationFrame(() => {
-      const y = window.pageYOffset || document.documentElement.scrollTop || 0;
+  const stickyLogo = inner.querySelector('.rebla-v5__logo');
+  {% if section.settings.sticky_logo != blank %}
+    if (stickyLogo) {
+      stickyLogo.src = '{{ section.settings.sticky_logo | image_url: width: 240 }}';
+      stickyLogo.removeAttribute('srcset');
+    }
+  {% endif %}
 
-      if (!stickyActive && y >= 120) {
-        stickyActive = true;
-        root.classList.add('is-scrolled');
-      } else if (stickyActive && y <= 40) {
-        stickyActive = false;
-        root.classList.remove('is-scrolled');
-      }
+  sticky.appendChild(inner);
+  document.body.appendChild(sticky);
 
-      stickyFrame = null;
-    });
+  const update = () => {
+    sticky.classList.toggle('is-visible', window.scrollY > 120);
   };
 
-  root._reblaStickyHandler = updateSticky;
-  window.addEventListener('scroll', updateSticky, { passive: true });
-  updateSticky();
-
-
-
-  const desktopSentinel = root.querySelector('.rebla-v5__desktop-sentinel');
-
-  if (desktopSentinel && 'IntersectionObserver' in window) {
-    if (root._reblaDesktopObserver) root._reblaDesktopObserver.disconnect();
-
-    root._reblaDesktopObserver = new IntersectionObserver(
-      ([entry]) => {
-        root.classList.toggle('is-desktop-scrolled', !entry.isIntersecting);
-      },
-      { root: null, threshold: 0 }
-    );
-
-    root._reblaDesktopObserver.observe(desktopSentinel);
-  }
-
-  const drawer = root.querySelector('.rebla-v5__drawer');
-  const openBtn = root.querySelector('.rebla-v5__hamburger');
-  const closeBtn = root.querySelector('.rebla-v5__close');
-  const backdrop = root.querySelector('.rebla-v5__backdrop');
-
-  const setDrawer = (open) => {
-    drawer.classList.toggle('is-open', open);
-    drawer.setAttribute('aria-hidden', String(!open));
-    document.documentElement.style.overflow = open ? 'hidden' : '';
-  };
-
-  openBtn?.addEventListener('click', () => setDrawer(true));
-  closeBtn?.addEventListener('click', () => setDrawer(false));
-  backdrop?.addEventListener('click', () => setDrawer(false));
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') setDrawer(false); });
+  update();
+  window.addEventListener('scroll', update, { passive:true });
 })();
 </script>
 
