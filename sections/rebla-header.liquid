@@ -8,13 +8,13 @@
 %}
 
 <style>
-  #shopify-section-{{ section.id }}{position:relative;z-index:80}
+  #shopify-section-{{ section.id }}{position:absolute;top:0;left:0;right:0;z-index:80;pointer-events:none}
   .rebla-v5{--ink:#0a1b33;--blue:#1e6bff;--line:rgba(10,27,51,.10);--soft:#f7f8fa;color:var(--ink);font-family:inherit}
   .rebla-v5 *{box-sizing:border-box}
   .rebla-v5 a{color:inherit;text-decoration:none}
   .rebla-v5 button{font:inherit;color:inherit}
   .rebla-v5 svg{display:block;width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
-  .rebla-v5__desktop{background:#fff;border-bottom:1px solid var(--line)}
+  .rebla-v5__desktop{background:transparent;border:0;padding:26px 56px 0;pointer-events:none}
   .rebla-v5__bar{border-bottom:1px solid var(--line)}
   .rebla-v5__bar-inner,.rebla-v5__main-inner{width:min(calc(100% - 48px),1440px);margin:auto}
   .rebla-v5__bar-inner{min-height:46px;display:flex;justify-content:center;align-items:center}
@@ -22,11 +22,11 @@
   .rebla-v5__benefit{min-width:0;padding:0 30px;display:flex;justify-content:center;align-items:center;gap:10px;font-size:12px;font-weight:650;white-space:nowrap}
   .rebla-v5__benefit+.rebla-v5__benefit{border-left:1px solid var(--line)}
   .rebla-v5__benefit svg{width:19px;height:19px}
-  .rebla-v5__main-inner{min-height:88px;display:grid;grid-template-columns:240px minmax(0,1fr) auto;align-items:center;gap:24px;padding-left:28px;padding-right:28px}
+  .rebla-v5__main-inner{width:100%;min-height:88px;display:grid;grid-template-columns:220px minmax(0,1fr) auto;align-items:center;gap:10px;padding:0 28px;background:#fff;border:1px solid rgba(10,27,51,.08);border-radius:14px;box-shadow:0 14px 40px rgba(10,27,51,.14);pointer-events:auto}
   .rebla-v5__brand{justify-self:start;display:flex;align-items:center}
   .rebla-v5__logo{display:block;width:auto;height:auto;max-width:{{ section.settings.logo_width }}px;max-height:72px}
   .rebla-v5__name{font-size:28px;font-weight:800;letter-spacing:-.03em}
-  .rebla-v5__nav{justify-self:start;min-width:0}
+  .rebla-v5__nav{justify-self:start;min-width:0;margin-left:0}
   .rebla-v5__menu{list-style:none;margin:0;padding:0;display:flex;align-items:center;gap:clamp(24px,2.2vw,40px)}
   .rebla-v5__item{position:static}
   .rebla-v5__link{min-height:100px;display:flex;align-items:center;gap:9px;font-size:15px;font-weight:650;white-space:nowrap;border-bottom:2px solid transparent}
@@ -105,6 +105,7 @@
   }
 
   @media(max-width:749px){
+    #shopify-section-{{ section.id }}{position:relative;pointer-events:auto}
     .rebla-v5__desktop,.rebla-v5__sticky{display:none!important}
     .rebla-v5__mobile{display:block;background:#fff;border-bottom:1px solid var(--line)}
     .rebla-v5__mobile-top{min-height:48px;padding:0 8px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));align-items:stretch;border-bottom:1px solid var(--line)}
