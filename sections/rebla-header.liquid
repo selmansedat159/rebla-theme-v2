@@ -1191,6 +1191,15 @@ document.addEventListener('DOMContentLoaded', function(){
 })();
 </script>
 
+<style>
+@media(max-width:749px){
+  .rebla-v5__mobile-main{grid-template-columns:40px 126px minmax(0,1fr) auto!important}
+  .rebla-v5__mobile .rebla-v5__logo{max-width:126px!important;max-height:56px!important}
+  .rebla-v5__mobile-phone{color:var(--blue)!important;transform:translateY(2px)}
+  .rebla-v5__mobile-phone svg{stroke:currentColor!important}
+}
+</style>
+
 {% schema %}
 {
   "name": "Rebla Header V5",
