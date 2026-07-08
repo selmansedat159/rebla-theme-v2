@@ -22,19 +22,19 @@
   .rebla-v5__benefit{min-width:0;padding:0 30px;display:flex;justify-content:center;align-items:center;gap:10px;font-size:12px;font-weight:650;white-space:nowrap}
   .rebla-v5__benefit+.rebla-v5__benefit{border-left:1px solid var(--line)}
   .rebla-v5__benefit svg{width:19px;height:19px}
-  .rebla-v5__main-inner{min-height:100px;display:grid;grid-template-columns:minmax(200px,1fr) auto minmax(200px,1fr);align-items:center;gap:38px}
+  .rebla-v5__main-inner{min-height:100px;display:grid;grid-template-columns:260px minmax(0,1fr) auto;align-items:center;gap:28px}
   .rebla-v5__brand{justify-self:start;display:flex;align-items:center}
   .rebla-v5__logo{display:block;width:auto;height:auto;max-width:{{ section.settings.logo_width }}px;max-height:72px}
   .rebla-v5__name{font-size:28px;font-weight:800;letter-spacing:-.03em}
-  .rebla-v5__nav{justify-self:center}
-  .rebla-v5__menu{list-style:none;margin:0;padding:0;display:flex;align-items:center;gap:clamp(30px,3.2vw,56px)}
+  .rebla-v5__nav{justify-self:start;min-width:0}
+  .rebla-v5__menu{list-style:none;margin:0;padding:0;display:flex;align-items:center;gap:clamp(24px,2.2vw,40px)}
   .rebla-v5__item{position:static}
   .rebla-v5__link{min-height:100px;display:flex;align-items:center;gap:9px;font-size:15px;font-weight:650;white-space:nowrap;border-bottom:2px solid transparent}
   .rebla-v5__item:hover>.rebla-v5__link,.rebla-v5__item:focus-within>.rebla-v5__link{color:var(--blue);border-bottom-color:var(--blue)}
   .rebla-v5__chev{width:7px;height:7px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg) translateY(-2px)}
-  .rebla-v5__actions{justify-self:end;display:flex;align-items:center;gap:16px}
-  .rebla-v5__call{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 18px;border-radius:9px;background:var(--blue);color:#fff!important;font-size:12px;font-weight:800;letter-spacing:.01em;white-space:nowrap;box-shadow:0 8px 20px rgba(30,107,255,.20);transition:.18s ease}
-  .rebla-v5__call:hover{background:#0b58dc;transform:translateY(-1px);box-shadow:0 10px 24px rgba(30,107,255,.28)}
+  .rebla-v5__actions{justify-self:end;display:flex;align-items:center;gap:12px;white-space:nowrap}
+  .rebla-v5__call{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 18px;border-radius:9px;background:{{ section.settings.cta_background }};color:{{ section.settings.cta_text_color }}!important;font-size:12px;font-weight:800;letter-spacing:.01em;white-space:nowrap;box-shadow:0 8px 20px rgba(30,107,255,.20);transition:.18s ease}
+  .rebla-v5__call:hover{background:{{ section.settings.cta_hover_background }};transform:translateY(-1px);box-shadow:0 10px 24px rgba(30,107,255,.28)}
   .rebla-v5__flag{width:27px;height:27px;border-radius:50%;overflow:hidden;flex:0 0 27px;border:1px solid rgba(10,27,51,.12);box-shadow:0 2px 7px rgba(10,27,51,.12)}
   .rebla-v5__flag svg{width:100%;height:100%;display:block;stroke:none}
   .rebla-v5__action{position:relative;width:38px;height:42px;padding:0;border:0;background:none;display:grid;place-items:center;cursor:pointer}
@@ -210,18 +210,27 @@
       </nav>
 
       <div class="rebla-v5__actions">
-        <a class="rebla-v5__call" href="tel:{{ section.settings.phone | remove: ' ' | remove: '(' | remove: ')' | remove: '-' }}">CALL (888) 55 REBLA</a>
+        <a class="rebla-v5__call" href="tel:{{ section.settings.phone | remove: ' ' | remove: '(' | remove: ')' | remove: '-' }}">{{ section.settings.cta_text }}</a>
         <button type="button" class="rebla-v5__action"  aria-label="Search" data-rebla-search-trigger aria-expanded="false"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M16.5 16.5L21 21"/></svg></button>
         <a class="rebla-v5__action" href="{{ routes.account_url }}" aria-label="Account"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-5 4-7 8-7s7 2 8 7"/></svg></a>
         <a class="rebla-v5__action" href="{{ routes.cart_url }}" aria-label="Cart"><svg viewBox="0 0 24 24"><path d="M3 4h2l2 12h11l2-8H6"/><circle cx="9" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg>{% if cart.item_count > 0 %}<span class="rebla-v5__badge">{{ cart.item_count }}</span>{% endif %}</a>
         <span class="rebla-v5__flag" aria-label="United States">
-          <svg viewBox="0 0 36 36" role="img" aria-hidden="true">
-            <defs><clipPath id="reblaFlagMain"><circle cx="18" cy="18" r="18"/></clipPath></defs>
-            <g clip-path="url(#reblaFlagMain)">
-              <rect width="36" height="36" fill="#fff"/>
-              <g fill="#b22234"><rect y="0" width="36" height="2.77"/><rect y="5.54" width="36" height="2.77"/><rect y="11.08" width="36" height="2.77"/><rect y="16.62" width="36" height="2.77"/><rect y="22.16" width="36" height="2.77"/><rect y="27.70" width="36" height="2.77"/><rect y="33.24" width="36" height="2.77"/></g>
-              <rect width="15.5" height="19.4" fill="#3c3b6e"/>
-              <g fill="#fff" font-size="3.2" font-family="Arial,sans-serif"><text x="2" y="4">★ ★ ★</text><text x="2" y="8"> ★ ★ ★</text><text x="2" y="12">★ ★ ★</text><text x="2" y="16"> ★ ★ ★</text></g>
+          <svg viewBox="0 0 48 48" role="img" aria-hidden="true">
+            <defs><clipPath id="reblaUsFlag1"><circle cx="24" cy="24" r="23"/></clipPath></defs>
+            <g clip-path="url(#reblaUsFlag1)">
+              <rect width="48" height="48" fill="#fff"/>
+              <g fill="#D52B1E">
+                <rect y="0" width="48" height="4"/><rect y="8" width="48" height="4"/>
+                <rect y="16" width="48" height="4"/><rect y="24" width="48" height="4"/>
+                <rect y="32" width="48" height="4"/><rect y="40" width="48" height="4"/>
+              </g>
+              <rect width="21" height="24" fill="#173B72"/>
+              <g fill="#fff">
+                <circle cx="4" cy="4" r="1"/><circle cx="10" cy="4" r="1"/><circle cx="16" cy="4" r="1"/>
+                <circle cx="7" cy="9" r="1"/><circle cx="13" cy="9" r="1"/><circle cx="19" cy="9" r="1"/>
+                <circle cx="4" cy="14" r="1"/><circle cx="10" cy="14" r="1"/><circle cx="16" cy="14" r="1"/>
+                <circle cx="7" cy="19" r="1"/><circle cx="13" cy="19" r="1"/><circle cx="19" cy="19" r="1"/>
+              </g>
             </g>
           </svg>
         </span>
@@ -236,18 +245,27 @@
       </a>
       <nav aria-label="Sticky navigation"><ul class="rebla-v5__menu">{% for link in nav_menu.links %}<li><a class="rebla-v5__link" href="{{ link.url }}">{{ link.title }}</a></li>{% endfor %}</ul></nav>
       <div class="rebla-v5__actions">
-        <a class="rebla-v5__call" href="tel:{{ section.settings.phone | remove: ' ' | remove: '(' | remove: ')' | remove: '-' }}">CALL (888) 55 REBLA</a>
+        <a class="rebla-v5__call" href="tel:{{ section.settings.phone | remove: ' ' | remove: '(' | remove: ')' | remove: '-' }}">{{ section.settings.cta_text }}</a>
         <button type="button" class="rebla-v5__action"  aria-label="Search" data-rebla-search-trigger aria-expanded="false"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M16.5 16.5L21 21"/></svg></button>
         <a class="rebla-v5__action" href="{{ routes.account_url }}" aria-label="Account"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-5 4-7 8-7s7 2 8 7"/></svg></a>
         <a class="rebla-v5__action" href="{{ routes.cart_url }}" aria-label="Cart"><svg viewBox="0 0 24 24"><path d="M3 4h2l2 12h11l2-8H6"/><circle cx="9" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg>{% if cart.item_count > 0 %}<span class="rebla-v5__badge">{{ cart.item_count }}</span>{% endif %}</a>
         <span class="rebla-v5__flag" aria-label="United States">
-          <svg viewBox="0 0 36 36" role="img" aria-hidden="true">
-            <defs><clipPath id="reblaFlagSticky"><circle cx="18" cy="18" r="18"/></clipPath></defs>
-            <g clip-path="url(#reblaFlagSticky)">
-              <rect width="36" height="36" fill="#fff"/>
-              <g fill="#b22234"><rect y="0" width="36" height="2.77"/><rect y="5.54" width="36" height="2.77"/><rect y="11.08" width="36" height="2.77"/><rect y="16.62" width="36" height="2.77"/><rect y="22.16" width="36" height="2.77"/><rect y="27.70" width="36" height="2.77"/><rect y="33.24" width="36" height="2.77"/></g>
-              <rect width="15.5" height="19.4" fill="#3c3b6e"/>
-              <g fill="#fff" font-size="3.2" font-family="Arial,sans-serif"><text x="2" y="4">★ ★ ★</text><text x="2" y="8"> ★ ★ ★</text><text x="2" y="12">★ ★ ★</text><text x="2" y="16"> ★ ★ ★</text></g>
+          <svg viewBox="0 0 48 48" role="img" aria-hidden="true">
+            <defs><clipPath id="reblaUsFlag2"><circle cx="24" cy="24" r="23"/></clipPath></defs>
+            <g clip-path="url(#reblaUsFlag2)">
+              <rect width="48" height="48" fill="#fff"/>
+              <g fill="#D52B1E">
+                <rect y="0" width="48" height="4"/><rect y="8" width="48" height="4"/>
+                <rect y="16" width="48" height="4"/><rect y="24" width="48" height="4"/>
+                <rect y="32" width="48" height="4"/><rect y="40" width="48" height="4"/>
+              </g>
+              <rect width="21" height="24" fill="#173B72"/>
+              <g fill="#fff">
+                <circle cx="4" cy="4" r="1"/><circle cx="10" cy="4" r="1"/><circle cx="16" cy="4" r="1"/>
+                <circle cx="7" cy="9" r="1"/><circle cx="13" cy="9" r="1"/><circle cx="19" cy="9" r="1"/>
+                <circle cx="4" cy="14" r="1"/><circle cx="10" cy="14" r="1"/><circle cx="16" cy="14" r="1"/>
+                <circle cx="7" cy="19" r="1"/><circle cx="13" cy="19" r="1"/><circle cx="19" cy="19" r="1"/>
+              </g>
             </g>
           </svg>
         </span>
@@ -501,27 +519,33 @@
     },
     {
       "type": "text",
-      "id": "shipping_text",
-      "label": "Shipping text",
-      "default": "Free Shipping Across the U.S."
-    },
-    {
-      "type": "text",
-      "id": "warranty_text",
-      "label": "Warranty text",
-      "default": "2-Year Warranty"
-    },
-    {
-      "type": "text",
-      "id": "nsf_text",
-      "label": "NSF text",
-      "default": "NSF Certified Components"
-    },
-    {
-      "type": "text",
       "id": "phone",
       "label": "Phone",
       "default": "(888) 407-2424"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Call button text",
+      "default": "CALL (888) 55 REBLA"
+    },
+    {
+      "type": "color",
+      "id": "cta_background",
+      "label": "Call button background",
+      "default": "#1e6bff"
+    },
+    {
+      "type": "color",
+      "id": "cta_hover_background",
+      "label": "Call button hover background",
+      "default": "#0b58dc"
+    },
+    {
+      "type": "color",
+      "id": "cta_text_color",
+      "label": "Call button text color",
+      "default": "#ffffff"
     },
     {
       "type": "text",
