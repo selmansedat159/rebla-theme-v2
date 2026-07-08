@@ -973,6 +973,42 @@ document.addEventListener('click', function(e){
 }
 </style>
 
+
+<style>
+@media(max-width:749px){
+  /* Menü grubunu yukarı taşı */
+  .rebla-v5__drawer-nav{
+    padding-top:10px!important;
+  }
+
+  /* Mail satırını telefonla aynı boyuta getir */
+  .rebla-v5__drawer-email{
+    margin-top:12px!important;
+    gap:10px!important;
+  }
+  .rebla-v5__drawer-email svg{
+    width:23px!important;
+    height:23px!important;
+  }
+  .rebla-v5__drawer-email strong{
+    font-size:15px!important;
+    font-weight:800!important;
+  }
+
+  /* Mobilde search ikonunu kesin olarak kaldır */
+  .rebla-v5__mobile .rebla-v5__search,
+  .rebla-v5__mobile [aria-label="Search"],
+  .rebla-v5__mobile [aria-label="search"],
+  .rebla-v5__mobile a[href="/search"],
+  .rebla-v5__mobile a[href*="/search"],
+  .rebla-v5__mobile button[name="search"],
+  .rebla-v5__mobile .header__icon--search,
+  .rebla-v5__mobile .search-modal__toggle{
+    display:none!important;
+  }
+}
+</style>
+
 {% schema %}
 {
   "name": "Rebla Header V5",
