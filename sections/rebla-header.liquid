@@ -1116,6 +1116,33 @@ document.addEventListener('DOMContentLoaded', function(){
 });
 </script>
 
+
+<script>
+(function(){
+  const root = document.getElementById('ReblaV5-{{ section.id }}');
+  if (!root) return;
+
+  const hamburger = root.querySelector('.rebla-v5__hamburger');
+  const drawer = root.querySelector('.rebla-v5__drawer');
+  if (!hamburger || !drawer) return;
+
+  /* Eski açma listener'larından önce çalışır; tek buton gerçek toggle olur */
+  hamburger.addEventListener('click', function(e){
+    e.preventDefault();
+    e.stopImmediatePropagation();
+
+    const opening = !drawer.classList.contains('is-open');
+
+    drawer.classList.toggle('is-open', opening);
+    drawer.setAttribute('aria-hidden', opening ? 'false' : 'true');
+    hamburger.classList.toggle('is-open', opening);
+    hamburger.setAttribute('aria-expanded', opening ? 'true' : 'false');
+
+    document.documentElement.style.overflow = opening ? 'hidden' : '';
+  }, true);
+})();
+</script>
+
 {% schema %}
 {
   "name": "Rebla Header V5",
