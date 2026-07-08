@@ -53,7 +53,7 @@
         "button_radius": 7
       }
     },
-    "featured_blog_posts_J6CAdy": {
+    "featured_blog_posts_NWixqp": {
       "type": "featured-blog-posts",
       "blocks": {
         "static-blog-title": {
@@ -203,6 +203,6 @@
   },
   "order": [
     "rebla_hero_9D7iLP",
-    "featured_blog_posts_J6CAdy"
+    "featured_blog_posts_NWixqp"
   ]
 }
