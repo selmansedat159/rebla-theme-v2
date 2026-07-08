@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "type": "header",
   "name": "Header",
@@ -127,10 +136,11 @@
         "logo": "shopify://shop_images/Untitled_design_2.png",
         "logo_width": 180,
         "menu": "main-menu",
-        "shipping_text": "Free Shipping Across the U.S.",
-        "warranty_text": "2-Year Warranty",
-        "nsf_text": "NSF Certified Components",
         "phone": "TOLL FREE (888) 55 REBLA",
+        "cta_text": "TOLL FREE (888) 55 REBLA",
+        "cta_background": "#1e6bff",
+        "cta_hover_background": "#0b58dc",
+        "cta_text_color": "#ffffff",
         "mega_heading": "Premium water, from the first drop to the last.",
         "mega_image": "shopify://shop_images/Gemini_Generated_Image_rm3v0lrm3v0lrm3v.png",
         "mega_link": ""
