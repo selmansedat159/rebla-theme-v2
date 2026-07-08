@@ -1,5 +1,5 @@
 {% comment %}
-  REBLA HEADER V5
+  REBLA HEADER V5 - STICKY UPDATE
   Premium desktop + sticky + mobile header
 {% endcomment %}
 
@@ -11,6 +11,13 @@
   #shopify-section-{{ section.id }}{position:relative;z-index:80}
 {% if request.page_type == 'index' %}
 #shopify-section-{{ section.id }}{position:absolute;top:0;left:0;right:0;pointer-events:none}
+{% else %}
+/* Ana sayfa dışındaki sayfalarda normal header akışta kalır, içerik altından başlar */
+#shopify-section-{{ section.id }} .rebla-v5__desktop {
+  position: relative !important;
+  pointer-events: auto !important;
+  padding: 26px max(24px, calc((100% - 1440px) / 2)) 20px;
+}
 {% endif %}
   .rebla-v5{--ink:#0a1b33;--blue:#1e6bff;--line:rgba(10,27,51,.10);--soft:#f7f8fa;color:var(--ink);font-family:inherit}
   .rebla-v5 *{box-sizing:border-box}
@@ -76,45 +83,52 @@
   .rebla-v5__feature svg{width:27px;height:27px;color:var(--ink)}
   .rebla-v5__feature strong{display:block;font-size:12px;margin-bottom:3px}
   .rebla-v5__feature small{display:block;font-size:10px;opacity:.66;line-height:1.35}
+  
+  /* YENİ STICKY GÖRÜNÜM AYARLARI */
   .rebla-v5__sticky{
-  position:fixed;
-  top:0;
-  left:0;
-  right:0;
-  width:100%;
-  z-index:9999;
-  opacity:0;
-  visibility:hidden;
-  pointer-events:none;
-  transform:translateY(-100%);
-  transition:transform .28s cubic-bezier(.22,1,.36,1),opacity .18s ease,visibility .28s;
-}
-.rebla-v5__sticky-shell.is-visible .rebla-v5__sticky{
-  opacity:1;
-  visibility:visible;
-  pointer-events:auto;
-  transform:translateY(0);
-}
-.rebla-v5__sticky-inner{
-  width:100%;
-  height:60px;
-  min-height:60px;
-  padding:0 40px;
-  display:grid;
-  grid-template-columns:150px minmax(0,1fr) auto;
-  align-items:center;
-  gap:24px;
-  background:#fff;
-  border:0;
-  border-bottom:1px solid rgba(10,27,51,.10);
-  border-radius:0;
-  box-shadow:0 4px 16px rgba(10,27,51,.08);
-  backdrop-filter:none;
-  -webkit-backdrop-filter:none;
-}
-.rebla-v5__sticky .rebla-v5__logo{max-width:108px;max-height:34px}
-.rebla-v5__sticky .rebla-v5__menu{justify-content:flex-start;gap:28px}
-.rebla-v5__sticky .rebla-v5__link{min-height:60px;font-size:13px;border:0}
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    width:100%;
+    z-index:9999;
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+    transform:translateY(-100%);
+    transition:transform .28s cubic-bezier(.22,1,.36,1),opacity .18s ease,visibility .28s;
+  }
+  .rebla-v5__sticky-shell.is-visible .rebla-v5__sticky{
+    opacity:1;
+    visibility:visible;
+    pointer-events:auto;
+    transform:translateY(0);
+  }
+  .rebla-v5__sticky-inner{
+    width:100% !important;
+    max-width:100% !important;
+    height:58px !important; /* İstediğiniz 56-60px yüksekliği */
+    min-height:58px !important;
+    padding:0 32px !important;
+    display:flex !important;
+    justify-content:space-between !important;
+    align-items:center !important;
+    background:#fff;
+    border:0;
+    border-bottom:1px solid rgba(10,27,51,.10);
+    border-radius:0 !important; /* Oval köşeler ve sağdan soldan boşluklar tamamen kaldırıldı */
+    box-shadow:0 4px 16px rgba(10,27,51,.06);
+    backdrop-filter:none;
+    -webkit-backdrop-filter:none;
+  }
+  .rebla-v5__sticky .rebla-v5__brand{flex:0 0 auto}
+  .rebla-v5__sticky .rebla-v5__logo{max-width:110px !important;max-height:36px !important} /* İnce görünüm için küçük logo limiti */
+  .rebla-v5__sticky nav{flex:1 1 auto;display:flex;justify-content:center}
+  .rebla-v5__sticky .rebla-v5__menu{gap:32px}
+  .rebla-v5__sticky .rebla-v5__link{min-height:58px;font-size:14px;border:0}
+  .rebla-v5__sticky .rebla-v5__actions{flex:0 0 auto;margin-right:0;gap:16px}
+  .rebla-v5__sticky .rebla-v5__call{min-height:36px;padding:0 14px;font-size:11px;border-radius:20px} /* İnceltilmiş buton */
+
   .rebla-v5__mobile,.rebla-v5__drawer{display:none}
   .rebla-v5__drawer.is-open{display:block;position:fixed;inset:0;z-index:120}
   .rebla-v5__backdrop{position:absolute;inset:0;background:rgba(10,27,51,.38)}
@@ -162,7 +176,6 @@
       overflow:hidden;background:rgba(255,255,255,.90);
       backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)
     }
-
   }
 
   .rebla-v5__nsf-top{display:flex;align-items:center;justify-content:center;gap:10px}
@@ -179,8 +192,6 @@
     margin-bottom:-1px;
     pointer-events:none;
   }
-
-
 
 #shopify-section-{{ section.id }} .rebla-v5__sticky-shell{
   position:fixed!important;
@@ -204,14 +215,11 @@
 @media(max-width:749px){
   #shopify-section-{{ section.id }} .rebla-v5__sticky-shell{display:none!important}
 }
-
 </style>
 
 <div class="rebla-v5" id="ReblaV5-{{ section.id }}">
   <span class="rebla-v5__desktop-sentinel" aria-hidden="true"></span>
   <header class="rebla-v5__desktop">
-
-
     <div class="rebla-v5__main-inner">
       <a class="rebla-v5__brand" href="{{ routes.root_url }}">
         {% if section.settings.logo != blank %}
@@ -252,7 +260,6 @@
                         </div>
                       {% endfor %}
                     </div>
-
                   </div>
 
                   <div class="rebla-v5__featurebar">
@@ -277,7 +284,7 @@
         <a class="rebla-v5__action" href="{{ routes.cart_url }}" aria-label="Cart"><svg viewBox="0 0 24 24"><path d="M3 4h2l2 12h11l2-8H6"/><circle cx="9" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg>{% if cart.item_count > 0 %}<span class="rebla-v5__badge">{{ cart.item_count }}</span>{% endif %}</a>
         <span class="rebla-v5__flag" aria-label="United States">
           <svg viewBox="0 0 48 48" role="img" aria-hidden="true">
-            <defs><clipPath id="reblaUsFlag1"><circle cx="24" cy="24" r="23"/></clipPath></defs>
+            <defs><clipPath id="reblaUsFlag1"><circle cx="24" cy="24" r="23"/></circlePath></defs>
             <g clip-path="url(#reblaUsFlag1)">
               <rect width="48" height="48" fill="#fff"/>
               <g fill="#D52B1E">
@@ -298,8 +305,6 @@
       </div>
     </div>
   </header>
-
-
 
 <div id="rebla-sticky-{{ section.id }}" class="rebla-v5 rebla-v5__sticky-shell">
   <div class="rebla-v5__sticky">
@@ -338,7 +343,6 @@
   </div>
 
   <header class="rebla-v5__mobile">
-
     <div class="rebla-v5__mobile-main">
       <button class="rebla-v5__hamburger" type="button" aria-label="Open menu"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
       <a class="rebla-v5__mobile-brand" href="{{ routes.root_url }}">{% if section.settings.logo != blank %}{{ section.settings.logo | image_url: width: 360 | image_tag: class: 'rebla-v5__logo', loading: 'eager', alt: shop.name }}{% else %}<span class="rebla-v5__name">{{ shop.name }}</span>{% endif %}</a>
@@ -435,27 +439,15 @@
 })();
 </script>
 
-
-
-
-
-
-
-
-
-
 <style>
-/* Clean sticky behavior: desktop uses .rebla-v5__sticky already present in this file */
 @media (min-width:750px){
   .rebla-v5__sticky{
     transition:
-      opacity .32s ease,
-      visibility .32s ease,
-      transform .42s cubic-bezier(.22,1,.36,1);
+      opacity .22s ease,
+      visibility .22s ease,
+      transform .32s cubic-bezier(.22,1,.36,1);
   }
 }
-
-/* Mobile: animate the same header into floating state */
 @media (max-width:749px){
   .rebla-v5__mobile{
     transition:
@@ -466,26 +458,18 @@
       box-shadow .38s ease,
       transform .38s cubic-bezier(.22,1,.36,1);
   }
-
   .rebla-v5.is-scrolled .rebla-v5__mobile{
     animation:reblaMobileFloat .42s cubic-bezier(.22,1,.36,1) both;
   }
-
   .rebla-v5.is-scrolled .rebla-v5__mobile-top{
     display:none!important;
   }
-
   @keyframes reblaMobileFloat{
     from{opacity:.72;transform:translateY(-14px) scale(.975)}
     to{opacity:1;transform:translateY(0) scale(1)}
   }
 }
 </style>
-
-
-
-
-
 
 <script>
 (() => {
@@ -495,12 +479,25 @@
   const stickyShell = document.getElementById('rebla-sticky-{{ section.id }}');
   if (!stickyShell) return;
 
+  let lastScrollTop = 0;
+
   const updateSticky = () => {
-    const shouldShow = window.innerWidth >= 750 && window.scrollY > 120;
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    
+    // Temel kural: 120px'den fazla kaydırıldıysa VE aşağı doğru iniliyorsa sticky'yi göster
+    // Yukarı doğru kaydırılıyorsa (scrollTop < lastScrollTop) veya en yukarı çıkıldıysa gizle
+    const isScrollingDown = scrollTop > lastScrollTop;
+    const shouldShow = window.innerWidth >= 750 && scrollTop > 120 && isScrollingDown;
+
     stickyShell.classList.toggle('is-visible', shouldShow);
+    
+    // Negatif scroll değerlerini engellemek için (iOS elastic scroll koruması)
+    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
   };
 
+  // İlk yüklemede kontrol et
   updateSticky();
+  
   window.addEventListener('scroll', updateSticky, { passive: true });
   window.addEventListener('resize', updateSticky);
 })();
@@ -593,5 +590,3 @@
 }
 {% endschema %}
 </div>
-
-
