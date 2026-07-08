@@ -117,6 +117,22 @@
     }
   }
 
+
+  @media(min-width:901px){
+    .rebla-v5__desktop nav[aria-label="Primary navigation"],
+    .rebla-v5__sticky-nav{
+      transform:translateX({{ section.settings.menu_offset_x | default: 0 }}px);
+    }
+  }
+
+
+  @media(min-width:901px){
+    .rebla-v5__desktop .rebla-v5__icons,
+    .rebla-v5__sticky .rebla-v5__icons{
+      margin-right:{{ section.settings.icons_right_spacing | default: 0 }}px;
+    }
+  }
+
   .rebla-v5__mobile,.rebla-v5__drawer{display:none}
   .rebla-v5__drawer.is-open{display:block;position:fixed;inset:0;z-index:120}
   .rebla-v5__backdrop{position:absolute;inset:0;background:rgba(10,27,51,.38)}
@@ -580,6 +596,27 @@ updateDesktopSticky();
   "tag": "section",
   "class": "rebla-header-v4-section",
   "settings": [
+    {
+      "type": "range",
+      "id": "menu_offset_x",
+      "label": "Menu horizontal position",
+      "min": -250,
+      "max": 250,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "icons_right_spacing",
+      "label": "Right icons spacing",
+      "min": 0,
+      "max": 120,
+      "step": 5,
+      "unit": "px",
+      "default": 25
+    },
+
     {
       "type": "image_picker",
       "id": "logo",
