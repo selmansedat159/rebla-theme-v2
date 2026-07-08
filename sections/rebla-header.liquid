@@ -335,14 +335,20 @@
 
 
 
-  const updateDesktopSticky = () => {
-  if (window.innerWidth >= 750) {
-    root.classList.toggle('is-desktop-scrolled', window.scrollY >= 180);
-  }
-};
+  const desktopSentinel = root.querySelector('.rebla-v5__desktop-sentinel');
 
-window.addEventListener('scroll', updateDesktopSticky, { passive: true });
-updateDesktopSticky();
+if (desktopSentinel && 'IntersectionObserver' in window) {
+  if (root._reblaDesktopObserver) root._reblaDesktopObserver.disconnect();
+
+  root._reblaDesktopObserver = new IntersectionObserver(
+    ([entry]) => {
+      root.classList.toggle('is-desktop-scrolled', !entry.isIntersecting);
+    },
+    { root: null, threshold: 0 }
+  );
+
+  root._reblaDesktopObserver.observe(desktopSentinel);
+}
 
 window.addEventListener('scroll', updateDesktopSticky, { passive: true });
 updateDesktopSticky();
