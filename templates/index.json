@@ -1,13 +1,51 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
-  "sections": {},
-  "order": []
+  "sections": {
+    "rebla_hero_9D7iLP": {
+      "type": "rebla-hero",
+      "name": "Rebla Hero",
+      "settings": {
+        "heading": "Engineered clarity for every drop.",
+        "description": "<p>Premium reverse osmosis system engineered for cleaner, safer, better-tasting water.</p>",
+        "button_label": "Shop System",
+        "button_link": "",
+        "show_arrow": true,
+        "desktop_image": "shopify://shop_images/creative-studio-asset-d367647a-c496-4cdf-843a-d98b1c293438.png",
+        "desktop_image_position": "center center",
+        "mobile_image_position": "center center",
+        "desktop_height": 540,
+        "content_width": 1440,
+        "desktop_side_padding": 32,
+        "copy_width": 540,
+        "desktop_copy_position": "left",
+        "desktop_heading_size": 72,
+        "heading_line_height": 98,
+        "description_width": 470,
+        "desktop_text_size": 18,
+        "description_spacing": 24,
+        "button_spacing": 28,
+        "desktop_fade": 90,
+        "mobile_padding_top": 48,
+        "mobile_side_padding": 24,
+        "mobile_padding_bottom": 22,
+        "mobile_heading_size": 44,
+        "mobile_heading_line_height": 102,
+        "mobile_description_width": 360,
+        "mobile_text_size": 16,
+        "mobile_description_spacing": 18,
+        "mobile_button_spacing": 22,
+        "mobile_image_height": 370,
+        "mobile_text_alignment": "left",
+        "heading_color": "#0a1b33",
+        "text_color": "#0a1b33",
+        "mobile_background": "#f7f8fa",
+        "button_background": "#1261d6",
+        "button_hover_background": "#0b50b9",
+        "button_text_color": "#ffffff",
+        "button_radius": 7
+      }
+    }
+  },
+  "order": [
+    "rebla_hero_9D7iLP"
+  ]
 }
