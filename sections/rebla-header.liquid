@@ -1,5 +1,5 @@
 {% comment %}
-  REBLA HEADER V5 - STICKY UPDATE FIXED
+  REBLA HEADER V5 - CORE STICKY REFIRED
   Premium desktop + sticky + mobile header
 {% endcomment %}
 
@@ -8,11 +8,11 @@
 %}
 
 <style>
-  #shopify-section-{{ section.id }}{position:relative;z-index:8000}
+  #shopify-section-{{ section.id }}{position:relative;z-index:99999}
 {% if request.page_type == 'index' %}
   #shopify-section-{{ section.id }}{position:absolute;top:0;left:0;right:0;pointer-events:none}
+  #shopify-section-{{ section.id }} .rebla-v5__desktop { pointer-events: auto !important; }
 {% else %}
-  /* Ana sayfa dışındaki sayfalarda kesinlikle akışta kalması ve içeriğin altına binmemesi için */
   #shopify-section-{{ section.id }} {
     position: relative !important;
     top: auto !important;
@@ -27,11 +27,11 @@
   }
 {% endif %}
   .rebla-v5{--ink:#0a1b33;--blue:#1e6bff;--line:rgba(10,27,51,.10);--soft:#f7f8fa;color:var(--ink);font-family:inherit}
-  .rebla-v5 *{box-sizing:border-box}
+  .rebla-v5 * { box-sizing: border-box; }
   .rebla-v5 a{color:inherit;text-decoration:none}
   .rebla-v5 button{font:inherit;color:inherit}
   .rebla-v5 svg{display:block;width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
-  .rebla-v5__desktop{background:transparent;border:0;padding:26px 56px 0;pointer-events:none}
+  .rebla-v5__desktop{background:transparent;border:0;padding:26px 56px 0}
   .rebla-v5__bar{border-bottom:1px solid var(--line)}
   .rebla-v5__bar-inner,.rebla-v5__main-inner{width:min(calc(100% - 48px),1440px);margin:auto}
   .rebla-v5__bar-inner{min-height:46px;display:flex;justify-content:center;align-items:center}
@@ -91,26 +91,38 @@
   .rebla-v5__feature strong{display:block;font-size:12px;margin-bottom:3px}
   .rebla-v5__feature small{display:block;font-size:10px;opacity:.66;line-height:1.35}
   
-  /* STICKY DETAYLI TASARIM GÜNCELLEMESİ */
+  /* ULTRASONIK STICKY FORCE CSS */
+  .rebla-v5__sticky-shell {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    z-index: 999999 !important;
+    pointer-events: none !important;
+  }
   .rebla-v5__sticky{
-    position:fixed !important;
+    position:absolute !important;
     top:0 !important;
     left:0 !important;
     right:0 !important;
     width:100% !important;
-    z-index:99999 !important;
     opacity:0 !important;
     visibility:hidden !important;
     pointer-events:none !important;
     transform:translateY(-100%) !important;
     transition:transform .28s cubic-bezier(.22,1,.36,1), opacity .18s ease, visibility .28s !important;
   }
-  .rebla-v5__sticky-shell.is-visible .rebla-v5__sticky{
-    opacity:1 !important;
-    visibility:visible !important;
-    pointer-events:auto !important;
-    transform:translateY(0) !important;
+  
+  /* Global Sınıf Tetiklendiğinde Çalışacak Ezici Kural */
+  html.rebla-sticky-active .rebla-v5__sticky-shell { pointer-events: auto !important; }
+  html.rebla-sticky-active .rebla-v5__sticky {
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    transform: translateY(0) !important;
   }
+
   .rebla-v5__sticky-inner{
     width:100% !important;
     max-width:100% !important;
@@ -123,24 +135,22 @@
     background:#fff !important;
     border:0 !important;
     border-bottom:1px solid rgba(10,27,51,.10) !important;
-    border-radius:0 !important; /* Tam ekran yapışma ve oval kenarları sıfırlama */
+    border-radius:0 !important;
     box-shadow:0 4px 16px rgba(10,27,51,.06) !important;
-    backdrop-filter:none !important;
-    -webkit-backdrop-filter:none !important;
   }
-  .rebla-v5__sticky .rebla-v5__brand{flex:0 0 auto !important}
-  .rebla-v5__sticky .rebla-v5__logo{max-width:110px !important;max-height:36px !important}
+  .rebla-v5__sticky .rebla-v5__brand{flex:0 0 auto !important; pointer-events: auto !important;}
+  .rebla-v5__sticky .rebla-v5__logo{max-width:110px !important;max-height:36px !important; display:block !important;}
   .rebla-v5__sticky nav{flex:1 1 auto !important;display:flex !important;justify-content:center !important}
-  .rebla-v5__sticky .rebla-v5__menu{gap:32px !important; display:flex !important; align-items:center !important}
-  .rebla-v5__sticky .rebla-v5__link{min-height:58px !important;font-size:14px !important;border:0 !important; display:flex !important; align-items:center !important}
+  .rebla-v5__sticky .rebla-v5__menu{gap:32px !important; display:flex !important; align-items:center !important; list-style:none !important;}
+  .rebla-v5__sticky .rebla-v5__link{min-height:58px !important;font-size:14px !important;border:0 !important; display:flex !important; align-items:center !important; pointer-events: auto !important;}
   .rebla-v5__sticky .rebla-v5__actions{flex:0 0 auto !important;margin-right:0 !important;gap:16px !important; display:flex !important; align-items:center !important}
-  .rebla-v5__sticky .rebla-v5__call{min-height:36px !important;padding:0 14px !important;font-size:11px !important;border-radius:20px !important}
+  .rebla-v5__sticky .rebla-v5__call{min-height:36px !important;padding:0 14px !important;font-size:11px !important;border-radius:20px !important; display:inline-flex !important; align-items:center !important; pointer-events: auto !important;}
 
   .rebla-v5__mobile,.rebla-v5__drawer{display:none}
   .rebla-v5__drawer.is-open{display:block;position:fixed;inset:0;z-index:120}
   .rebla-v5__backdrop{position:absolute;inset:0;background:rgba(10,27,51,.38)}
   .rebla-v5__panel{position:relative;width:min(88vw,390px);height:100%;padding:22px;background:#fff;overflow:auto}
-  .rebla-v5__drawer-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px}
+  .rebla-v5__drawer-head{display:flex;justify-space-between;align-items:center;margin-bottom:22px}
   .rebla-v5__close{border:0;background:none;font-size:32px;cursor:pointer}
   .rebla-v5__drawer-list,.rebla-v5__drawer-sub{list-style:none;margin:0;padding:0}
   .rebla-v5__drawer-list>li{border-bottom:1px solid var(--line)}
@@ -199,29 +209,9 @@
     margin-bottom:-1px;
     pointer-events:none;
   }
-
-#shopify-section-{{ section.id }} .rebla-v5__sticky-shell{
-  position:fixed!important;
-  top:0!important;
-  left:0!important;
-  right:0!important;
-  width:100%!important;
-  z-index:99999!important;
-  pointer-events:none!important;
-}
-#shopify-section-{{ section.id }} .rebla-v5__sticky-shell.is-visible{
-  pointer-events:auto!important;
-}
-#shopify-section-{{ section.id }} .rebla-v5__sticky-shell .rebla-v5__sticky{
-  position:relative!important;
-  top:auto!important;
-  left:auto!important;
-  right:auto!important;
-  width:100%!important;
-}
-@media(max-width:749px){
-  #shopify-section-{{ section.id }} .rebla-v5__sticky-shell{display:none!important}
-}
+  @media(max-width:749px){
+    #shopify-section-{{ section.id }} .rebla-v5__sticky-shell{display:none!important}
+  }
 </style>
 
 <div class="rebla-v5" id="ReblaV5-{{ section.id }}">
@@ -313,7 +303,7 @@
     </div>
   </header>
 
-<div id="rebla-sticky-{{ section.id }}" class="rebla-v5__sticky-shell">
+<div class="rebla-v5__sticky-shell">
   <div class="rebla-v5__sticky">
     <div class="rebla-v5__sticky-inner">
       <a class="rebla-v5__brand" href="{{ routes.root_url }}">
@@ -480,23 +470,23 @@
 
 <script>
 (() => {
-  const stickyShell = document.querySelector('.rebla-v5__sticky-shell');
-  if (!stickyShell) return;
-
   let lastScrollTop = 0;
+  const rootHtml = document.documentElement;
 
   const handleScroll = () => {
+    if (window.innerWidth < 750) {
+      rootHtml.classList.remove('rebla-sticky-active');
+      return;
+    }
+
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     
-    // Masaüstü kontrolü (750px üstü)
-    if (window.innerWidth >= 750) {
-      // 120px'den fazla kaydırıldıysa VE aşağı kaydırılıyorsa göster
-      if (scrollTop > 120 && scrollTop > lastScrollTop) {
-        stickyShell.classList.add('is-visible');
-      } else {
-        // Yukarı kaydırılıyorsa veya 120px'in altındaysa gizle
-        stickyShell.classList.remove('is-visible');
-      }
+    // 120px'den fazla kaydırıldıysa VE aşağı doğru iniliyorsa sticky'yi aktif et
+    if (scrollTop > 120 && scrollTop > lastScrollTop) {
+      rootHtml.classList.add('rebla-sticky-active');
+    } else {
+      // Yukarı kaydırılıyorsa veya en tepedeysek pasif et
+      rootHtml.classList.remove('rebla-sticky-active');
     }
     
     lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
@@ -504,7 +494,7 @@
 
   window.addEventListener('scroll', handleScroll, { passive: true });
   window.addEventListener('resize', handleScroll);
-  handleScroll(); // İlk yükleme kontrolü
+  handleScroll();
 })();
 </script>
 
