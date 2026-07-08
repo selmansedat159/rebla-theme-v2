@@ -80,6 +80,27 @@
   .rebla-v5__sticky .rebla-v5__logo{max-width:112px;max-height:44px}
   .rebla-v5__sticky .rebla-v5__menu{justify-content:center;gap:30px}
   .rebla-v5__sticky .rebla-v5__link{min-height:68px;font-size:12px;border:0}
+
+  /* Sticky header mega menu */
+  .rebla-v5__sticky-nav{position:static;min-width:0}
+  .rebla-v5__sticky .rebla-v5__item{position:static}
+  .rebla-v5__sticky .rebla-v5__sticky-mega{
+    position:absolute;
+    top:calc(100% + 10px);
+    left:50%;
+    right:auto;
+    width:min(calc(100vw - 32px),1180px);
+    transform:translate(-50%,8px);
+    border:1px solid var(--line);
+    border-radius:16px;
+    overflow:hidden;
+    z-index:101;
+  }
+  .rebla-v5__sticky .rebla-v5__item:hover .rebla-v5__sticky-mega,
+  .rebla-v5__sticky .rebla-v5__item:focus-within .rebla-v5__sticky-mega{
+    transform:translate(-50%,0);
+  }
+
   .rebla-v5__mobile,.rebla-v5__drawer{display:none}
   .rebla-v5__drawer.is-open{display:block;position:fixed;inset:0;z-index:120}
   .rebla-v5__backdrop{position:absolute;inset:0;background:rgba(10,27,51,.38)}
@@ -243,7 +264,51 @@
       <a class="rebla-v5__brand" href="{{ routes.root_url }}">
         {% if section.settings.logo != blank %}{{ section.settings.logo | image_url: width: 360 | image_tag: class: 'rebla-v5__logo', loading: 'lazy', alt: shop.name }}{% else %}<span class="rebla-v5__name">{{ shop.name }}</span>{% endif %}
       </a>
-      <nav aria-label="Sticky navigation"><ul class="rebla-v5__menu">{% for link in nav_menu.links %}<li><a class="rebla-v5__link" href="{{ link.url }}">{{ link.title }}</a></li>{% endfor %}</ul></nav>
+      <nav class="rebla-v5__sticky-nav" aria-label="Sticky navigation">
+        <ul class="rebla-v5__menu">
+          {% for link in nav_menu.links %}
+            <li class="rebla-v5__item">
+              <a class="rebla-v5__link" href="{{ link.url }}">{{ link.title }}{% if link.links != blank %}<span class="rebla-v5__chev"></span>{% endif %}</a>
+              {% if link.links != blank %}
+                <div class="rebla-v5__mega rebla-v5__sticky-mega">
+                  <div class="rebla-v5__mega-inner">
+                    <div class="rebla-v5__promo"{% if section.settings.mega_image != blank %} style="background-image:linear-gradient(to bottom,rgba(247,248,250,.98),rgba(247,248,250,.70) 48%,rgba(247,248,250,.04)),url('{{ section.settings.mega_image | image_url: width: 700 }}')"{% endif %}>
+                      <h3>{{ section.settings.mega_heading }}</h3>
+                      <a class="rebla-v5__blue-link" href="{{ section.settings.mega_link | default: link.url }}">Shop System →</a>
+                    </div>
+                    <div class="rebla-v5__columns">
+                      {% for child in link.links limit: 3 %}
+                        <div class="rebla-v5__column">
+                          <h3>{{ child.title }}</h3>
+                          <ul>
+                            {% if child.links != blank %}
+                              {% for grandchild in child.links limit: 6 %}
+                                <li><a href="{{ grandchild.url }}">{{ grandchild.title }}</a></li>
+                              {% endfor %}
+                            {% else %}
+                              <li><a href="{{ child.url }}">Explore {{ child.title }}</a></li>
+                              <li><a href="{{ child.url }}">Learn more</a></li>
+                            {% endif %}
+                          </ul>
+                          <a class="rebla-v5__blue-link" href="{{ child.url }}">View All →</a>
+                        </div>
+                      {% endfor %}
+                    </div>
+                  </div>
+                  <div class="rebla-v5__featurebar">
+                    <div class="rebla-v5__featurebar-inner">
+                      <div class="rebla-v5__feature"><svg viewBox="0 0 24 24"><path d="M12 2l8 4-8 4-8-4zM4 10l8 4 8-4M4 14l8 4 8-4"/></svg><div><strong>5-Stage Filtration</strong><small>Complete purification</small></div></div>
+                      <div class="rebla-v5__feature"><svg viewBox="0 0 24 24"><path d="M12 3s6 6 6 11a6 6 0 1 1-12 0c0-5 6-11 6-11z"/></svg><div><strong>Removes 1,000+ Contaminants</strong><small>Powerful purification</small></div></div>
+                      <div class="rebla-v5__feature"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 4v3M20 12h-3M12 20v-3M4 12h3"/></svg><div><strong>High Performance RO Membrane</strong><small>Built for reliable flow</small></div></div>
+                      <div class="rebla-v5__feature"><svg viewBox="0 0 24 24"><path d="M3 5h18v14H3zM3 9h18M7 5v14M11 5v14"/></svg><div><strong>All-in-One System</strong><small>Compact. Complete. Convenient.</small></div></div>
+                    </div>
+                  </div>
+                </div>
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      </nav>
       <div class="rebla-v5__actions">
         <a class="rebla-v5__call" href="tel:{{ section.settings.phone | remove: ' ' | remove: '(' | remove: ')' | remove: '-' }}">{{ section.settings.cta_text }}</a>
         <button type="button" class="rebla-v5__action"  aria-label="Search" data-rebla-search-trigger aria-expanded="false"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M16.5 16.5L21 21"/></svg></button>
