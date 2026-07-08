@@ -34,6 +34,10 @@
   .rebla-v5__chev{width:7px;height:7px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg) translateY(-2px)}
   .rebla-v5__actions{justify-self:end;display:flex;align-items:center;gap:12px;white-space:nowrap}
   .rebla-v5__call{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 18px;border-radius:9px;background:{{ section.settings.cta_background }};color:{{ section.settings.cta_text_color }}!important;font-size:12px;font-weight:800;letter-spacing:.01em;white-space:nowrap;box-shadow:0 8px 20px rgba(30,107,255,.20);transition:.18s ease}
+
+  .rebla-v5__call{gap:9px}
+  .rebla-v5__call-icon{width:17px;height:17px;flex:0 0 17px;fill:currentColor}
+
   .rebla-v5__call:hover{background:{{ section.settings.cta_hover_background }};transform:translateY(-1px);box-shadow:0 10px 24px rgba(30,107,255,.28)}
   .rebla-v5__flag{width:27px;height:27px;border-radius:50%;overflow:hidden;flex:0 0 27px;border:1px solid rgba(10,27,51,.12);box-shadow:0 2px 7px rgba(10,27,51,.12)}
   .rebla-v5__flag svg{width:100%;height:100%;display:block;stroke:none}
@@ -231,7 +235,7 @@
       </nav>
 
       <div class="rebla-v5__actions">
-        <a class="rebla-v5__call" href="tel:{{ section.settings.phone | remove: ' ' | remove: '(' | remove: ')' | remove: '-' }}">{{ section.settings.cta_text }}</a>
+        <a class="rebla-v5__call" href="tel:{{ section.settings.phone | remove: ' ' | remove: '(' | remove: ')' | remove: '-' }}"><svg class="rebla-v5__call-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8c1.7 3.4 3.2 4.9 6.6 6.6l2.2-2.2c.3-.3.8-.4 1.2-.2 1.3.5 2.7.8 4.2.8.7 0 1.2.5 1.2 1.2v3.5c0 .7-.5 1.2-1.2 1.2C10.4 21.7 2.3 13.6 2.3 3.2 2.3 2.5 2.8 2 3.5 2H7c.7 0 1.2.5 1.2 1.2 0 1.5.3 2.9.8 4.2.1.4.1.9-.2 1.2z"/></svg><span>{{ section.settings.cta_text }}</span></a>
         <button type="button" class="rebla-v5__action"  aria-label="Search" data-rebla-search-trigger aria-expanded="false"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M16.5 16.5L21 21"/></svg></button>
         <a class="rebla-v5__action" href="{{ routes.account_url }}" aria-label="Account"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-5 4-7 8-7s7 2 8 7"/></svg></a>
         <a class="rebla-v5__action" href="{{ routes.cart_url }}" aria-label="Cart"><svg viewBox="0 0 24 24"><path d="M3 4h2l2 12h11l2-8H6"/><circle cx="9" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg>{% if cart.item_count > 0 %}<span class="rebla-v5__badge">{{ cart.item_count }}</span>{% endif %}</a>
@@ -310,7 +314,7 @@
         </ul>
       </nav>
       <div class="rebla-v5__actions">
-        <a class="rebla-v5__call" href="tel:{{ section.settings.phone | remove: ' ' | remove: '(' | remove: ')' | remove: '-' }}">{{ section.settings.cta_text }}</a>
+        <a class="rebla-v5__call" href="tel:{{ section.settings.phone | remove: ' ' | remove: '(' | remove: ')' | remove: '-' }}"><svg class="rebla-v5__call-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8c1.7 3.4 3.2 4.9 6.6 6.6l2.2-2.2c.3-.3.8-.4 1.2-.2 1.3.5 2.7.8 4.2.8.7 0 1.2.5 1.2 1.2v3.5c0 .7-.5 1.2-1.2 1.2C10.4 21.7 2.3 13.6 2.3 3.2 2.3 2.5 2.8 2 3.5 2H7c.7 0 1.2.5 1.2 1.2 0 1.5.3 2.9.8 4.2.1.4.1.9-.2 1.2z"/></svg><span>{{ section.settings.cta_text }}</span></a>
         <button type="button" class="rebla-v5__action"  aria-label="Search" data-rebla-search-trigger aria-expanded="false"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M16.5 16.5L21 21"/></svg></button>
         <a class="rebla-v5__action" href="{{ routes.account_url }}" aria-label="Account"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-5 4-7 8-7s7 2 8 7"/></svg></a>
         <a class="rebla-v5__action" href="{{ routes.cart_url }}" aria-label="Cart"><svg viewBox="0 0 24 24"><path d="M3 4h2l2 12h11l2-8H6"/><circle cx="9" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg>{% if cart.item_count > 0 %}<span class="rebla-v5__badge">{{ cart.item_count }}</span>{% endif %}</a>
