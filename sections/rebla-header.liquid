@@ -269,15 +269,13 @@
   <path d="M9.2 17.2L8.5 22l3.5-2 3.5 2-.7-4.8"/>
 </svg><div><strong>2-Year Warranty</strong><small>Built for lasting confidence</small></div></div>
                       <div class="rebla-v5__feature"><svg viewBox="0 0 24 24"><path d="M12 3s6 6 6 11a6 6 0 1 1-12 0c0-5 6-11 6-11z"/></svg><div><strong>Removes 1,000+ Contaminants</strong><small>Powerful purification</small></div></div>
-                      <div class="rebla-v5__feature"><svg viewBox="0 0 24 24" aria-hidden="true">
-  <circle cx="12" cy="12" r="10" fill="currentColor"/>
-  <text x="12" y="14.7"
-        text-anchor="middle"
+                      <div class="rebla-v5__feature"><svg viewBox="0 0 32 32" aria-hidden="true" fill="none">
+  <circle cx="16" cy="16" r="12.5" stroke="currentColor" stroke-width="2"/>
+  <text x="16" y="18.8" text-anchor="middle"
         font-family="Arial, Helvetica, sans-serif"
-        font-size="8.2"
-        font-weight="900"
-        letter-spacing="-0.8"
-        fill="white">nsf</text>
+        font-size="8.4" font-weight="900"
+        letter-spacing="-0.7"
+        fill="currentColor">NSF</text>
 </svg><div><strong>NSF Certified Components</strong><small>Certified quality you can trust</small></div></div>
                       <div class="rebla-v5__feature"><svg viewBox="0 0 24 24"><path d="M3 5h18v14H3zM3 9h18M7 5v14M11 5v14"/></svg><div><strong>All-in-One System</strong><small>Compact. Complete. Convenient.</small></div></div>
                     </div>
@@ -1210,6 +1208,29 @@ document.addEventListener('DOMContentLoaded', function(){
   .rebla-v5__mobile .rebla-v5__logo{max-width:126px!important;max-height:56px!important}
   .rebla-v5__mobile-phone{color:var(--blue)!important;transform:translateY(2px)}
   .rebla-v5__mobile-phone svg{stroke:currentColor!important}
+}
+</style>
+
+
+<style>
+@media (min-width: 750px) {
+  #ReblaV5-{{ section.id }} .rebla-v5__mega-inner{
+    grid-template-columns:25% 75%!important;
+    gap:0!important;
+  }
+
+  #ReblaV5-{{ section.id }} .rebla-v5__columns{
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  }
+
+  #ReblaV5-{{ section.id }} .rebla-v5__promo{
+    margin-right:0!important;
+    border-radius:14px!important;
+  }
+
+  #ReblaV5-{{ section.id }} .rebla-v5__column{
+    box-sizing:border-box!important;
+  }
 }
 </style>
 
