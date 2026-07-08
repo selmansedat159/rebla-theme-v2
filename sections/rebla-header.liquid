@@ -105,6 +105,18 @@
     transform:translate(-50%,0);
   }
 
+
+  @media(min-width:901px){
+    .rebla-v5__desktop .rebla-v5__bar,
+    .rebla-v5__sticky .rebla-v5__bar{
+      grid-template-columns:auto minmax(0,1fr) auto minmax(0,1fr) auto;
+    }
+    .rebla-v5__desktop .rebla-v5__call,
+    .rebla-v5__sticky .rebla-v5__call{
+      justify-self:center;
+    }
+  }
+
   .rebla-v5__mobile,.rebla-v5__drawer{display:none}
   .rebla-v5__drawer.is-open{display:block;position:fixed;inset:0;z-index:120}
   .rebla-v5__backdrop{position:absolute;inset:0;background:rgba(10,27,51,.38)}
