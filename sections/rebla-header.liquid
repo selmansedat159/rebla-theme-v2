@@ -301,7 +301,7 @@
 
 
 
-<div class="rebla-v5 rebla-v5__sticky-shell">
+<div id="rebla-sticky-{{ section.id }}" class="rebla-v5 rebla-v5__sticky-shell">
   <div class="rebla-v5__sticky">
     <div class="rebla-v5__sticky-inner">
       <a class="rebla-v5__brand" href="{{ routes.root_url }}">
@@ -492,7 +492,7 @@
   const section = document.getElementById('shopify-section-{{ section.id }}');
   if (!section) return;
 
-  const stickyShell = section.querySelector('.rebla-v5__sticky-shell');
+  const stickyShell = document.getElementById('rebla-sticky-{{ section.id }}');
   if (!stickyShell) return;
 
   const updateSticky = () => {
