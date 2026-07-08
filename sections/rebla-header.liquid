@@ -1143,6 +1143,54 @@ document.addEventListener('DOMContentLoaded', function(){
 })();
 </script>
 
+
+<style>
+@media (max-width: 749px) {
+  /* Çekmece her zaman görünür headerın ALTINDAN başlar */
+  #ReblaV5-{{ section.id }} .rebla-v5__drawer {
+    top: var(--rebla-mobile-header-height, 78px) !important;
+    height: calc(100dvh - var(--rebla-mobile-header-height, 78px)) !important;
+    z-index: 9998 !important;
+  }
+
+  /* Normal ve sticky header çekmecenin üstünde kalır */
+  #ReblaV5-{{ section.id }},
+  #ReblaV5-{{ section.id }}.is-sticky,
+  #ReblaV5-{{ section.id }} .rebla-v5__header,
+  #ReblaV5-{{ section.id }} .rebla-v5__sticky {
+    z-index: 10000 !important;
+  }
+
+  /* Menü içeriği artık headerın arkasına kaçmaz */
+  #ReblaV5-{{ section.id }} .rebla-v5__panel {
+    height: 100% !important;
+    max-height: 100% !important;
+    overflow-y: auto !important;
+  }
+}
+</style>
+
+<script>
+(function () {
+  const root = document.getElementById('ReblaV5-{{ section.id }}');
+  if (!root) return;
+
+  function syncMobileHeaderHeight() {
+    if (window.innerWidth > 749) return;
+    const visibleHeader =
+      root.querySelector('.rebla-v5__sticky:not([hidden])') ||
+      root.querySelector('.rebla-v5__header') ||
+      root;
+    const h = Math.round(visibleHeader.getBoundingClientRect().height) || 78;
+    root.style.setProperty('--rebla-mobile-header-height', h + 'px');
+  }
+
+  syncMobileHeaderHeight();
+  window.addEventListener('resize', syncMobileHeaderHeight);
+  window.addEventListener('scroll', syncMobileHeaderHeight, { passive: true });
+})();
+</script>
+
 {% schema %}
 {
   "name": "Rebla Header V5",
