@@ -1,366 +1,257 @@
-{% comment %}
-  REBLA HEADER V5
-  Premium desktop + sticky + mobile header
-{% endcomment %}
-
 {% liquid
-  assign nav_menu = section.settings.menu
+  assign logo_width = section.settings.logo_width | default: 180
+  assign phone_href = section.settings.phone_number | remove: ' ' | remove: '(' | remove: ')' | remove: '-'
 %}
 
-<style>
-  #shopify-section-{{ section.id }}{position:relative;z-index:9999}
-  .rebla-v5{--ink:#0a1b33;--blue:#1e6bff;--line:rgba(10,27,51,.10);--soft:#f7f8fa;color:var(--ink);font-family:inherit}
-  .rebla-v5 *{box-sizing:border-box}
-  .rebla-v5 a{color:inherit;text-decoration:none}
-  .rebla-v5 button{font:inherit;color:inherit}
-  .rebla-v5 svg{display:block;width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
-  .rebla-v5__desktop{background:transparent;border:0;padding:26px 56px 0;pointer-events:none}
-  .rebla-v5__bar{border-bottom:1px solid var(--line)}
-  .rebla-v5__bar-inner,.rebla-v5__main-inner{width:min(calc(100% - 48px),1440px);margin:auto}
-  .rebla-v5__bar-inner{min-height:46px;display:flex;justify-content:center;align-items:center}
-  .rebla-v5__benefits{display:grid;grid-template-columns:repeat(4,auto);align-items:center}
-  .rebla-v5__benefit{min-width:0;padding:0 30px;display:flex;justify-content:center;align-items:center;gap:10px;font-size:12px;font-weight:650;white-space:nowrap}
-  .rebla-v5__benefit+.rebla-v5__benefit{border-left:1px solid var(--line)}
-  .rebla-v5__benefit svg{width:19px;height:19px}
-  .rebla-v5__main-inner{width:100%;min-height:88px;display:grid;grid-template-columns:220px minmax(0,1fr) auto;align-items:center;gap:10px;padding:0 28px;background:#fff;border:1px solid rgba(10,27,51,.08);border-radius:14px;box-shadow:0 14px 40px rgba(10,27,51,.14);pointer-events:auto}
-  .rebla-v5__brand{justify-self:start;display:flex;align-items:center}
-  .rebla-v5__logo{display:block;width:auto;height:auto;max-width:{{ section.settings.logo_width }}px;max-height:72px}
-  .rebla-v5__name{font-size:28px;font-weight:800;letter-spacing:-.03em}
-  .rebla-v5__nav{justify-self:start;min-width:0;margin-left:0}
-  .rebla-v5__menu{list-style:none;margin:0;padding:0;display:flex;align-items:center;gap:clamp(24px,2.2vw,40px)}
-  .rebla-v5__item{position:static}
-  .rebla-v5__link{min-height:100px;display:flex;align-items:center;gap:9px;font-size:15px;font-weight:650;white-space:nowrap;border-bottom:2px solid transparent}
-  .rebla-v5__item:hover>.rebla-v5__link,.rebla-v5__item:focus-within>.rebla-v5__link{color:var(--blue);border-bottom-color:var(--blue)}
-  .rebla-v5__chev{width:7px;height:7px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg) translateY(-2px)}
-  .rebla-v5__actions{justify-self:end;display:flex;align-items:center;gap:12px;white-space:nowrap;margin-right:14px}
-  .rebla-v5__call{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 18px;border-radius:9px;background:{{ section.settings.cta_background }};color:{{ section.settings.cta_text_color }}!important;font-size:12px;font-weight:800;letter-spacing:.01em;white-space:nowrap;box-shadow:0 8px 20px rgba(30,107,255,.20);transition:.18s ease}
-  .rebla-v5__call:hover{background:{{ section.settings.cta_hover_background }};transform:translateY(-1px);box-shadow:0 10px 24px rgba(30,107,255,.28)}
-  .rebla-v5__flag{width:27px;height:27px;border-radius:50%;overflow:hidden;flex:0 0 27px;border:1px solid rgba(10,27,51,.12);box-shadow:0 2px 7px rgba(10,27,51,.12)}
-  .rebla-v5__flag svg{width:100%;height:100%;display:block;stroke:none}
-  .rebla-v5__action{position:relative;width:38px;height:42px;padding:0;border:0;background:none;display:grid;place-items:center;cursor:pointer}
-  .rebla-v5__badge{position:absolute;top:1px;right:-2px;min-width:18px;height:18px;padding:0 5px;border-radius:20px;background:var(--blue);color:#fff;display:grid;place-items:center;font-size:10px;font-weight:800}
-  .rebla-v5__mega{position:absolute;pointer-events:auto;left:0;right:0;top:100%;padding:16px 24px 0;background:#fff;border-top:1px solid var(--line);box-shadow:0 24px 55px rgba(10,27,51,.13);opacity:0;visibility:hidden;transform:translateY(8px);transition:.18s ease}
-  .rebla-v5__item:hover .rebla-v5__mega,.rebla-v5__item:focus-within .rebla-v5__mega{opacity:1;visibility:visible;transform:none}
-  .rebla-v5__mega-inner{width:min(100%,1440px);margin:auto;display:grid;grid-template-columns:240px minmax(0,1fr);gap:26px;padding-bottom:18px}
-  .rebla-v5__promo,.rebla-v5__trust{background:var(--soft);border-radius:14px;overflow:hidden}
-  .rebla-v5__promo{min-height:270px;padding:24px;display:flex;flex-direction:column;justify-content:space-between;background-size:cover;background-position:center bottom}
-  .rebla-v5__promo h3{max-width:165px;margin:0;font-size:22px;line-height:1.15;font-weight:800;letter-spacing:-.03em}
-  .rebla-v5__blue-link{color:var(--blue);font-size:13px;font-weight:750}
-  .rebla-v5__columns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
-  .rebla-v5__column{padding:12px 24px;border-left:1px solid var(--line)}
-  .rebla-v5__column:first-child{border-left:0}
-  .rebla-v5__column h3{margin:0 0 18px;font-size:12px;font-weight:800;text-transform:uppercase}
-  .rebla-v5__column ul{list-style:none;margin:0 0 20px;padding:0}
-  .rebla-v5__column li+li{margin-top:12px}
-  .rebla-v5__column li a{font-size:13px;line-height:1.35}
-  .rebla-v5__column li a:hover{color:var(--blue)}
-  .rebla-v5__trust{padding:8px 20px;display:grid;align-content:center}
-  .rebla-v5__trust-row{padding:18px 0;display:grid;grid-template-columns:30px 1fr;gap:12px;align-items:start}
-  .rebla-v5__trust-row+.rebla-v5__trust-row{border-top:1px solid var(--line)}
-  .rebla-v5__trust-row strong{display:block;font-size:13px;margin-bottom:3px}
-  .rebla-v5__trust-row small{display:block;font-size:11px;opacity:.7;line-height:1.35}
-  .rebla-v5__nsf{width:28px;height:28px;border:1.5px solid currentColor;border-radius:50%;display:grid;place-items:center;font-size:8px;font-weight:800}
-  .rebla-v5__search-panel{position:absolute;top:100%;right:max(24px,calc((100% - 1440px)/2));z-index:90;width:min(420px,calc(100% - 32px));padding-top:10px}
-  .rebla-v5__search-panel[hidden]{display:none}
-  .rebla-v5__search-form{height:54px;display:grid;grid-template-columns:24px 1fr 32px;gap:10px;align-items:center;padding:0 14px;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 18px 45px rgba(10,27,51,.16)}
-  .rebla-v5__search-form svg{width:20px;fill:none;stroke:currentColor;stroke-width:1.7}
-  .rebla-v5__search-form input{width:100%;border:0;outline:0;background:transparent;font:inherit;color:var(--ink)}
-  .rebla-v5__search-close{border:0;background:transparent;font-size:25px;line-height:1;cursor:pointer;color:var(--ink)}
-  .rebla-v5__featurebar{border-top:1px solid var(--line);background:#fff}
-  .rebla-v5__featurebar-inner{width:min(100%,1440px);min-height:76px;margin:auto;display:grid;grid-template-columns:repeat(4,1fr)}
-  .rebla-v5__feature{padding:14px 26px;display:grid;grid-template-columns:34px 1fr;gap:12px;align-items:center}
-  .rebla-v5__feature+.rebla-v5__feature{border-left:1px solid var(--line)}
-  .rebla-v5__feature svg{width:27px;height:27px;color:var(--ink)}
-  .rebla-v5__feature strong{display:block;font-size:12px;margin-bottom:3px}
-  .rebla-v5__feature small{display:block;font-size:10px;opacity:.66;line-height:1.35}
-  .rebla-v5__mobile,.rebla-v5__drawer{display:none}
-  .rebla-v5__drawer.is-open{display:block;position:fixed;inset:0;z-index:120}
-  .rebla-v5__backdrop{position:absolute;inset:0;background:rgba(10,27,51,.38)}
-  .rebla-v5__panel{position:relative;width:min(88vw,390px);height:100%;padding:22px;background:#fff;overflow:auto}
-  .rebla-v5__drawer-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px}
-  .rebla-v5__close{border:0;background:none;font-size:32px;cursor:pointer}
-  .rebla-v5__drawer-list,.rebla-v5__drawer-sub{list-style:none;margin:0;padding:0}
-  .rebla-v5__drawer-list>li{border-bottom:1px solid var(--line)}
-  .rebla-v5__drawer-list>li>a{display:block;padding:17px 2px;font-weight:750}
-  .rebla-v5__drawer-sub{padding:0 0 12px 14px}
-  .rebla-v5__drawer-sub a{display:block;padding:8px 2px;font-size:13px;opacity:.78}
+<section id="ReblaHeader-{{ section.id }}" class="rh-shell">
+  <div class="rh-header">
+    <a class="rh-logo" href="{{ routes.root_url }}" aria-label="{{ shop.name }}">
+      {% if section.settings.logo != blank %}
+        {{ section.settings.logo | image_url: width: 500 | image_tag: loading: 'eager', widths: '140,180,220,280,360', alt: shop.name }}
+      {% else %}
+        <span>{{ shop.name }}</span>
+      {% endif %}
+    </a>
 
-  @media(max-width:1100px){
-    .rebla-v5__main-inner{grid-template-columns:170px 1fr auto;gap:20px}
-    .rebla-v5__menu{gap:22px}
-    .rebla-v5__link{font-size:13px}
-    .rebla-v5__mega-inner{grid-template-columns:190px 1fr}
-    .rebla-v5__trust{display:none}
-    .rebla-v5__mega-inner{grid-template-columns:210px 1fr}
-    .rebla-v5__featurebar-inner{grid-template-columns:repeat(2,1fr)}
-    .rebla-v5__feature:nth-child(3){border-left:0;border-top:1px solid var(--line)}
-    .rebla-v5__feature:nth-child(4){border-top:1px solid var(--line)}
-  }
+    <nav class="rh-nav" aria-label="Main navigation">
+      {% for link in section.settings.menu.links %}
+        <div class="rh-nav-item{% if link.links != blank %} has-dropdown{% endif %}">
+          <a href="{{ link.url }}" class="rh-nav-link">
+            {{ link.title }}
+            {% if link.links != blank %}
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 9.5 5 5 5-5"/></svg>
+            {% endif %}
+          </a>
 
-  @media(max-width:749px){
-    .rebla-v5__desktop{display:none!important}
-    .rebla-v5__mobile{display:block;background:#fff;border-bottom:1px solid var(--line)}
-    .rebla-v5__mobile-top{min-height:48px;padding:0 8px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));align-items:stretch;border-bottom:1px solid var(--line)}
-    .rebla-v5__mobile-benefit{min-width:0;padding:5px 5px;display:flex;justify-content:center;align-items:center;gap:5px;font-size:8.5px;font-weight:700;text-align:center;line-height:1.15}
-    .rebla-v5__mobile-benefit+.rebla-v5__mobile-benefit{border-left:1px solid var(--line)}
-    .rebla-v5__mobile-benefit svg{width:16px;height:16px;flex:none}
-    .rebla-v5__mobile-main{min-height:70px;padding:0 12px;display:grid;grid-template-columns:42px 1fr auto;align-items:center;gap:8px}
-    .rebla-v5__hamburger{width:38px;height:38px;border:0;background:none;padding:0;display:grid;place-items:center;cursor:pointer}
-    .rebla-v5__hamburger svg{width:24px;height:24px}
-    .rebla-v5__mobile-brand{justify-self:center}
-    .rebla-v5__mobile .rebla-v5__logo{max-width:118px;max-height:48px}
-    .rebla-v5__mobile-actions{display:flex;align-items:center;gap:1px}
-    .rebla-v5__mobile-actions .rebla-v5__action{width:34px}
-    .rebla-v5__mobile-benefit .rebla-v5__nsf-circle{width:20px;height:20px;font-size:6.5px}
+          {% if link.links != blank %}
+            <div class="rh-mega">
+              <div class="rh-mega-inner">
+                <a class="rh-feature-card" href="{{ section.settings.feature_link | default: link.url }}">
+                  <div class="rh-feature-media">
+                    {% if section.settings.feature_image != blank %}
+                      {{ section.settings.feature_image | image_url: width: 700 | image_tag: loading: 'lazy', widths: '300,500,700', alt: section.settings.feature_heading }}
+                    {% endif %}
+                    <div class="rh-feature-copy">
+                      <strong>{{ section.settings.feature_heading }}</strong>
+                      <span>{{ section.settings.feature_cta }} →</span>
+                    </div>
+                  </div>
+                </a>
 
-  }
+                <div class="rh-mega-columns">
+                  {% for child in link.links %}
+                    <div class="rh-mega-col">
+                      <a class="rh-mega-title" href="{{ child.url }}">{{ child.title }}</a>
+                      {% for grandchild in child.links %}
+                        <a href="{{ grandchild.url }}">{{ grandchild.title }}</a>
+                      {% endfor %}
+                      <a class="rh-view-all" href="{{ child.url }}">View All →</a>
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
 
-  .rebla-v5__nsf-top{display:flex;align-items:center;justify-content:center;gap:10px}
-  .rebla-v5__nsf-circle{
-    display:inline-grid;place-items:center;width:25px;height:25px;
-    border:1.5px solid currentColor;border-radius:50%;
-    font-size:8px;font-weight:800;flex:0 0 auto
-  }
+              <div class="rh-benefits">
+                <div><span class="rh-benefit-icon">▱</span><span><b>5-Stage Filtration</b><small>Complete purification</small></span></div>
+                <div><span class="rh-benefit-icon">◯</span><span><b>Removes 1,000+ Contaminants</b><small>Powerful purification</small></span></div>
+                <div><span class="rh-benefit-icon">✥</span><span><b>High Performance RO Membrane</b><small>Built for reliable flow</small></span></div>
+                <div><span class="rh-benefit-icon">▦</span><span><b>All-in-One System</b><small>Compact. Complete. Convenient.</small></span></div>
+              </div>
+            </div>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </nav>
 
+    <div class="rh-actions">
+      {% if section.settings.call_button_text != blank %}
+        <a class="rh-call" href="tel:{{ phone_href }}">{{ section.settings.call_button_text }}</a>
+      {% endif %}
 
+      <button class="rh-icon rh-search-toggle" type="button" aria-label="Search">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+      </button>
 
-
-</style>
-
-<div class="rebla-v5" id="ReblaV5-{{ section.id }}">
-  <header class="rebla-v5__desktop">
-
-
-    <div class="rebla-v5__main-inner">
-      <a class="rebla-v5__brand" href="{{ routes.root_url }}">
-        {% if section.settings.logo != blank %}
-          {{ section.settings.logo | image_url: width: 600 | image_tag: class: 'rebla-v5__logo', loading: 'eager', alt: shop.name }}
-        {% else %}
-          <span class="rebla-v5__name">{{ shop.name }}</span>
-        {% endif %}
+      <a class="rh-icon" href="{{ routes.account_url }}" aria-label="Account">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"/><path d="M4.5 21c.7-5 3.2-7.5 7.5-7.5s6.8 2.5 7.5 7.5"/></svg>
       </a>
 
-      <nav class="rebla-v5__nav" aria-label="Main navigation">
-        <ul class="rebla-v5__menu">
-          {% for link in nav_menu.links %}
-            <li class="rebla-v5__item">
-              <a class="rebla-v5__link" href="{{ link.url }}">{{ link.title }}{% if link.links != blank %}<span class="rebla-v5__chev"></span>{% endif %}</a>
-              {% if link.links != blank %}
-                <div class="rebla-v5__mega">
-                  <div class="rebla-v5__mega-inner">
-                    <div class="rebla-v5__promo"{% if section.settings.mega_image != blank %} style="background-image:linear-gradient(to bottom,rgba(247,248,250,.98),rgba(247,248,250,.70) 48%,rgba(247,248,250,.04)),url('{{ section.settings.mega_image | image_url: width: 700 }}')"{% endif %}>
-                      <h3>{{ section.settings.mega_heading }}</h3>
-                      <a class="rebla-v5__blue-link" href="{{ section.settings.mega_link | default: link.url }}">Shop System →</a>
-                    </div>
+      <a class="rh-icon rh-cart" href="{{ routes.cart_url }}" aria-label="Cart">
+        <svg viewBox="0 0 24 24"><path d="M3 4h2l2 11h10l2-8H6"/><circle cx="9" cy="20" r="1"/><circle cx="17" cy="20" r="1"/></svg>
+        {% if cart.item_count > 0 %}<span>{{ cart.item_count }}</span>{% endif %}
+      </a>
 
-                    <div class="rebla-v5__columns">
-                      {% for child in link.links limit: 3 %}
-                        <div class="rebla-v5__column">
-                          <h3>{{ child.title }}</h3>
-                          <ul>
-                            {% if child.links != blank %}
-                              {% for grandchild in child.links limit: 6 %}
-                                <li><a href="{{ grandchild.url }}">{{ grandchild.title }}</a></li>
-                              {% endfor %}
-                            {% else %}
-                              <li><a href="{{ child.url }}">Explore {{ child.title }}</a></li>
-                              <li><a href="{{ child.url }}">Learn more</a></li>
-                            {% endif %}
-                          </ul>
-                          <a class="rebla-v5__blue-link" href="{{ child.url }}">View All →</a>
-                        </div>
-                      {% endfor %}
-                    </div>
-
-                  </div>
-
-                  <div class="rebla-v5__featurebar">
-                    <div class="rebla-v5__featurebar-inner">
-                      <div class="rebla-v5__feature"><svg viewBox="0 0 24 24"><path d="M12 2l8 4-8 4-8-4zM4 10l8 4 8-4M4 14l8 4 8-4"/></svg><div><strong>5-Stage Filtration</strong><small>Complete purification</small></div></div>
-                      <div class="rebla-v5__feature"><svg viewBox="0 0 24 24"><path d="M12 3s6 6 6 11a6 6 0 1 1-12 0c0-5 6-11 6-11z"/></svg><div><strong>Removes 1,000+ Contaminants</strong><small>Powerful purification</small></div></div>
-                      <div class="rebla-v5__feature"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 4v3M20 12h-3M12 20v-3M4 12h3"/></svg><div><strong>High Performance RO Membrane</strong><small>Built for reliable flow</small></div></div>
-                      <div class="rebla-v5__feature"><svg viewBox="0 0 24 24"><path d="M3 5h18v14H3zM3 9h18M7 5v14M11 5v14"/></svg><div><strong>All-in-One System</strong><small>Compact. Complete. Convenient.</small></div></div>
-                    </div>
-                  </div>
-                </div>
-              {% endif %}
-            </li>
-          {% endfor %}
-        </ul>
-      </nav>
-
-      <div class="rebla-v5__actions">
-        <a class="rebla-v5__call" href="tel:{{ section.settings.phone | remove: ' ' | remove: '(' | remove: ')' | remove: '-' }}">{{ section.settings.cta_text }}</a>
-        <button type="button" class="rebla-v5__action"  aria-label="Search" data-rebla-search-trigger aria-expanded="false"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M16.5 16.5L21 21"/></svg></button>
-        <a class="rebla-v5__action" href="{{ routes.account_url }}" aria-label="Account"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-5 4-7 8-7s7 2 8 7"/></svg></a>
-        <a class="rebla-v5__action" href="{{ routes.cart_url }}" aria-label="Cart"><svg viewBox="0 0 24 24"><path d="M3 4h2l2 12h11l2-8H6"/><circle cx="9" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg>{% if cart.item_count > 0 %}<span class="rebla-v5__badge">{{ cart.item_count }}</span>{% endif %}</a>
-        <span class="rebla-v5__flag" aria-label="United States">
-          <svg viewBox="0 0 48 48" role="img" aria-hidden="true">
-            <defs><clipPath id="reblaUsFlag1"><circle cx="24" cy="24" r="23"/></clipPath></defs>
-            <g clip-path="url(#reblaUsFlag1)">
-              <rect width="48" height="48" fill="#fff"/>
-              <g fill="#D52B1E">
-                <rect y="0" width="48" height="4"/><rect y="8" width="48" height="4"/>
-                <rect y="16" width="48" height="4"/><rect y="24" width="48" height="4"/>
-                <rect y="32" width="48" height="4"/><rect y="40" width="48" height="4"/>
-              </g>
-              <rect width="21" height="24" fill="#173B72"/>
-              <g fill="#fff">
-                <circle cx="4" cy="4" r="1"/><circle cx="10" cy="4" r="1"/><circle cx="16" cy="4" r="1"/>
-                <circle cx="7" cy="9" r="1"/><circle cx="13" cy="9" r="1"/><circle cx="19" cy="9" r="1"/>
-                <circle cx="4" cy="14" r="1"/><circle cx="10" cy="14" r="1"/><circle cx="16" cy="14" r="1"/>
-                <circle cx="7" cy="19" r="1"/><circle cx="13" cy="19" r="1"/><circle cx="19" cy="19" r="1"/>
-              </g>
-            </g>
-          </svg>
-        </span>
-      </div>
+      <span class="rh-flag" aria-label="United States">🇺🇸</span>
     </div>
-  </header>
 
-
-  <header class="rebla-v5__mobile">
-
-    <div class="rebla-v5__mobile-main">
-      <button class="rebla-v5__hamburger" type="button" aria-label="Open menu"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
-      <a class="rebla-v5__mobile-brand" href="{{ routes.root_url }}">{% if section.settings.logo != blank %}{{ section.settings.logo | image_url: width: 360 | image_tag: class: 'rebla-v5__logo', loading: 'eager', alt: shop.name }}{% else %}<span class="rebla-v5__name">{{ shop.name }}</span>{% endif %}</a>
-      <div class="rebla-v5__mobile-actions">
-        <button type="button" class="rebla-v5__action"  aria-label="Search" data-rebla-search-trigger aria-expanded="false"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M16.5 16.5L21 21"/></svg></button>
-        <a class="rebla-v5__action" href="{{ routes.account_url }}" aria-label="Account"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-5 4-7 8-7s7 2 8 7"/></svg></a>
-        <a class="rebla-v5__action" href="{{ routes.cart_url }}" aria-label="Cart"><svg viewBox="0 0 24 24"><path d="M3 4h2l2 12h11l2-8H6"/><circle cx="9" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg>{% if cart.item_count > 0 %}<span class="rebla-v5__badge">{{ cart.item_count }}</span>{% endif %}</a>
-      </div>
-    </div>
-  </header>
-
-  <div class="rebla-v5__drawer" aria-hidden="true">
-    <div class="rebla-v5__backdrop"></div>
-    <aside class="rebla-v5__panel">
-      <div class="rebla-v5__drawer-head"><strong>Menu</strong><button class="rebla-v5__close" type="button" aria-label="Close menu">×</button></div>
-      <ul class="rebla-v5__drawer-list">
-        {% for link in nav_menu.links %}
-          <li><a href="{{ link.url }}">{{ link.title }}</a>{% if link.links != blank %}<ul class="rebla-v5__drawer-sub">{% for child in link.links %}<li><a href="{{ child.url }}">{{ child.title }}</a></li>{% endfor %}</ul>{% endif %}</li>
-        {% endfor %}
-      </ul>
-    </aside>
+    <button class="rh-menu-toggle" type="button" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
-</div>
 
+  <div class="rh-search-panel" hidden>
+    <form action="{{ routes.search_url }}" method="get" role="search">
+      <input type="search" name="q" placeholder="Search products..." autocomplete="off">
+      <button type="submit" aria-label="Submit search">→</button>
+    </form>
+  </div>
 
+  <div class="rh-mobile-drawer" hidden>
+    {% for link in section.settings.menu.links %}
+      <a href="{{ link.url }}">{{ link.title }}</a>
+      {% for child in link.links %}
+        <a class="rh-mobile-child" href="{{ child.url }}">{{ child.title }}</a>
+      {% endfor %}
+    {% endfor %}
+    {% if section.settings.call_button_text != blank %}
+      <a class="rh-mobile-call" href="tel:{{ phone_href }}">{{ section.settings.call_button_text }}</a>
+    {% endif %}
+  </div>
+</section>
 
 <style>
-  .rebla-search-overlay-v6[hidden]{display:none!important}
-  .rebla-search-overlay-v6{
-    position:fixed;
-    top:154px;
-    right:28px;
-    z-index:9999;
-    width:min(390px,calc(100vw - 32px));
+  #shopify-section-{{ section.id }}{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    height:0;
+    overflow:visible;
   }
-  .rebla-search-overlay-v6__box{
+
+  #ReblaHeader-{{ section.id }}{
+    --rh-blue:{{ section.settings.cta_background }};
+    --rh-text:#081a33;
+    --rh-radius:16px;
+    width:min(calc(100% - 7.5vw), 1410px);
+    margin:28px auto 0;
+    font-family:inherit;
+    color:var(--rh-text);
+    position:relative;
+  }
+
+  #ReblaHeader-{{ section.id }} *{box-sizing:border-box}
+
+  #ReblaHeader-{{ section.id }} .rh-header{
+    height:106px;
+    display:grid;
+    grid-template-columns:190px minmax(420px,1fr) auto;
+    align-items:center;
+    gap:28px;
+    padding:0 34px 0 48px;
     background:#fff;
-    border:1px solid rgba(10,24,51,.12);
-    border-radius:14px;
-    box-shadow:0 14px 38px rgba(10,24,51,.16);
-    padding:10px;
+    border-radius:var(--rh-radius);
+    box-shadow:0 14px 38px rgba(8,26,51,.10);
+    transition:height .22s ease,border-radius .22s ease,box-shadow .22s ease;
   }
-  .rebla-search-overlay-v6 form{display:flex;align-items:center;gap:8px}
-  .rebla-search-overlay-v6 input{
-    min-width:0;width:100%;height:42px;border:0;outline:0;
-    font:inherit;font-size:14px;color:#0a1833;background:transparent;padding:0 8px
+
+  #ReblaHeader-{{ section.id }} .rh-logo{display:flex;align-items:center;width:{{ logo_width }}px;max-width:100%}
+  #ReblaHeader-{{ section.id }} .rh-logo img{display:block;width:100%;height:auto}
+
+  #ReblaHeader-{{ section.id }} .rh-nav{display:flex;align-items:center;justify-content:flex-start;gap:34px;height:100%}
+  #ReblaHeader-{{ section.id }} .rh-nav-item{height:100%;display:flex;align-items:center}
+  #ReblaHeader-{{ section.id }} .rh-nav-link{height:100%;display:flex;align-items:center;gap:7px;color:var(--rh-text);text-decoration:none;font-size:15px;font-weight:700;white-space:nowrap;position:relative}
+  #ReblaHeader-{{ section.id }} .rh-nav-link svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2}
+  #ReblaHeader-{{ section.id }} .rh-nav-link:after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--rh-blue);transform:scaleX(0);transition:.2s}
+  #ReblaHeader-{{ section.id }} .rh-nav-item:hover>.rh-nav-link:after{transform:scaleX(1)}
+
+  #ReblaHeader-{{ section.id }} .rh-actions{display:flex;align-items:center;gap:20px}
+  #ReblaHeader-{{ section.id }} .rh-call{display:flex;align-items:center;justify-content:center;min-height:46px;padding:0 21px;border-radius:8px;background:var(--rh-blue);color:{{ section.settings.cta_text_color }};text-decoration:none;font-size:13px;font-weight:800;white-space:nowrap;box-shadow:0 9px 20px color-mix(in srgb,var(--rh-blue) 25%,transparent)}
+  #ReblaHeader-{{ section.id }} .rh-icon{width:25px;height:25px;display:grid;place-items:center;padding:0;border:0;background:none;color:var(--rh-text);text-decoration:none;position:relative;cursor:pointer}
+  #ReblaHeader-{{ section.id }} .rh-icon svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+  #ReblaHeader-{{ section.id }} .rh-cart span{position:absolute;right:-8px;top:-9px;min-width:19px;height:19px;padding:0 5px;border-radius:20px;background:#2169f3;color:#fff;font-size:11px;font-weight:800;display:grid;place-items:center}
+  #ReblaHeader-{{ section.id }} .rh-flag{width:29px;height:29px;border-radius:50%;display:grid;place-items:center;overflow:hidden;font-size:25px;line-height:1;box-shadow:0 3px 10px rgba(0,0,0,.12)}
+  #ReblaHeader-{{ section.id }} .rh-menu-toggle{display:none}
+
+  #ReblaHeader-{{ section.id }} .rh-mega{
+    display:none;
+    position:absolute;
+    left:0;
+    right:0;
+    top:calc(100% + 1px);
+    background:#fff;
+    border-radius:0 0 16px 16px;
+    box-shadow:0 24px 45px rgba(8,26,51,.12);
+    overflow:hidden;
   }
-  .rebla-search-overlay-v6 button{border:0;cursor:pointer}
-  .rebla-search-overlay-v6__submit{
-    height:40px;padding:0 15px!important;border-radius:9px!important;
-    background:#1e6bff!important;color:#fff!important;font-weight:700
+  #ReblaHeader-{{ section.id }} .has-dropdown:hover .rh-mega{display:block}
+  #ReblaHeader-{{ section.id }} .rh-mega-inner{display:grid;grid-template-columns:250px 1fr;gap:50px;padding:18px 24px 18px}
+  #ReblaHeader-{{ section.id }} .rh-feature-card{text-decoration:none;color:var(--rh-text)}
+  #ReblaHeader-{{ section.id }} .rh-feature-media{height:280px;border-radius:15px;overflow:hidden;position:relative;background:#f4f6f8}
+  #ReblaHeader-{{ section.id }} .rh-feature-media img{width:100%;height:100%;object-fit:cover}
+  #ReblaHeader-{{ section.id }} .rh-feature-copy{position:absolute;inset:0;padding:24px;display:flex;flex-direction:column;justify-content:space-between}
+  #ReblaHeader-{{ section.id }} .rh-feature-copy strong{max-width:190px;font-size:25px;line-height:1.08}
+  #ReblaHeader-{{ section.id }} .rh-feature-copy span{font-size:14px;font-weight:800}
+  #ReblaHeader-{{ section.id }} .rh-mega-columns{display:grid;grid-template-columns:repeat(3,1fr)}
+  #ReblaHeader-{{ section.id }} .rh-mega-col{padding:14px 25px;border-left:1px solid #e3e8ee;display:flex;flex-direction:column;gap:17px}
+  #ReblaHeader-{{ section.id }} .rh-mega-col:first-child{border-left:0}
+  #ReblaHeader-{{ section.id }} .rh-mega-col a{text-decoration:none;color:var(--rh-text);font-size:14px}
+  #ReblaHeader-{{ section.id }} .rh-mega-title{font-size:13px!important;font-weight:800;text-transform:uppercase}
+  #ReblaHeader-{{ section.id }} .rh-view-all{margin-top:6px;font-weight:800!important}
+  #ReblaHeader-{{ section.id }} .rh-benefits{border-top:1px solid #e3e8ee;display:grid;grid-template-columns:repeat(4,1fr)}
+  #ReblaHeader-{{ section.id }} .rh-benefits>div{min-height:80px;padding:0 28px;display:flex;align-items:center;gap:18px;border-left:1px solid #e3e8ee}
+  #ReblaHeader-{{ section.id }} .rh-benefits>div:first-child{border-left:0}
+  #ReblaHeader-{{ section.id }} .rh-benefit-icon{font-size:25px}
+  #ReblaHeader-{{ section.id }} .rh-benefits b,#ReblaHeader-{{ section.id }} .rh-benefits small{display:block}
+  #ReblaHeader-{{ section.id }} .rh-benefits b{font-size:13px}
+  #ReblaHeader-{{ section.id }} .rh-benefits small{margin-top:5px;color:#6c7888;font-size:11px}
+
+  #ReblaHeader-{{ section.id }} .rh-search-panel{margin-top:8px;background:#fff;border-radius:12px;box-shadow:0 16px 35px rgba(8,26,51,.12);padding:14px}
+  #ReblaHeader-{{ section.id }} .rh-search-panel form{display:flex}
+  #ReblaHeader-{{ section.id }} .rh-search-panel input{width:100%;border:0;outline:0;font:inherit;font-size:16px;padding:10px}
+  #ReblaHeader-{{ section.id }} .rh-search-panel button{width:50px;border:0;background:var(--rh-blue);color:#fff;border-radius:8px;font-size:20px}
+  #ReblaHeader-{{ section.id }} .rh-mobile-drawer{display:none}
+
+  @media (max-width:1180px){
+    #ReblaHeader-{{ section.id }} .rh-header{grid-template-columns:155px 1fr auto;padding-left:28px;gap:20px}
+    #ReblaHeader-{{ section.id }} .rh-nav{gap:20px}
+    #ReblaHeader-{{ section.id }} .rh-nav-link{font-size:13px}
+    #ReblaHeader-{{ section.id }} .rh-actions{gap:14px}
+    #ReblaHeader-{{ section.id }} .rh-call{padding:0 15px;font-size:12px}
   }
-  .rebla-search-overlay-v6__close{
-    background:transparent!important;color:#0a1833!important;
-    font-size:22px;line-height:1;padding:6px!important
-  }
-  @media(max-width:749px){
-    .rebla-search-overlay-v6{top:126px;right:16px}
+
+  @media (max-width:989px){
+    #shopify-section-{{ section.id }}{height:auto}
+    #ReblaHeader-{{ section.id }}{width:calc(100% - 24px);margin:12px auto 0}
+    #ReblaHeader-{{ section.id }} .rh-header{height:72px;grid-template-columns:1fr auto auto;padding:0 18px;border-radius:13px}
+    #ReblaHeader-{{ section.id }} .rh-logo{width:min({{ logo_width }}px,135px)}
+    #ReblaHeader-{{ section.id }} .rh-nav,#ReblaHeader-{{ section.id }} .rh-call,#ReblaHeader-{{ section.id }} .rh-actions .rh-icon:not(.rh-cart){display:none}
+    #ReblaHeader-{{ section.id }} .rh-actions{gap:12px}
+    #ReblaHeader-{{ section.id }} .rh-flag{width:26px;height:26px;font-size:22px}
+    #ReblaHeader-{{ section.id }} .rh-menu-toggle{width:28px;height:24px;border:0;background:none;padding:0;display:flex;flex-direction:column;justify-content:space-between}
+    #ReblaHeader-{{ section.id }} .rh-menu-toggle span{height:2px;width:100%;background:var(--rh-text);border-radius:2px}
+    #ReblaHeader-{{ section.id }} .rh-mobile-drawer{margin-top:8px;background:#fff;border-radius:13px;box-shadow:0 18px 40px rgba(8,26,51,.14);padding:18px}
+    #ReblaHeader-{{ section.id }} .rh-mobile-drawer.is-open{display:flex;flex-direction:column;gap:16px}
+    #ReblaHeader-{{ section.id }} .rh-mobile-drawer a{text-decoration:none;color:var(--rh-text);font-weight:700}
+    #ReblaHeader-{{ section.id }} .rh-mobile-child{padding-left:16px;font-size:14px;font-weight:500!important}
+    #ReblaHeader-{{ section.id }} .rh-mobile-call{margin-top:8px;padding:14px;text-align:center;border-radius:8px;background:var(--rh-blue);color:#fff!important}
   }
 </style>
 
-<div id="reblaSearchOverlayV6" class="rebla-search-overlay-v6" hidden>
-  <div class="rebla-search-overlay-v6__box" role="dialog" aria-modal="true" aria-label="Search">
-    <form action="{{ routes.search_url }}" method="get" role="search">
-      <input id="reblaSearchInputV6" type="search" name="q" placeholder="Search products, filters and parts…" autocomplete="off">
-      <button class="rebla-search-overlay-v6__submit" type="submit">Search</button>
-      <button class="rebla-search-overlay-v6__close" type="button" aria-label="Close search">×</button>
-    </form>
-  </div>
-</div>
-
 <script>
-(function(){
-  const overlay = document.getElementById('reblaSearchOverlayV6');
-  if (!overlay) return;
-  const input = document.getElementById('reblaSearchInputV6');
-  const close = () => {
-    overlay.hidden = true;
-    document.querySelectorAll('[data-rebla-search-trigger]').forEach(el => el.setAttribute('aria-expanded','false'));
-  };
-  document.addEventListener('click', function(e){
-    const trigger = e.target.closest('[data-rebla-search-trigger]');
-    if (trigger) {
-      e.preventDefault();
-      e.stopPropagation();
-      overlay.hidden = false;
-      trigger.setAttribute('aria-expanded','true');
-      setTimeout(() => input && input.focus(), 30);
-      return;
-    }
-    if (e.target.closest('.rebla-search-overlay-v6__close')) { close(); return; }
-    if (!e.target.closest('.rebla-search-overlay-v6__box') && !e.target.closest('[data-rebla-search-trigger]')) close();
+(() => {
+  const root = document.getElementById('ReblaHeader-{{ section.id }}');
+  if (!root) return;
+
+  const searchToggle = root.querySelector('.rh-search-toggle');
+  const searchPanel = root.querySelector('.rh-search-panel');
+  const menuToggle = root.querySelector('.rh-menu-toggle');
+  const drawer = root.querySelector('.rh-mobile-drawer');
+
+  searchToggle?.addEventListener('click', () => {
+    searchPanel.hidden = !searchPanel.hidden;
+    if (!searchPanel.hidden) searchPanel.querySelector('input')?.focus();
   });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+
+  menuToggle?.addEventListener('click', () => {
+    drawer.hidden = false;
+    drawer.classList.toggle('is-open');
+  });
 })();
 </script>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<style>
-.shopify-section-group-header-group,
-#shopify-section-{{ section.id }} {
-  overflow: visible !important;
-}
-
-@media (min-width: 990px) {
-  #shopify-section-{{ section.id }} .rebla-v5__desktop {
-    position: sticky !important;
-    top: 0 !important;
-    z-index: 9999 !important;
-  }
-}
-
-@media (max-width: 989px) {
-  #shopify-section-{{ section.id }} .rebla-v5__mobile {
-    position: sticky !important;
-    top: 0 !important;
-    z-index: 9999 !important;
-  }
-}
-</style>
-
 {% schema %}
 {
-  "name": "Rebla Header V5",
-  "tag": "section",
-  "class": "rebla-header-v4-section",
+  "name": "Rebla Header",
   "settings": [
     {
       "type": "image_picker",
@@ -370,69 +261,68 @@
     {
       "type": "range",
       "id": "logo_width",
+      "label": "Logo width",
       "min": 120,
       "max": 240,
       "step": 5,
-      "unit": "px",
-      "label": "Logo width",
-      "default": 180
+      "default": 180,
+      "unit": "px"
     },
     {
       "type": "link_list",
       "id": "menu",
-      "label": "Main menu",
-      "default": "main-menu"
+      "label": "Main menu"
     },
     {
       "type": "text",
-      "id": "phone",
-      "label": "Phone",
-      "default": "(888) 407-2424"
+      "id": "phone_number",
+      "label": "Phone number",
+      "default": "+1 (888) 557-3252"
     },
     {
       "type": "text",
-      "id": "cta_text",
+      "id": "call_button_text",
       "label": "Call button text",
-      "default": "CALL (888) 55 REBLA"
+      "default": "TOLL FREE (888) 55 REBLA"
     },
     {
       "type": "color",
       "id": "cta_background",
-      "label": "Call button background",
-      "default": "#1e6bff"
-    },
-    {
-      "type": "color",
-      "id": "cta_hover_background",
-      "label": "Call button hover background",
-      "default": "#0b58dc"
+      "label": "CTA background",
+      "default": "#1E6BFF"
     },
     {
       "type": "color",
       "id": "cta_text_color",
-      "label": "Call button text color",
-      "default": "#ffffff"
-    },
-    {
-      "type": "text",
-      "id": "mega_heading",
-      "label": "Shop System card heading",
-      "default": "Premium water, from the first drop to the last."
+      "label": "CTA text color",
+      "default": "#FFFFFF"
     },
     {
       "type": "image_picker",
-      "id": "mega_image",
-      "label": "Shop System card image"
+      "id": "feature_image",
+      "label": "Mega menu feature image"
+    },
+    {
+      "type": "text",
+      "id": "feature_heading",
+      "label": "Mega menu feature heading",
+      "default": "Premium water, from the first drop to the last."
+    },
+    {
+      "type": "text",
+      "id": "feature_cta",
+      "label": "Mega menu feature CTA",
+      "default": "Shop System"
     },
     {
       "type": "url",
-      "id": "mega_link",
-      "label": "Shop System card link"
+      "id": "feature_link",
+      "label": "Mega menu feature link"
     }
   ],
   "presets": [
     {
-      "name": "Rebla Header V5"
+      "name": "Rebla Header"
     }
   ]
 }
