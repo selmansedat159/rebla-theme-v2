@@ -164,23 +164,21 @@
     .rebla-v5__mobile-benefit{min-width:0;padding:5px 5px;display:flex;justify-content:center;align-items:center;gap:5px;font-size:8.5px;font-weight:700;text-align:center;line-height:1.15}
     .rebla-v5__mobile-benefit+.rebla-v5__mobile-benefit{border-left:1px solid var(--line)}
     .rebla-v5__mobile-benefit svg{width:16px;height:16px;flex:none}
-    .rebla-v5__mobile-main{min-height:70px;padding:0 8px;display:grid;grid-template-columns:32px 78px minmax(82px,1fr) auto;align-items:center;gap:4px}
+    .rebla-v5__mobile-main{min-height:70px;padding:0 8px;display:grid;grid-template-columns:34px 92px minmax(108px,1fr) auto;align-items:center;gap:4px}
     .rebla-v5__hamburger{width:38px;height:38px;border:0;background:none;padding:0;display:grid;place-items:center;cursor:pointer}
     .rebla-v5__hamburger svg{width:24px;height:24px}
     .rebla-v5__mobile-brand{justify-self:start}
-    .rebla-v5__mobile .rebla-v5__logo{max-width:78px;max-height:40px}
+    .rebla-v5__mobile .rebla-v5__logo{max-width:92px;max-height:44px}
 
     .rebla-v5__mobile-call{
       min-width:0;
-      width:auto;
-      max-width:112px;
-      height:36px;
-      padding:0 7px;
-      gap:4px;
+      height:42px;
+      padding:0 10px;
+      gap:6px;
       justify-self:center;
       white-space:nowrap;
-      font-size:8px;
-      border-radius:9px;
+      font-size:10px;
+      border-radius:10px;
     }
     .rebla-v5__mobile-call .rebla-v5__call-icon{width:14px;height:14px;flex-basis:14px}
     .rebla-v5__mobile-call span{overflow:hidden;text-overflow:ellipsis}
@@ -212,170 +210,6 @@
   margin-bottom:-120px;
   pointer-events:none;
 }
-
-
-
-  @media(max-width:749px){
-    .rebla-v5__mobile-main{
-      grid-template-columns:32px minmax(72px,1fr) auto;
-      gap:8px;
-    }
-    .rebla-v5__mobile-brand{justify-self:start}
-    .rebla-v5__mobile-phone{
-      width:36px;
-      height:42px;
-      color:var(--blue);
-    }
-    .rebla-v5__mobile-phone svg{
-      width:22px;
-      height:22px;
-      stroke-width:1.9;
-    }
-
-    .rebla-v5__drawer.is-open{
-      display:block!important;
-      position:fixed;
-      inset:0;
-      z-index:99999;
-    }
-    .rebla-v5__panel{
-      width:100%;
-      height:100%;
-      padding:0;
-      display:flex;
-      flex-direction:column;
-      background:linear-gradient(180deg,#fff 0%,#fff 72%,#f7faff 100%);
-      overflow:auto;
-      box-shadow:none;
-    }
-    .rebla-v5__drawer-head{
-      min-height:78px;
-      margin:0;
-      padding:0 22px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      border-bottom:1px solid rgba(10,27,51,.08);
-    }
-    .rebla-v5__drawer-brand{display:flex;align-items:center}
-    .rebla-v5__drawer-brand .rebla-v5__logo{max-width:112px;max-height:46px}
-    .rebla-v5__close{
-      width:44px;
-      height:44px;
-      padding:0;
-      display:grid;
-      place-items:center;
-      border:0;
-      border-radius:50%;
-      background:rgba(30,107,255,.07);
-      color:var(--blue);
-      font-size:30px;
-      line-height:1;
-    }
-    .rebla-v5__drawer-nav{
-      flex:1;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:30px 24px 20px;
-    }
-    .rebla-v5__drawer-list{
-      width:100%;
-      max-width:420px;
-      padding:0;
-      text-align:center;
-    }
-    .rebla-v5__drawer-list>li{
-      border:0;
-      padding:0;
-    }
-    .rebla-v5__drawer-link{
-      width:100%;
-      min-height:58px;
-      padding:12px 8px!important;
-      display:flex!important;
-      align-items:center;
-      justify-content:center;
-      gap:12px;
-      border:0;
-      background:none;
-      color:var(--ink);
-      font-size:22px!important;
-      font-weight:750!important;
-      letter-spacing:-.025em;
-      text-align:center;
-    }
-    .rebla-v5__drawer-link:hover,
-    .rebla-v5__drawer-link:focus{color:var(--blue)}
-    .rebla-v5__submenu-mark{
-      width:22px;
-      height:22px;
-      display:grid;
-      place-items:center;
-      border:1px solid rgba(30,107,255,.28);
-      border-radius:50%;
-      color:var(--blue);
-      font-size:17px;
-      font-weight:500;
-      transition:.2s ease;
-    }
-    .rebla-v5__submenu-toggle[aria-expanded="true"]{color:var(--blue)}
-    .rebla-v5__submenu-toggle[aria-expanded="true"] .rebla-v5__submenu-mark{transform:rotate(45deg);background:rgba(30,107,255,.07)}
-    .rebla-v5__drawer-sub{
-      max-height:0;
-      overflow:hidden;
-      padding:0;
-      opacity:0;
-      transition:max-height .32s ease,opacity .25s ease,padding .25s ease;
-    }
-    .rebla-v5__drawer-item.is-submenu-open .rebla-v5__drawer-sub{
-      max-height:280px;
-      padding:4px 0 16px;
-      opacity:1;
-    }
-    .rebla-v5__drawer-sub li{border:0;background:none}
-    .rebla-v5__drawer-sub a{
-      display:block;
-      padding:8px 12px;
-      color:rgba(10,27,51,.68);
-      font-size:14px;
-      font-weight:650;
-      opacity:1;
-    }
-    .rebla-v5__drawer-sub a:hover{color:var(--blue)}
-    .rebla-v5__drawer-phone{
-      margin:0 24px 28px;
-      padding:20px 12px 4px;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      gap:8px;
-      border-top:1px solid rgba(30,107,255,.20);
-      text-align:center;
-    }
-    .rebla-v5__drawer-phone-label{
-      color:rgba(10,27,51,.48);
-      font-size:9px;
-      font-weight:800;
-      letter-spacing:.18em;
-    }
-    .rebla-v5__drawer-phone-main{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:9px;
-      color:var(--ink);
-      font-size:15px;
-      font-weight:800;
-      letter-spacing:.01em;
-    }
-    .rebla-v5__drawer-phone-main svg{
-      width:20px;
-      height:20px;
-      color:var(--blue);
-      stroke-width:1.9;
-    }
-  }
 
 </style>
 
@@ -555,7 +389,7 @@
     <div class="rebla-v5__mobile-main">
       <button class="rebla-v5__hamburger" type="button" aria-label="Open menu"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
       <a class="rebla-v5__mobile-brand" href="{{ routes.root_url }}">{% if section.settings.logo != blank %}{{ section.settings.logo | image_url: width: 360 | image_tag: class: 'rebla-v5__logo', loading: 'eager', alt: shop.name }}{% else %}<span class="rebla-v5__name">{{ shop.name }}</span>{% endif %}</a>
-      <a class="rebla-v5__action rebla-v5__mobile-phone" href="tel:{{ section.settings.phone | replace: ' ', '' | replace: '(', '' | replace: ')', '' | replace: '-', '' }}" aria-label="Call Rebla"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8c1.7 3.4 3.2 4.9 6.6 6.6l2.2-2.2c.3-.3.8-.4 1.2-.2 1.3.5 2.7.8 4.2.8.7 0 1.2.5 1.2 1.2v3.5c0 .7-.5 1.2-1.2 1.2C10.4 21.7 2.3 13.6 2.3 3.2 2.3 2.5 2.8 2 3.5 2H7c.7 0 1.2.5 1.2 1.2 0 1.5.3 2.9.8 4.2.1.4.1.9-.2 1.2z"/></svg></a>
+      <a class="rebla-v5__call rebla-v5__mobile-call" href="tel:{{ section.settings.phone | replace: ' ', '' | replace: '(', '' | replace: ')', '' | replace: '-', '' }}"><svg class="rebla-v5__call-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8c1.7 3.4 3.2 4.9 6.6 6.6l2.2-2.2c.3-.3.8-.4 1.2-.2 1.3.5 2.7.8 4.2.8.7 0 1.2.5 1.2 1.2v3.5c0 .7-.5 1.2-1.2 1.2C10.4 21.7 2.3 13.6 2.3 3.2 2.3 2.5 2.8 2 3.5 2H7c.7 0 1.2.5 1.2 1.2 0 1.5.3 2.9.8 4.2.1.4.1.9-.2 1.2z"/></svg><span>{{ section.settings.cta_text }}</span></a>
       <div class="rebla-v5__mobile-actions">
         <button type="button" class="rebla-v5__action"  aria-label="Search" data-rebla-search-trigger aria-expanded="false"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M16.5 16.5L21 21"/></svg></button>
         <a class="rebla-v5__action" href="{{ routes.account_url }}" aria-label="Account"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-5 4-7 8-7s7 2 8 7"/></svg></a>
@@ -565,42 +399,14 @@
   </header>
 
   <div class="rebla-v5__drawer" aria-hidden="true">
+    <div class="rebla-v5__backdrop"></div>
     <aside class="rebla-v5__panel">
-      <div class="rebla-v5__drawer-head">
-        <a class="rebla-v5__drawer-brand" href="{{ routes.root_url }}">
-          {% if section.settings.logo != blank %}{{ section.settings.logo | image_url: width: 360 | image_tag: class: 'rebla-v5__logo', loading: 'lazy', alt: shop.name }}{% else %}<span class="rebla-v5__name">{{ shop.name }}</span>{% endif %}
-        </a>
-        <button class="rebla-v5__close" type="button" aria-label="Close menu">×</button>
-      </div>
-
-      <nav class="rebla-v5__drawer-nav" aria-label="Mobile navigation">
-        <ul class="rebla-v5__drawer-list">
-          {% for link in nav_menu.links %}
-            <li class="rebla-v5__drawer-item{% if link.links != blank %} has-submenu{% endif %}">
-              {% if link.links != blank %}
-                <button class="rebla-v5__drawer-link rebla-v5__submenu-toggle" type="button" aria-expanded="false">
-                  <span>{{ link.title }}</span><span class="rebla-v5__submenu-mark">+</span>
-                </button>
-                <ul class="rebla-v5__drawer-sub">
-                  {% for child in link.links %}
-                    <li><a href="{{ child.url }}">{{ child.title }}</a></li>
-                  {% endfor %}
-                </ul>
-              {% else %}
-                <a class="rebla-v5__drawer-link" href="{{ link.url }}">{{ link.title }}</a>
-              {% endif %}
-            </li>
-          {% endfor %}
-        </ul>
-      </nav>
-
-      <a class="rebla-v5__drawer-phone" href="tel:{{ section.settings.phone | remove: ' ' | remove: '(' | remove: ')' | remove: '-' }}">
-        <span class="rebla-v5__drawer-phone-label">NEED HELP?</span>
-        <span class="rebla-v5__drawer-phone-main">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8c1.7 3.4 3.2 4.9 6.6 6.6l2.2-2.2c.3-.3.8-.4 1.2-.2 1.3.5 2.7.8 4.2.8.7 0 1.2.5 1.2 1.2v3.5c0 .7-.5 1.2-1.2 1.2C10.4 21.7 2.3 13.6 2.3 3.2 2.3 2.5 2.8 2 3.5 2H7c.7 0 1.2.5 1.2 1.2 0 1.5.3 2.9.8 4.2.1.4.1.9-.2 1.2z"/></svg>
-          <span>TOLL FREE {{ section.settings.phone }}</span>
-        </span>
-      </a>
+      <div class="rebla-v5__drawer-head"><strong>Menu</strong><button class="rebla-v5__close" type="button" aria-label="Close menu">×</button></div>
+      <ul class="rebla-v5__drawer-list">
+        {% for link in nav_menu.links %}
+          <li><a href="{{ link.url }}">{{ link.title }}</a>{% if link.links != blank %}<ul class="rebla-v5__drawer-sub">{% for child in link.links %}<li><a href="{{ child.url }}">{{ child.title }}</a></li>{% endfor %}</ul>{% endif %}</li>
+        {% endfor %}
+      </ul>
     </aside>
   </div>
 </div>
@@ -669,17 +475,6 @@ updateDesktopSticky();
     drawer.setAttribute('aria-hidden', String(!open));
     document.documentElement.style.overflow = open ? 'hidden' : '';
   };
-
-
-  root.addEventListener('click', function(event){
-    const toggle = event.target.closest('.rebla-v5__submenu-toggle');
-    if (!toggle) return;
-    event.preventDefault();
-    const item = toggle.closest('.rebla-v5__drawer-item');
-    const open = !item.classList.contains('is-submenu-open');
-    item.classList.toggle('is-submenu-open', open);
-    toggle.setAttribute('aria-expanded', String(open));
-  });
 
   openBtn?.addEventListener('click', () => setDrawer(true));
   closeBtn?.addEventListener('click', () => setDrawer(false));
@@ -806,50 +601,21 @@ updateDesktopSticky();
     to{opacity:1;transform:translateY(0) scale(1)}
   }
 }
-
-
 </style>
 
 
 
 
-
-
-
 <script>
-(function(){
-  const root = document.getElementById('ReblaV5-{{ section.id }}');
-  if (!root || root.dataset.mobileDrawerReady === 'true') return;
-  root.dataset.mobileDrawerReady = 'true';
-
-  const drawer = root.querySelector('.rebla-v5__drawer');
+document.addEventListener('click', function(event){
+  const button = event.target.closest('#ReblaV5-{{ section.id }} .rebla-v5__hamburger');
+  if (!button) return;
+  const drawer = document.querySelector('#ReblaV5-{{ section.id }} .rebla-v5__drawer');
   if (!drawer) return;
-
-  function setMobileDrawer(open){
-    drawer.classList.toggle('is-open', open);
-    drawer.setAttribute('aria-hidden', open ? 'false' : 'true');
-    document.documentElement.style.overflow = open ? 'hidden' : '';
-  }
-
-  root.addEventListener('click', function(event){
-    if (event.target.closest('.rebla-v5__hamburger')) {
-      event.preventDefault();
-      setMobileDrawer(true);
-      return;
-    }
-    if (event.target.closest('.rebla-v5__close') || event.target.closest('.rebla-v5__backdrop')) {
-      event.preventDefault();
-      event.stopPropagation();
-      setMobileDrawer(false);
-    }
-  });
-
-  document.addEventListener('keydown', function(event){
-    if (event.key === 'Escape' && drawer.classList.contains('is-open')) {
-      setMobileDrawer(false);
-    }
-  });
-})();
+  drawer.classList.add('is-open');
+  drawer.setAttribute('aria-hidden','false');
+  document.documentElement.style.overflow = 'hidden';
+});
 </script>
 
 {% schema %}
