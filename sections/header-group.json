@@ -133,6 +133,8 @@
       "type": "rebla-header",
       "name": "Rebla Header",
       "settings": {
+        "menu_offset_x": -250,
+        "icons_right_spacing": 120,
         "logo": "shopify://shop_images/Untitled_design_2.png",
         "logo_width": 180,
         "menu": "main-menu",
