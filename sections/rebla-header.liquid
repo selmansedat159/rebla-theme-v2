@@ -113,7 +113,7 @@
   #shopify-section-{{ section.id }}{
     position:relative;
     z-index:1000;
-    height:0;
+    height:auto;
     overflow:visible;
   }
 
@@ -121,8 +121,8 @@
     --rh-blue:{{ section.settings.cta_background }};
     --rh-text:#081a33;
     --rh-radius:16px;
-    width:min(calc(100% - 7.5vw), 1410px);
-    margin:28px auto 0;
+    width:100%;
+    margin:0;
     font-family:inherit;
     color:var(--rh-text);
     position:relative;
@@ -154,8 +154,8 @@
     gap:28px;
     padding:0 34px 0 48px;
     background:#fff;
-    border-radius:var(--rh-radius);
-    box-shadow:0 14px 38px rgba(8,26,51,.10);
+    border-radius:0;
+    box-shadow:0 1px 0 rgba(8,26,51,.10);
     transition:height .22s ease,border-radius .22s ease,box-shadow .22s ease;
   }
 
@@ -226,8 +226,8 @@
 
   @media (max-width:989px){
     #shopify-section-{{ section.id }}{height:auto}
-    #ReblaHeader-{{ section.id }}{width:calc(100% - 24px);margin:12px auto 0}
-    #ReblaHeader-{{ section.id }} .rh-header{height:72px;grid-template-columns:1fr auto auto;padding:0 18px;border-radius:13px}
+    #ReblaHeader-{{ section.id }}{width:100%;margin:0}
+    #ReblaHeader-{{ section.id }} .rh-header{height:72px;grid-template-columns:1fr auto auto;padding:0 18px;border-radius:0}
     #ReblaHeader-{{ section.id }} .rh-logo{width:min({{ logo_width }}px,135px)}
     #ReblaHeader-{{ section.id }} .rh-nav,#ReblaHeader-{{ section.id }} .rh-call,#ReblaHeader-{{ section.id }} .rh-actions .rh-icon:not(.rh-cart){display:none}
     #ReblaHeader-{{ section.id }} .rh-actions{gap:12px}
