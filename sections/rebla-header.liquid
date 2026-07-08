@@ -434,7 +434,10 @@
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8c1.7 3.4 3.2 4.9 6.6 6.6l2.2-2.2c.3-.3.8-.4 1.2-.2 1.3.5 2.7.8 4.2.8.7 0 1.2.5 1.2 1.2v3.5c0 .7-.5 1.2-1.2 1.2C10.4 21.7 2.3 13.6 2.3 3.2 2.3 2.5 2.8 2 3.5 2H7c.7 0 1.2.5 1.2 1.2 0 1.5.3 2.9.8 4.2.1.4.1.9-.2 1.2z"/></svg>
           <strong>{{ section.settings.cta_text }}</strong>
         </a>
-        <a class="rebla-v5__drawer-email" href="mailto:support@reblawater.com">support@reblawater.com</a>
+        <a class="rebla-v5__drawer-email" href="mailto:support@reblawater.com">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6.5h18v11H3zM3.5 7l8.5 6 8.5-6"/></svg>
+          <strong>support@reblawater.com</strong>
+        </a>
       </div>
     </aside>
   </div>
@@ -893,6 +896,79 @@ document.addEventListener('click', function(e){
     font-size:12px;
     font-weight:650;
     letter-spacing:.01em;
+  }
+}
+</style>
+
+
+<style>
+@media(max-width:749px){
+  /* Mobil logo büyüt */
+  .rebla-v5__mobile-main{
+    grid-template-columns:40px 112px minmax(0,1fr) auto;
+  }
+  .rebla-v5__mobile .rebla-v5__logo{
+    max-width:112px;
+    max-height:50px;
+  }
+
+  /* Mobil aramayı kaldır */
+  .rebla-v5__mobile-actions .rebla-v5__icon-btn[aria-label="Search"],
+  .rebla-v5__mobile-actions a[href*="/search"],
+  .rebla-v5__mobile-actions button[class*="search"],
+  .rebla-v5__mobile-actions .search-modal__toggle{
+    display:none!important;
+  }
+
+  /* Telefon ikonunu diğer header ikonlarıyla aynı çizgisel stile getir */
+  .rebla-v5__mobile-phone{
+    width:42px;
+    height:42px;
+    display:grid;
+    place-items:center;
+    border:0;
+    background:transparent;
+    color:var(--ink);
+  }
+  .rebla-v5__mobile-phone svg{
+    width:22px;
+    height:22px;
+    fill:none!important;
+    stroke:currentColor;
+    stroke-width:1.65;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+  }
+
+  /* Menü ayraçlarını uzat ve belirginleştir */
+  .rebla-v5__drawer-list>li+li:before{
+    width:120px;
+    height:1px;
+    background:rgba(10,27,51,.18);
+  }
+
+  /* Mail satırını telefonla aynı hiyerarşiye getir */
+  .rebla-v5__drawer-email{
+    margin-top:12px;
+    display:inline-flex!important;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    color:var(--ink)!important;
+  }
+  .rebla-v5__drawer-email svg{
+    width:21px;
+    height:21px;
+    color:var(--blue);
+    fill:none;
+    stroke:currentColor;
+    stroke-width:1.8;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+  }
+  .rebla-v5__drawer-email strong{
+    font-size:15px;
+    font-weight:800;
   }
 }
 </style>
