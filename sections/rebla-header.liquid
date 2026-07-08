@@ -111,8 +111,7 @@
 
 <style>
   #shopify-section-{{ section.id }}{
-    position:sticky;
-    top:0;
+    position:relative;
     z-index:1000;
     height:0;
     overflow:visible;
@@ -130,6 +129,22 @@
   }
 
   #ReblaHeader-{{ section.id }} *{box-sizing:border-box}
+
+  #ReblaHeader-{{ section.id }}.is-sticky{
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    width:100%;
+    margin:0;
+    z-index:10000;
+  }
+
+  #ReblaHeader-{{ section.id }}.is-sticky .rh-header{
+    border-radius:0;
+    box-shadow:0 8px 24px rgba(8,26,51,.12);
+  }
+
 
   #ReblaHeader-{{ section.id }} .rh-header{
     height:106px;
@@ -236,6 +251,15 @@
   const searchPanel = root.querySelector('.rh-search-panel');
   const menuToggle = root.querySelector('.rh-menu-toggle');
   const drawer = root.querySelector('.rh-mobile-drawer');
+
+  const stickyStart = root.getBoundingClientRect().top + window.scrollY;
+
+  const updateSticky = () => {
+    root.classList.toggle('is-sticky', window.scrollY > stickyStart);
+  };
+
+  window.addEventListener('scroll', updateSticky, { passive: true });
+  updateSticky();
 
   searchToggle?.addEventListener('click', () => {
     searchPanel.hidden = !searchPanel.hidden;
