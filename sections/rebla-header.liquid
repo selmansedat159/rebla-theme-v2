@@ -45,7 +45,7 @@
   .rebla-v5__badge{position:absolute;top:1px;right:-2px;min-width:18px;height:18px;padding:0 5px;border-radius:20px;background:var(--blue);color:#fff;display:grid;place-items:center;font-size:10px;font-weight:800}
   .rebla-v5__mega{position:absolute;left:0;right:0;top:100%;padding:16px 24px 0;background:#fff;border-top:1px solid var(--line);box-shadow:0 24px 55px rgba(10,27,51,.13);opacity:0;visibility:hidden;transform:translateY(8px);transition:.18s ease}
   .rebla-v5__item:hover .rebla-v5__mega,.rebla-v5__item:focus-within .rebla-v5__mega{opacity:1;visibility:visible;transform:none}
-  .rebla-v5__mega-inner{width:min(100%,1440px);margin:auto;display:grid;grid-template-columns:240px minmax(0,1fr);gap:26px;padding-bottom:18px}
+  .rebla-v5__mega-inner{width:min(100%,1440px);margin:auto;display:grid;grid-template-columns:370px minmax(0, 1fr) 250px;gap:26px;padding-bottom:18px}
   .rebla-v5__promo,.rebla-v5__trust{background:var(--soft);border-radius:14px;overflow:hidden}
   .rebla-v5__promo{min-height:270px;padding:24px;display:flex;flex-direction:column;justify-content:space-between;background-size:cover;background-position:center bottom}
   .rebla-v5__promo h3{max-width:165px;margin:0;font-size:22px;line-height:1.15;font-weight:800;letter-spacing:-.03em}
@@ -193,11 +193,7 @@
     .rebla-v5__main-inner{grid-template-columns:170px 1fr auto;gap:20px}
     .rebla-v5__menu{gap:22px}
     .rebla-v5__link{font-size:13px}
-    .rebla-v5__mega-inner{grid-template-columns:190px 1fr}
-    .rebla-v5__trust{display:none}
-    .rebla-v5__mega-inner{grid-template-columns:210px 1fr}
-    .rebla-v5__featurebar-inner{grid-template-columns:repeat(2,1fr)}
-    .rebla-v5__feature:nth-child(3){border-left:0;border-top:1px solid var(--line)}
+    .rebla-v5__mega-inner{grid-template-columns:370px minmax(0, 1fr) 250px;border-top:1px solid var(--line)}
     .rebla-v5__feature:nth-child(4){border-top:1px solid var(--line)}
   }
 
@@ -323,6 +319,22 @@
     color:#66758a;
     font-size:12px;
     line-height:1.4;
+  }
+
+
+  .rebla-v5__mega-inner{
+    grid-template-columns:370px minmax(0,1fr) 250px !important;
+    align-items:stretch;
+  }
+  .rebla-v5__columns{
+    grid-column:2;
+    min-width:0;
+  }
+  .rebla-v5__benefits-rail{
+    grid-column:3;
+    grid-row:1;
+    min-width:0;
+    align-self:stretch;
   }
 
 </style>
@@ -1373,7 +1385,7 @@ document.addEventListener('DOMContentLoaded', function(){
 <style>
 @media (min-width: 750px) {
   #ReblaV5-{{ section.id }} .rebla-v5__mega-inner{
-    grid-template-columns:25% 75%!important;
+    grid-template-columns:370px minmax(0, 1fr) 250px;
     gap:0!important;
   }
 
