@@ -303,7 +303,7 @@
                   <div class="rebla-v5__mega">
                     <div class="rebla-v5__mega-inner">
                       <div class="rebla-v5__promo"{% if section.settings.mega_image != blank %} style="background-image:linear-gradient(to bottom,rgba(247,248,250,.98),rgba(247,248,250,.70) 48%,rgba(247,248,250,.04)),url('{{ section.settings.mega_image | image_url: width: 700 }}')"{% endif %}>
-                        <h3>{{ section.settings.mega_heading }}</h3>
+                        <h3>{{ section.settings.mega_heading | replace: 'Premium water, from the first drop to the last.', 'Premium water,<br>from the first drop<br>to the last.' }}</h3>
                         <a class="rebla-v5__blue-link" href="{{ section.settings.mega_link | default: link.url }}">Shop System →</a>
                       </div>
                       <div class="rebla-v5__columns">
@@ -314,10 +314,10 @@
                             case forloop.index
                               when 1
                                 assign category_description = 'Complete reverse osmosis systems'
-                                assign category_cta = 'Shop Systems →'
+                                assign category_cta = 'View All →'
                               when 2
                                 assign category_description = 'Genuine replacement filter packs'
-                                assign category_cta = 'Shop Filters →'
+                                assign category_cta = 'View All →'
                               when 3
                                 assign category_description = 'Faucets, tanks and replacement parts'
                                 assign category_cta = 'Shop Parts →'
@@ -414,7 +414,7 @@
                   <div class="rebla-v5__mega rebla-v5__sticky-mega">
                     <div class="rebla-v5__mega-inner">
                       <div class="rebla-v5__promo"{% if section.settings.mega_image != blank %} style="background-image:linear-gradient(to bottom,rgba(247,248,250,.98),rgba(247,248,250,.70) 48%,rgba(247,248,250,.04)),url('{{ section.settings.mega_image | image_url: width: 700 }}')"{% endif %}>
-                        <h3>{{ section.settings.mega_heading }}</h3>
+                        <h3>{{ section.settings.mega_heading | replace: 'Premium water, from the first drop to the last.', 'Premium water,<br>from the first drop<br>to the last.' }}</h3>
                         <a class="rebla-v5__blue-link" href="{{ section.settings.mega_link | default: link.url }}">Shop System →</a>
                       </div>
                       <div class="rebla-v5__columns">
@@ -425,10 +425,10 @@
                             case forloop.index
                               when 1
                                 assign category_description = 'Complete reverse osmosis systems'
-                                assign category_cta = 'Shop Systems →'
+                                assign category_cta = 'View All →'
                               when 2
                                 assign category_description = 'Genuine replacement filter packs'
-                                assign category_cta = 'Shop Filters →'
+                                assign category_cta = 'View All →'
                               when 3
                                 assign category_description = 'Faucets, tanks and replacement parts'
                                 assign category_cta = 'Shop Parts →'
