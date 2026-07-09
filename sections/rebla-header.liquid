@@ -337,6 +337,72 @@
     align-self:stretch;
   }
 
+
+  /* V13 — compact premium Shop mega menu */
+  .rebla-v5__mega-inner{
+    grid-template-columns:320px minmax(0,1fr) 280px !important;
+    gap:22px !important;
+    padding-bottom:14px !important;
+    align-items:stretch;
+  }
+
+  .rebla-v5__promo{
+    min-height:250px !important;
+  }
+
+  .rebla-v5__columns{
+    grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+    align-items:stretch;
+  }
+
+  .rebla-v5__column{
+    padding:14px 22px !important;
+    border-left:0 !important;
+    position:relative;
+  }
+
+  .rebla-v5__column + .rebla-v5__column::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:14px;
+    bottom:14px;
+    width:1px;
+    background:var(--line);
+  }
+
+  .rebla-v5__benefits-rail{
+    background:#F7F9FC;
+    border-left:0 !important;
+    border-radius:12px;
+    padding:22px 20px !important;
+    gap:18px !important;
+    justify-content:center;
+  }
+
+  .rebla-v5__benefit{
+    grid-template-columns:32px 1fr !important;
+    gap:11px !important;
+  }
+
+  .rebla-v5__benefit-icon{
+    width:32px !important;
+    height:32px !important;
+  }
+
+  .rebla-v5__benefit-icon svg{
+    width:25px !important;
+    height:25px !important;
+  }
+
+  .rebla-v5__benefit strong{
+    font-size:14px !important;
+  }
+
+  .rebla-v5__benefit span{
+    font-size:12px !important;
+  }
+
 </style>
 
 <div class="rebla-v5" id="ReblaV5-{{ section.id }}">
