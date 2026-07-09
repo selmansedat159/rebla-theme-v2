@@ -304,7 +304,9 @@
                     <div class="rebla-v5__mega-inner">
                       <div class="rebla-v5__promo"{% if section.settings.mega_image != blank %} style="background-image:linear-gradient(to bottom,rgba(247,248,250,.98),rgba(247,248,250,.70) 48%,rgba(247,248,250,.04)),url('{{ section.settings.mega_image | image_url: width: 700 }}')"{% endif %}>
                         <h3>{{ section.settings.mega_heading | replace: 'Premium water, from the first drop to the last.', 'Premium water,<br>from the first drop<br>to the last.' }}</h3>
-                        
+                        {% if section.settings.mega_link != blank %}
+                          <a class="rebla-v5__promo-link" href="{{ section.settings.mega_link }}">Explore →</a>
+                        {% endif %}
                       </div>
                       <div class="rebla-v5__columns">
                         {% for child in link.links limit: 3 %}
@@ -415,7 +417,9 @@
                     <div class="rebla-v5__mega-inner">
                       <div class="rebla-v5__promo"{% if section.settings.mega_image != blank %} style="background-image:linear-gradient(to bottom,rgba(247,248,250,.98),rgba(247,248,250,.70) 48%,rgba(247,248,250,.04)),url('{{ section.settings.mega_image | image_url: width: 700 }}')"{% endif %}>
                         <h3>{{ section.settings.mega_heading | replace: 'Premium water, from the first drop to the last.', 'Premium water,<br>from the first drop<br>to the last.' }}</h3>
-                        
+                        {% if section.settings.mega_link != blank %}
+                          <a class="rebla-v5__promo-link" href="{{ section.settings.mega_link }}">Explore →</a>
+                        {% endif %}
                       </div>
                       <div class="rebla-v5__columns">
                         {% for child in link.links limit: 3 %}
@@ -1357,6 +1361,22 @@ document.addEventListener('DOMContentLoaded', function(){
     min-height:76px;
   }
 }
+</style>
+
+
+<style>
+  .rebla-v5__promo-link {
+    position: absolute;
+    left: 24px;
+    bottom: 24px;
+    z-index: 2;
+    color: #1268f3;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1;
+    text-decoration: none;
+  }
+  .rebla-v5__promo-link:hover { text-decoration: underline; }
 </style>
 
 {% schema %}
