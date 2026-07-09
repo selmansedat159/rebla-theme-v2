@@ -287,17 +287,25 @@
                       </div>
                       <div class="rebla-v5__columns">
                         {% for child in link.links limit: 3 %}
+                          {% liquid
+                            assign category_description = ''
+                            assign category_cta = 'Shop Now'
+                            case forloop.index
+                              when 1
+                                assign category_description = 'Complete reverse osmosis systems'
+                                assign category_cta = 'Shop Systems →'
+                              when 2
+                                assign category_description = 'Genuine replacement filter packs'
+                                assign category_cta = 'Shop Filters →'
+                              when 3
+                                assign category_description = 'Faucets, tanks and replacement parts'
+                                assign category_cta = 'Shop Parts →'
+                            endcase
+                          %}
                           <div class="rebla-v5__column">
                             <h3>{{ child.title }}</h3>
-                            <ul>
-                              {% if child.links != blank %}
-                                {% for grandchild in child.links limit: 6 %}
-                                  <li><a href="{{ grandchild.url }}">{{ grandchild.title }}</a></li>
-                                {% endfor %}
-                              {% else %}
-                                <li><a href="{{ child.url }}">{{ child.title }}</a></li>
-                              {% endif %}
-                            </ul>
+                            <p class="rebla-v5__category-desc">{{ category_description }}</p>
+                            <a class="rebla-v5__category-link" href="{{ child.url }}">{{ category_cta }}</a>
                           </div>
                         {% endfor %}
                       </div>
@@ -368,17 +376,25 @@
                       </div>
                       <div class="rebla-v5__columns">
                         {% for child in link.links limit: 3 %}
+                          {% liquid
+                            assign category_description = ''
+                            assign category_cta = 'Shop Now'
+                            case forloop.index
+                              when 1
+                                assign category_description = 'Complete reverse osmosis systems'
+                                assign category_cta = 'Shop Systems →'
+                              when 2
+                                assign category_description = 'Genuine replacement filter packs'
+                                assign category_cta = 'Shop Filters →'
+                              when 3
+                                assign category_description = 'Faucets, tanks and replacement parts'
+                                assign category_cta = 'Shop Parts →'
+                            endcase
+                          %}
                           <div class="rebla-v5__column">
                             <h3>{{ child.title }}</h3>
-                            <ul>
-                              {% if child.links != blank %}
-                                {% for grandchild in child.links limit: 6 %}
-                                  <li><a href="{{ grandchild.url }}">{{ grandchild.title }}</a></li>
-                                {% endfor %}
-                              {% else %}
-                                <li><a href="{{ child.url }}">{{ child.title }}</a></li>
-                              {% endif %}
-                            </ul>
+                            <p class="rebla-v5__category-desc">{{ category_description }}</p>
+                            <a class="rebla-v5__category-link" href="{{ child.url }}">{{ category_cta }}</a>
                           </div>
                         {% endfor %}
                       </div>
