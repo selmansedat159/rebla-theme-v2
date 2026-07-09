@@ -1,4 +1,4 @@
-raw_code = """{% comment %}
+{% comment %}
   REBLA HEADER V5
   Premium desktop + sticky + mobile header
 {% endcomment %}
@@ -293,7 +293,7 @@ raw_code = """{% comment %}
     display:flex;
     flex-direction:column;
     justify-content:center;
-    gap:22px;
+    gap:28px;
     box-sizing:border-box;
   }
   .rebla-v5__benefit{
@@ -414,43 +414,6 @@ raw_code = """{% comment %}
   .rebla-v5__benefit span{
     font-size:12px !important;
   }
-  
-  /* PREMIUM OPTIMIZATION FOR BENEFITS RAIL */
-  @media (min-width: 750px) {
-    #ReblaV5-{{ section.id }} .rebla-v5__benefits-rail {
-      background: #ffffff !important;
-      padding: 14px 0 14px 24px !important;
-      border-radius: 0 !important;
-      gap: 20px !important;
-      border-left: 1px solid rgba(10, 27, 51, 0.08) !important; 
-    }
-    #ReblaV5-{{ section.id }} .rebla-v5__benefit-icon {
-      width: 24px !important;
-      height: 24px !important;
-      color: #0B1C32 !important;
-      opacity: 0.8;
-    }
-    #ReblaV5-{{ section.id }} .rebla-v5__benefit-icon svg {
-      width: 22px !important;
-      height: 22px !important;
-    }
-    #ReblaV5-{{ section.id }} .rebla-v5__benefit {
-      grid-template-columns: 24px 1fr !important;
-      gap: 12px !important;
-      align-items: center !important; 
-    }
-    #ReblaV5-{{ section.id }} .rebla-v5__benefit strong {
-      font-size: 13.5px !important;
-      font-weight: 700 !important;
-      color: #0B1C32 !important;
-      margin-bottom: 1px !important;
-    }
-    #ReblaV5-{{ section.id }} .rebla-v5__benefit span {
-      font-size: 11.5px !important;
-      font-weight: 500 !important;
-      color: #66758a !important;
-    }
-  }
 </style>
 
 <div class="rebla-v5" id="ReblaV5-{{ section.id }}">
@@ -522,7 +485,7 @@ raw_code = """{% comment %}
                           <span class="rebla-v5__benefit-icon">
                             <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M7.5 14.5v-5l3 5v-5M13 14.5v-5h3.5M13 12h3"/></svg>
                           </span>
-                          <div><strong>NSF Certified</strong><span>Tested. Trusted. Certified.</span></div>
+                          <div><strong>NSF Certified Components</strong><span>Tested. Trusted. Certified.</span></div>
                         </div>
                       </div>
                     </div>
@@ -631,7 +594,7 @@ raw_code = """{% comment %}
                           <span class="rebla-v5__benefit-icon">
                             <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M7.5 14.5v-5l3 5v-5M13 14.5v-5h3.5M13 12h3"/></svg>
                           </span>
-                          <div><strong>NSF Certified</strong><span>Tested. Trusted. Certified.</span></div>
+                          <div><strong>NSF Certified Components</strong><span>Tested. Trusted. Certified.</span></div>
                         </div>
                       </div>
                     </div>
@@ -1599,8 +1562,29 @@ document.addEventListener('DOMContentLoaded', function(){
     }
   ]
 }
-{% endschema %}"""
+{% endschema %}
 
-with open("rebla-header-v5-optimized.liquid", "w", encoding="utf-8") as f:
-    f.write(raw_code)
-print("File successfully generated.")
+<style>
+@media (min-width: 990px){
+  .rebla-v5__benefits-rail{
+    width:250px !important;
+    height:260px !important;
+    padding:24px 20px !important;
+    margin-left:auto !important;
+    margin-right:0 !important;
+    gap:28px !important;
+    justify-self:end !important;
+  }
+
+  .rebla-v5__benefit{
+    border:0 !important;
+    padding:0 !important;
+  }
+
+  .rebla-v5__benefit::before,
+  .rebla-v5__benefit::after{
+    display:none !important;
+    content:none !important;
+  }
+}
+</style>
