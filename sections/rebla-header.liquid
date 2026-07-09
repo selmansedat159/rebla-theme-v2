@@ -28,8 +28,7 @@
   .rebla-v5__name{font-size:28px;font-weight:800;letter-spacing:-.03em}
   .rebla-v5__nav{justify-self:start;min-width:0}
   .rebla-v5__menu{list-style:none;margin:0;padding:0;display:flex;align-items:center;gap:clamp(24px,2.2vw,40px)}
-  .rebla-v5__item{position:relative}
-  .rebla-v5__item--mega{position:static}
+  .rebla-v5__item{position:static}
   .rebla-v5__link{min-height:100px;display:flex;align-items:center;gap:9px;font-size:15px;font-weight:650;white-space:nowrap;border-bottom:2px solid transparent}
   .rebla-v5__item:hover>.rebla-v5__link,.rebla-v5__item:focus-within>.rebla-v5__link{color:var(--blue);border-bottom-color:var(--blue)}
   .rebla-v5__chev{width:7px;height:7px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg) translateY(-2px)}
@@ -46,11 +45,6 @@
   .rebla-v5__badge{position:absolute;top:1px;right:-2px;min-width:18px;height:18px;padding:0 5px;border-radius:20px;background:var(--blue);color:#fff;display:grid;place-items:center;font-size:10px;font-weight:800}
   .rebla-v5__mega{position:absolute;left:0;right:0;top:100%;padding:16px 24px 0;background:#fff;border-top:1px solid var(--line);box-shadow:0 24px 55px rgba(10,27,51,.13);opacity:0;visibility:hidden;transform:translateY(8px);transition:.18s ease}
   .rebla-v5__item:hover .rebla-v5__mega,.rebla-v5__item:focus-within .rebla-v5__mega{opacity:1;visibility:visible;transform:none}
-  .rebla-v5__dropdown{position:absolute;top:100%;min-width:220px;width:max-content;max-width:300px;padding:10px;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 18px 45px rgba(10,27,51,.14);opacity:0;visibility:hidden;transform:translateY(8px);transition:.18s ease;z-index:95}
-  .rebla-v5__item:hover>.rebla-v5__dropdown,.rebla-v5__item:focus-within>.rebla-v5__dropdown{opacity:1;visibility:visible;transform:none}
-  .rebla-v5__dropdown-list{list-style:none;margin:0;padding:0}
-  .rebla-v5__dropdown-link{display:block;padding:11px 12px;border-radius:8px;font-size:13px;font-weight:650;line-height:1.3;white-space:nowrap}
-  .rebla-v5__dropdown-link:hover{color:var(--blue);background:var(--soft)}
   .rebla-v5__mega-inner{width:min(100%,1440px);margin:auto;display:grid;grid-template-columns:240px minmax(0,1fr);gap:26px;padding-bottom:18px}
   .rebla-v5__promo,.rebla-v5__trust{background:var(--soft);border-radius:14px;overflow:hidden}
   .rebla-v5__promo{min-height:270px;padding:24px;display:flex;flex-direction:column;justify-content:space-between;background-size:cover;background-position:center bottom}
@@ -93,8 +87,7 @@
 
   /* Sticky header mega menu */
   .rebla-v5__sticky-nav{position:static;min-width:0}
-  .rebla-v5__sticky .rebla-v5__item{position:relative}
-  .rebla-v5__sticky .rebla-v5__item--mega{position:static}
+  .rebla-v5__sticky .rebla-v5__item{position:static}
   .rebla-v5__sticky .rebla-v5__sticky-mega{
     position:absolute;
     top:calc(100% + 10px);
@@ -138,6 +131,49 @@
       justify-self:end;
       margin-right:0;
     }
+  }
+
+
+  /* First top-level menu item = mega menu; all others = classic dropdown */
+  .rebla-v5__dropdown{
+    position:absolute;
+    top:100%;
+    left:0;
+    z-index:102;
+    min-width:230px;
+    width:max-content;
+    max-width:320px;
+    padding:10px;
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:12px;
+    box-shadow:0 18px 42px rgba(10,27,51,.14);
+    opacity:0;
+    visibility:hidden;
+    transform:translateY(8px);
+    transition:.18s ease;
+  }
+  .rebla-v5__dropdown ul{list-style:none;margin:0;padding:0}
+  .rebla-v5__dropdown a{
+    display:block;
+    padding:11px 13px;
+    border-radius:8px;
+    font-size:13px;
+    font-weight:650;
+    line-height:1.25;
+    white-space:nowrap;
+  }
+  .rebla-v5__dropdown a:hover{background:var(--soft);color:var(--blue)}
+  .rebla-v5__item--dropdown{position:relative}
+  .rebla-v5__item--dropdown:hover>.rebla-v5__dropdown,
+  .rebla-v5__item--dropdown:focus-within>.rebla-v5__dropdown{
+    opacity:1;
+    visibility:visible;
+    transform:none;
+  }
+
+  .rebla-v5__sticky .rebla-v5__dropdown{
+    top:calc(100% + 10px);
   }
 
   .rebla-v5__mobile,.rebla-v5__drawer{display:none}
@@ -237,66 +273,44 @@
       <nav class="rebla-v5__nav" aria-label="Main navigation">
         <ul class="rebla-v5__menu">
           {% for link in nav_menu.links %}
-            <li class="rebla-v5__item{% if link.title | handleize == 'shop' %} rebla-v5__item--mega{% endif %}">
+            <li class="rebla-v5__item{% unless forloop.first %} rebla-v5__item--dropdown{% endunless %}">
               <a class="rebla-v5__link" href="{{ link.url }}">{{ link.title }}{% if link.links != blank %}<span class="rebla-v5__chev"></span>{% endif %}</a>
-              {% if link.links != blank %}
-                {% if link.title | handleize == 'shop' %}
-                  <div class="rebla-v5__mega">
-                  <div class="rebla-v5__mega-inner">
-                    <div class="rebla-v5__promo"{% if section.settings.mega_image != blank %} style="background-image:linear-gradient(to bottom,rgba(247,248,250,.98),rgba(247,248,250,.70) 48%,rgba(247,248,250,.04)),url('{{ section.settings.mega_image | image_url: width: 700 }}')"{% endif %}>
-                      <h3>{{ section.settings.mega_heading }}</h3>
-                      <a class="rebla-v5__blue-link" href="{{ section.settings.mega_link | default: link.url }}">Shop System →</a>
-                    </div>
 
-                    <div class="rebla-v5__columns">
-                      {% for child in link.links limit: 3 %}
-                        <div class="rebla-v5__column">
-                          <h3>{{ child.title }}</h3>
-                          <ul>
-                            {% if child.links != blank %}
-                              {% for grandchild in child.links limit: 6 %}
-                                <li><a href="{{ grandchild.url }}">{{ grandchild.title }}</a></li>
-                              {% endfor %
+              {% if link.links != blank %}
+                {% if forloop.first %}
+                  <div class="rebla-v5__mega">
+                    <div class="rebla-v5__mega-inner">
+                      <div class="rebla-v5__promo"{% if section.settings.mega_image != blank %} style="background-image:linear-gradient(to bottom,rgba(247,248,250,.98),rgba(247,248,250,.70) 48%,rgba(247,248,250,.04)),url('{{ section.settings.mega_image | image_url: width: 700 }}')"{% endif %}>
+                        <h3>{{ section.settings.mega_heading }}</h3>
+                        <a class="rebla-v5__blue-link" href="{{ section.settings.mega_link | default: link.url }}">Shop System →</a>
+                      </div>
+                      <div class="rebla-v5__columns">
+                        {% for child in link.links limit: 3 %}
+                          <div class="rebla-v5__column">
+                            <h3>{{ child.title }}</h3>
+                            <ul>
+                              {% if child.links != blank %}
+                                {% for grandchild in child.links limit: 6 %}
+                                  <li><a href="{{ grandchild.url }}">{{ grandchild.title }}</a></li>
+                                {% endfor %}
+                              {% else %}
+                                <li><a href="{{ child.url }}">{{ child.title }}</a></li>
+                              {% endif %}
+                            </ul>
+                          </div>
+                        {% endfor %}
+                      </div>
+                    </div>
+                  </div>
                 {% else %}
                   <div class="rebla-v5__dropdown">
-                    <ul class="rebla-v5__dropdown-list">
+                    <ul>
                       {% for child in link.links %}
-                        <li><a class="rebla-v5__dropdown-link" href="{{ child.url }}">{{ child.title }}</a></li>
+                        <li><a href="{{ child.url }}">{{ child.title }}</a></li>
                       {% endfor %}
                     </ul>
                   </div>
                 {% endif %}
-              {% endif %}
-            </li>
-          {% endfor %}
-                            {% else %}
-                              <li><a href="{{ child.url }}">Explore {{ child.title }}</a></li>
-                              <li><a href="{{ child.url }}">Learn more</a></li>
-                            {% endif %}
-                          </ul>
-                          <a class="rebla-v5__blue-link" href="{{ child.url }}">View All →</a>
-                        </div>
-                      {% endfor %}
-                    </div>
-
-                  </div>
-
-                  <div class="rebla-v5__featurebar">
-                    <div class="rebla-v5__featurebar-inner">
-                      <div class="rebla-v5__feature"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-  <path d="M12 2.8l2.1 1.5 2.6-.2.8 2.5 2.2 1.5-.9 2.5.9 2.5-2.2 1.5-.8 2.5-2.6-.2L12 18.4l-2.1-1.5-2.6.2-.8-2.5-2.2-1.5.9-2.5-.9-2.5 2.2-1.5.8-2.5 2.6.2L12 2.8z"/>
-  <path d="M8.4 10.8l2.3 2.3 4.9-5"/>
-  <path d="M9.2 17.2L8.5 22l3.5-2 3.5 2-.7-4.8"/>
-</svg><div><strong>2-Year Warranty</strong><small>Built for lasting confidence</small></div></div>
-                      <div class="rebla-v5__feature"><svg viewBox="0 0 24 24"><path d="M12 3s6 6 6 11a6 6 0 1 1-12 0c0-5 6-11 6-11z"/></svg><div><strong>Removes 1,000+ Contaminants</strong><small>Powerful purification</small></div></div>
-                      <div class="rebla-v5__feature"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-  <path d="M12 3l7 3v5c0 4.6-2.8 8-7 10-4.2-2-7-5.4-7-10V6l7-3z"/>
-  <path d="M8.5 12l2.2 2.2 4.8-5"/>
-</svg><div><strong>NSF Certified Components</strong><small>Certified quality you can trust</small></div></div>
-                      <div class="rebla-v5__feature"><svg viewBox="0 0 24 24"><path d="M3 5h18v14H3zM3 9h18M7 5v14M11 5v14"/></svg><div><strong>All-in-One System</strong><small>Compact. Complete. Convenient.</small></div></div>
-                    </div>
-                  </div>
-                </div>
               {% endif %}
             </li>
           {% endfor %}
@@ -340,56 +354,44 @@
       <nav class="rebla-v5__sticky-nav" aria-label="Sticky navigation">
         <ul class="rebla-v5__menu">
           {% for link in nav_menu.links %}
-            <li class="rebla-v5__item{% if link.title | handleize == 'shop' %} rebla-v5__item--mega{% endif %}">
+            <li class="rebla-v5__item{% unless forloop.first %} rebla-v5__item--dropdown{% endunless %}">
               <a class="rebla-v5__link" href="{{ link.url }}">{{ link.title }}{% if link.links != blank %}<span class="rebla-v5__chev"></span>{% endif %}</a>
+
               {% if link.links != blank %}
-                {% if link.title | handleize == 'shop' %}
+                {% if forloop.first %}
                   <div class="rebla-v5__mega rebla-v5__sticky-mega">
-                  <div class="rebla-v5__mega-inner">
-                    <div class="rebla-v5__promo"{% if section.settings.mega_image != blank %} style="background-image:linear-gradient(to bottom,rgba(247,248,250,.98),rgba(247,248,250,.70) 48%,rgba(247,248,250,.04)),url('{{ section.settings.mega_image | image_url: width: 700 }}')"{% endif %}>
-                      <h3>{{ section.settings.mega_heading }}</h3>
-                      <a class="rebla-v5__blue-link" href="{{ section.settings.mega_link | default: link.url }}">Shop System →</a>
+                    <div class="rebla-v5__mega-inner">
+                      <div class="rebla-v5__promo"{% if section.settings.mega_image != blank %} style="background-image:linear-gradient(to bottom,rgba(247,248,250,.98),rgba(247,248,250,.70) 48%,rgba(247,248,250,.04)),url('{{ section.settings.mega_image | image_url: width: 700 }}')"{% endif %}>
+                        <h3>{{ section.settings.mega_heading }}</h3>
+                        <a class="rebla-v5__blue-link" href="{{ section.settings.mega_link | default: link.url }}">Shop System →</a>
+                      </div>
+                      <div class="rebla-v5__columns">
+                        {% for child in link.links limit: 3 %}
+                          <div class="rebla-v5__column">
+                            <h3>{{ child.title }}</h3>
+                            <ul>
+                              {% if child.links != blank %}
+                                {% for grandchild in child.links limit: 6 %}
+                                  <li><a href="{{ grandchild.url }}">{{ grandchild.title }}</a></li>
+                                {% endfor %}
+                              {% else %}
+                                <li><a href="{{ child.url }}">{{ child.title }}</a></li>
+                              {% endif %}
+                            </ul>
+                          </div>
+                        {% endfor %}
+                      </div>
                     </div>
-                    <div class="rebla-v5__columns">
-                      {% for child in link.links limit: 3 %}
-                        <div class="rebla-v5__column">
-                          <h3>{{ child.title }}</h3>
-                          <ul>
-                            {% if child.links != blank %}
-                              {% for grandchild in child.links limit: 6 %}
-                                <li><a href="{{ grandchild.url }}">{{ grandchild.title }}</a></li>
-                              {% endfor %
+                  </div>
                 {% else %}
                   <div class="rebla-v5__dropdown">
-                    <ul class="rebla-v5__dropdown-list">
+                    <ul>
                       {% for child in link.links %}
-                        <li><a class="rebla-v5__dropdown-link" href="{{ child.url }}">{{ child.title }}</a></li>
+                        <li><a href="{{ child.url }}">{{ child.title }}</a></li>
                       {% endfor %}
                     </ul>
                   </div>
                 {% endif %}
-              {% endif %}
-            </li>
-          {% endfor %}
-                            {% else %}
-                              <li><a href="{{ child.url }}">Explore {{ child.title }}</a></li>
-                              <li><a href="{{ child.url }}">Learn more</a></li>
-                            {% endif %}
-                          </ul>
-                          <a class="rebla-v5__blue-link" href="{{ child.url }}">View All →</a>
-                        </div>
-                      {% endfor %}
-                    </div>
-                  </div>
-                  <div class="rebla-v5__featurebar">
-                    <div class="rebla-v5__featurebar-inner">
-                      <div class="rebla-v5__feature"><svg viewBox="0 0 24 24"><path d="M12 2l8 4-8 4-8-4zM4 10l8 4 8-4M4 14l8 4 8-4"/></svg><div><strong>2-Year Warranty</strong><small>Built for lasting confidence</small></div></div>
-                      <div class="rebla-v5__feature"><svg viewBox="0 0 24 24"><path d="M12 3s6 6 6 11a6 6 0 1 1-12 0c0-5 6-11 6-11z"/></svg><div><strong>Removes 1,000+ Contaminants</strong><small>Powerful purification</small></div></div>
-                      <div class="rebla-v5__feature"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 4v3M20 12h-3M12 20v-3M4 12h3"/></svg><div><strong>NSF Certified Components</strong><small>Certified quality you can trust</small></div></div>
-                      <div class="rebla-v5__feature"><svg viewBox="0 0 24 24"><path d="M3 5h18v14H3zM3 9h18M7 5v14M11 5v14"/></svg><div><strong>All-in-One System</strong><small>Compact. Complete. Convenient.</small></div></div>
-                    </div>
-                  </div>
-                </div>
               {% endif %}
             </li>
           {% endfor %}
