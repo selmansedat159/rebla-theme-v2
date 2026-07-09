@@ -1564,17 +1564,30 @@ document.addEventListener('DOMContentLoaded', function(){
 }
 {% endschema %}
 
-
 <style>
 @media (min-width: 990px){
   .rebla-v5__mega-inner{
-    padding-right:24px !important;
+    grid-template-columns: 332px repeat(3, minmax(0, 1fr)) 250px !important;
+    column-gap: 0 !important;
+    padding-right: 8px !important;
   }
 
   .rebla-v5__benefits-rail{
-    justify-self:end !important;
-    margin-left:auto !important;
-    margin-right:0 !important;
+    justify-self: end !important;
+    margin-left: auto !important;
+    margin-right: 0 !important;
+    gap: 28px !important;
+  }
+
+  .rebla-v5__benefit{
+    border-left: 0 !important;
+    padding-left: 0 !important;
+  }
+
+  .rebla-v5__benefit::before,
+  .rebla-v5__benefit::after{
+    display: none !important;
+    content: none !important;
   }
 }
 </style>
