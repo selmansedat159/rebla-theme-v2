@@ -48,7 +48,7 @@
   .rebla-v5__mega-inner{width:min(100%,1440px);margin:auto;display:grid;grid-template-columns:240px minmax(0,1fr);gap:26px;padding-bottom:18px}
   .rebla-v5__promo,.rebla-v5__trust{background:var(--soft);border-radius:14px;overflow:hidden}
   .rebla-v5__promo{min-height:270px;padding:24px;display:flex;flex-direction:column;justify-content:space-between;background-size:cover;background-position:center bottom}
-  .rebla-v5__promo h3{max-width:165px;margin:0;font-size:22px;line-height:1.15;font-weight:800;letter-spacing:-.03em}
+  .rebla-v5__promo h3{max-width:260px;margin:0;font-size:22px;line-height:1.15;font-weight:800;letter-spacing:-.03em}
   .rebla-v5__blue-link{color:var(--blue);font-size:13px;font-weight:750}
   .rebla-v5__columns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
   .rebla-v5__column{padding:12px 24px;border-left:1px solid var(--line)}
@@ -304,7 +304,7 @@
                     <div class="rebla-v5__mega-inner">
                       <div class="rebla-v5__promo"{% if section.settings.mega_image != blank %} style="background-image:linear-gradient(to bottom,rgba(247,248,250,.98),rgba(247,248,250,.70) 48%,rgba(247,248,250,.04)),url('{{ section.settings.mega_image | image_url: width: 700 }}')"{% endif %}>
                         <h3>{{ section.settings.mega_heading | replace: 'Premium water, from the first drop to the last.', 'Premium water,<br>from the first drop<br>to the last.' }}</h3>
-                        <a class="rebla-v5__blue-link" href="{{ section.settings.mega_link | default: link.url }}">Shop System →</a>
+                        
                       </div>
                       <div class="rebla-v5__columns">
                         {% for child in link.links limit: 3 %}
@@ -320,7 +320,7 @@
                                 assign category_cta = 'View All →'
                               when 3
                                 assign category_description = 'Faucets, tanks and replacement parts'
-                                assign category_cta = 'Shop Parts →'
+                                assign category_cta = 'View All →'
                             endcase
                           %}
                           <div class="rebla-v5__column">
@@ -415,7 +415,7 @@
                     <div class="rebla-v5__mega-inner">
                       <div class="rebla-v5__promo"{% if section.settings.mega_image != blank %} style="background-image:linear-gradient(to bottom,rgba(247,248,250,.98),rgba(247,248,250,.70) 48%,rgba(247,248,250,.04)),url('{{ section.settings.mega_image | image_url: width: 700 }}')"{% endif %}>
                         <h3>{{ section.settings.mega_heading | replace: 'Premium water, from the first drop to the last.', 'Premium water,<br>from the first drop<br>to the last.' }}</h3>
-                        <a class="rebla-v5__blue-link" href="{{ section.settings.mega_link | default: link.url }}">Shop System →</a>
+                        
                       </div>
                       <div class="rebla-v5__columns">
                         {% for child in link.links limit: 3 %}
@@ -431,7 +431,7 @@
                                 assign category_cta = 'View All →'
                               when 3
                                 assign category_description = 'Faucets, tanks and replacement parts'
-                                assign category_cta = 'Shop Parts →'
+                                assign category_cta = 'View All →'
                             endcase
                           %}
                           <div class="rebla-v5__column">
